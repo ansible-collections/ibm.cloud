@@ -1,0 +1,14 @@
+---
+access_group_name: "ansible-test"
+access_group_id: "766f3584b2c840ee96d856bc04551da8"
+account_id: "4448261269a14562b839e4567898"
+conditions: [{
+  'claim': 'isManager',
+  'operator': 'EQUALS',
+  'value': 'true',
+}]
+members: [{
+  iam_id :  "IBMid-2700023HKG",
+  type : "user"
+}]
+iam_id: "IBMid-2700023HKG"

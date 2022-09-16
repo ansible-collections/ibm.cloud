@@ -1,0 +1,104 @@
+---
+- name: Access Group.
+  hosts: localhost
+  collections:
+   - ibm.cloudcollection
+  tasks:
+    - name: Fetch the variables from var file
+      include_vars:
+        file: vars.yml
+
+    - name: Check access group Exists
+      ibm_iam_access_group_info:
+        access_group_id: "{{access_group_id}}"
+      failed_when: 
+         - access_group_output.msg.id is not defined
+         - '"Failed to find the specified access group" not in access_group_output.msg'     
+      register: access_group_output
+    
+    - name: Save existing access group info as fact
+      set_fact:
+        cacheable: True
+        access_group: "{{ access_group_output.msg }}"
+      when: access_group_output.msg.id is defined
+    ## create access group
+    - name: Create access Group
+      ibm_iam_access_group:
+        name: "{{ access_group_name }}"
+        account_id: "{{ account_id }}"
+      register: ag_create_output
+      when: access_group is not defined
+
+    - name: Save newly created access group info as fact
+      set_fact:
+        cacheable: True
+        access_group: "{{ ag_create_output.msg }}"
+      when: ag_create_output.msg.id is defined
+
+    - name: Print access group info 
+      debug:
+        msg: "access Group: {{ access_group }}"
+    ## create access group rule
+    - name: Create access Group Rule
+      ibm_iam_access_group_rule:
+        name: "{{ access_group_name }}"
+        name             : "newrule"
+        expiration        : 4
+        realm_name: "test-idp.com"
+        conditions: "{{conditions}}"
+        access_group_id : "{{ag_create_output.msg.id}}"
+      register: ag_rule_create_output
+
+    - name: Save newly created access group rule info as fact
+      set_fact:
+        cacheable: True
+        access_group_rule: "{{ ag_rule_create_output.msg }}"
+      when: ag_rule_create_output.msg.id is defined
+
+    - name: Get details of all access group rules in an access group
+      ibm_iam_access_group_rules_info:
+        access_group_id: "{{ access_group.id }}"
+
+    ## create access group members
+    - name: Create access Group Members
+      ibm_iam_access_group_members:
+        members : "{{members}}"
+        access_group_id : "{{ag_create_output.msg.id}}"
+      register: ag_members_create_output
+
+    - name: Save newly created access group members info as fact
+      set_fact:
+        cacheable: True
+        access_group_members: "{{ ag_members_create_output.msg }}"
+      when: ag_members_create_output.msg.members[0].iam_id is defined
+
+    - name: Get details of all access group members in an access group
+      ibm_iam_access_group_members_info:
+        access_group_id: "{{ access_group.id }}"
+    
+    - name: Delete access Group Members
+      ibm_iam_access_group_members:
+        iam_id : "{{iam_id}}"
+        access_group_id : "{{ag_create_output.msg.id}}"
+        state: absent
+      register: ag_members_delete_output
+      when: access_group_members.members[0].iam_id is defined
+    
+    - name: Delete access Group Rule
+      ibm_iam_access_group_rule:
+        rule_id: "{{access_group_rule.id}}"
+        access_group_id : "{{ag_create_output.msg.id}}"
+        state: absent
+      register: ag_rule_delete_output
+      when: access_group_rule.id is defined  
+
+    - name: Delete access group
+      ibm_iam_access_group:
+        access_group_id: "{{ access_group.id }}"
+        state: absent
+      register: output
+      when: ag_create_output.msg.id is defined  
+
+    - name: Get details of all access groups in an account
+      ibm_iam_access_groups_info:
+        account_id: "{{ account_id }}"

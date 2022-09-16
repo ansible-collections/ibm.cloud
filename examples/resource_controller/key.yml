@@ -1,0 +1,50 @@
+---
+- name: Resource key Creation.
+  hosts: localhost
+  collections:
+   - ibm.cloud
+  tasks:
+    - name: Fetch the variables from var file
+      include_vars:
+        file: key_vars.yml
+
+    - name: Check resource key exists in a list
+      ibm_resource_keys_info:
+        name: "{{ name }}"
+      register: resource_key_output
+    
+    - name: Save existing resource key info as fact
+      set_fact:
+        cacheable: True
+        resource_key: "{{ resource_key_output.msg.resources[0] }}"
+      when: resource_key_output.msg.resources[0].id is defined
+    
+    - name: Create resource key
+      ibm_resource_key:
+        name: "{{ name }}"
+        source: "{{ source }}"
+        role: "{{ role }}"
+      register: key_create_output
+      when: resource_key.id is not defined
+
+    - name: Save newly created resource key info as fact
+      set_fact:
+        cacheable: True
+        resource_key: "{{ key_create_output.msg }}"
+      when: key_create_output.msg.id is defined
+
+    - name: Print Resource key info 
+      debug:
+        msg: "Resource key: {{ resource_key }}"
+    
+    - name: Check resource key exists
+      ibm_resource_key_info:
+        id: "{{ key_create_output.msg.id }}"
+      when: key_create_output.msg.id is defined
+      
+    - name: Delete Resource key
+      ibm_resource_key:
+        id: "{{ resource_key.id }}"
+        state: absent
+      register: output
+      when: key_create_output.msg.id is defined

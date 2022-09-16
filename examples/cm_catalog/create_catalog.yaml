@@ -1,0 +1,30 @@
+---
+- name: Private Catalog
+  connection: local
+  hosts: localhost
+  tasks:
+    - name: Fetch the variables from var file
+      include_vars:
+        file: vars.yaml
+    - name: Create Catalog
+      ibm_cm_catalog:
+        label: "{{ label }}"
+        short_description: "{{ short_description }}"
+        resource_group_id: "{{ resource_group_id }}"
+        kind: "{{ kind }}" 
+      register: cm_catalog 
+
+    - name: Print Private Catalog info 
+      debug:
+        msg: "successfully created the private catalog : {{ cm_catalog }}"
+
+    - name: Delete Catalog
+      ibm_cm_catalog:
+        id: "{{ cm_catalog.msg.id }}"
+        state: absent
+      register: output
+
+    - name: Print Private Catalog info after deletion
+      debug:
+        msg: "successfully created the private catalog: {{ cm_catalog }}"
+  
