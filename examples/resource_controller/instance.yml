@@ -1,0 +1,54 @@
+---
+- name: Resource Instance Creation.
+  hosts: localhost
+  collections:
+   - ibm.cloud
+  tasks:
+    - name: Fetch the variables from var file
+      include_vars:
+        file: vars.yml
+
+    - name: Check resource instance exists in a list
+      ibm_resource_instances_info:
+        name: "{{ name }}"
+        service:  "{{ service }}"
+      register: resource_instance_output
+    
+    - name: Save existing resource instance info as fact
+      set_fact:
+        cacheable: True
+        resource_instance: "{{ resource_instance_output.msg.resources[0] }}"
+      when: resource_instance_output.msg.resources[0].id is defined
+    
+    - name: Create resource instance
+      ibm_resource_instance:
+        name: "{{ name }}"
+        resource_group: "{{ resource_group }}"
+        plan: "{{ plan }}"
+        service: "{{ service }}"
+        location: "{{ location }}"
+        # parameters: "{{ params}}"
+      register: instance_create_output
+      when: resource_instance.id is not defined
+
+    - name: Save newly created resource instance info as fact
+      set_fact:
+        cacheable: True
+        resource_instance: "{{ instance_create_output.msg }}"
+      when: instance_create_output.msg.id is defined
+
+    - name: Print Resource Instance info 
+      debug:
+        msg: "Resource Instance: {{ resource_instance }}"
+    
+    - name: Check resource instance exists
+      ibm_resource_instance_info:
+        id: "{{ instance_create_output.msg.id }}"
+      when: instance_create_output.msg.id is defined
+      
+    - name: Delete Resource instance
+      ibm_resource_instance:
+        id: "{{ resource_instance.id }}"
+        state: absent
+      register: output
+      when: instance_create_output.msg.id is defined

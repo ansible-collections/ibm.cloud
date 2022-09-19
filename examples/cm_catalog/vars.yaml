@@ -1,0 +1,5 @@
+---
+label: "Ansible Catalog Label"
+short_description: "Test New Description"
+kind: "offering"
+resource_group_id: ""

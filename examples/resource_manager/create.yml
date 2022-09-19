@@ -1,0 +1,51 @@
+---
+- name: Resource Group Creation.
+  hosts: localhost
+  collections:
+   - ibm.cloud
+  tasks:
+    - name: Fetch the variables from var file
+      include_vars:
+        file: vars.yml
+
+    - name: Check resource group Exists
+      ibm_resource_group_info:
+        id: "{{resource_group_id}}"
+      failed_when: 
+         - resource_group_output.msg.id is not defined
+         - '"Invalid Id" not in resource_group_output.msg'  
+         - '"missing" not in resource_group_output.msg' 
+         - '"Failed to get a resource group." not in resource_group_output.msg' 
+      register: resource_group_output
+    
+    - name: Save existing resource group info as fact
+      set_fact:
+        cacheable: True
+        resource_group: "{{ resource_group_output.msg }}"
+      when: resource_group_output.msg.id is defined
+    
+    - name: Create resource Group
+      ibm_resource_group:
+        name: "{{ resource_group_name }}"
+      register: rg_create_output
+      when: resource_group is not defined
+
+    - name: Save newly created resource group info as fact
+      set_fact:
+        cacheable: True
+        resource_group: "{{ rg_create_output.msg }}"
+      when: rg_create_output.msg.id is defined
+
+    - name: Print Resource group info 
+      debug:
+        msg: "Resource Group: {{ resource_group }}"
+      
+    - name: Delete Resource group
+      ibm_resource_group:
+        id: "{{ resource_group.id }}"
+        state: absent
+      register: output
+      when: rg_create_output.msg.id is defined  
+
+    - name: Get details of all resource groups in an account
+      ibm_resource_groups_info:

@@ -1,0 +1,36 @@
+---
+- name: Service Id
+  hosts: localhost
+  collections:
+   - ibm.cloudcollection
+  tasks:
+    - name: Fetch the variables from var file
+      include_vars:
+        file: vars.yml
+
+    - name: Create service_id
+      ibm_iam_service_id:
+        name: "{{ service_id_name }}"
+        account_id: "{{ account_id }}"
+      register: service_id_create_output
+
+    - name: Save newly created access group info as fact
+      set_fact:
+        cacheable: True
+        service_id: "{{ service_id_create_output.msg }}"
+      when: service_id_create_output.msg.id is defined
+
+    - name: Print service id info 
+      debug:
+        msg: "Service Id: {{ service_id }}"
+
+    - name: Delete service id
+      ibm_iam_service_id:
+        id: "{{ service_id.id }}"
+        state: absent
+      register: output
+      when: service_id_create_output.msg.id is defined  
+
+    - name: Get details of all service ids in an account
+      ibm_iam_service_ids_info:
+        account_id: "{{ account_id }}"

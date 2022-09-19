@@ -1,0 +1,16 @@
+namespace: "ibm"
+name: "cloud"
+version: "1.0.0-beta0"
+readme: "README.md"
+authors:
+    - "Mujeebur Rahman"
+    - "Harini Kantareddy"
+    - "Kavya Handadi"
+description: "Ansible modules collection for IBM-Cloud."
+license:
+    - "APL-2.0"
+issues: "https://github.com/ansible-collections/ibm.cloud/issues"
+tags:
+    - ibmcloud
+    - cloud
+repository: "https://github.com/ansible-collections/ibm.cloud"
