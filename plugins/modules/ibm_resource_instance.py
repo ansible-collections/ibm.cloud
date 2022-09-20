@@ -1,18 +1,8 @@
-# coding: utf-8
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 # (C) Copyright IBM Corp. 2022.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 # pylint: disable=missing-function-docstring,too-many-branches
 
@@ -26,7 +16,7 @@ DOCUMENTATION = r'''
 module: ibm_resource_instance
 short_description: Manage ibm_resource_instance resources.
 author: Kavya Handadi (@kavya498)
-version_added: "1.0.0"
+version_added: "0.0.1-beta0"
 description:
     - This module creates, updates, or deletes a ibm_resource_instance.
     - By default the module will look for an existing ibm_resource_instance.

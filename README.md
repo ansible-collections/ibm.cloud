@@ -128,6 +128,6 @@ We welcome community contributions to this collection. If you find problems, ple
 
 ## Licensing
 
-Apache License v2.0 or later.
+GNU GENERAL PUBLIC LICENSE v3.0 or later.
 
-See [LICENSE](./LICENSE.md) to see the full text.
+See [LICENSE](./LICENSE) to see the full text.

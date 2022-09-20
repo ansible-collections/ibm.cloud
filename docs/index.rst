@@ -6,7 +6,7 @@
 Ibm.Cloud
 =========
 
-Collection version 1.0.0-beta0
+Collection version 0.0.1-beta0
 
 .. contents::
    :local:
