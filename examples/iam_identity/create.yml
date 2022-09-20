@@ -2,7 +2,7 @@
 - name: Service Id
   hosts: localhost
   collections:
-   - ibm.cloudcollection
+   - ibm.cloud
   tasks:
     - name: Fetch the variables from var file
       include_vars:
