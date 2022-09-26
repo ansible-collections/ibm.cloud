@@ -96,6 +96,7 @@ jobs:
         uses: ansible-community/ansible-test-gh-action@release/v1
         with:
           ansible-core-version: ${{ matrix.ansible }}
+          target-python-version: 3.9
           target: tests/unit/modules/
           testing-type: units
           # OPTIONAL If your unit tests require code
