@@ -97,7 +97,9 @@ jobs:
         with:
           ansible-core-version: ${{ matrix.ansible }}
           target-python-version: 3.9
-          target: tests/unit/modules/
+          target: >-  # `--requirements` is a hack for installing Python package deps
+            --requirements
+            tests/unit/modules/
           testing-type: units
           # OPTIONAL If your unit tests require code
           # from other collections, install them like this
