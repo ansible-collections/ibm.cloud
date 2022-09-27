@@ -1,76 +1,105 @@
+# README FIRST
+# 1. If you don't have unit tests, remove that section.
+# 2. If your collection depends on other collections ensure they are installed,
+#    add them to the "test-deps" input.
+# 3. For the comprehensive list of the inputs supported by the
+#    ansible-community/ansible-test-gh-action GitHub Action, see
+#    https://github.com/marketplace/actions/ansible-test.
+# 4. If you need help please ask in #ansible-community on the Libera.chat IRC
+#    network.
+
 name: CI
 on:
   # Run CI against all pushes (direct commits, also merged PRs), Pull Requests
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - stable-*
   pull_request:
-    branches: [ main ]
-env:
-  NAMESPACE: ibm
-  COLLECTION_NAME: cloud 
+  # Run CI once per day (at 06:00 UTC)
+  # This ensures that even if there haven't been commits that we are still
+  # testing against latest version of ansible-test for each ansible-core
+  # version
+  schedule:
+    - cron: '0 6 * * *'
 
 jobs:
 
 ###
-# Sanity and unity tests (REQUIRED)
+# Sanity tests (REQUIRED)
 #
 # https://docs.ansible.com/ansible/latest/dev_guide/testing_sanity.html
 
-  sanity-and-unity:
+  sanity:
     name: Sanity (Ⓐ${{ matrix.ansible }})
     strategy:
       matrix:
         ansible:
           # It's important that Sanity is tested against all stable-X.Y branches
           # Testing against `devel` may fail as new tests are added.
+          # An alternative to `devel` is the `milestone` branch with
+          # gets synchronized with `devel` every few weeks and therefore
+          # tends to be a more stable target. Be aware that it is not updated
+          # around creation of a new stable branch, this might cause a problem
+          # that two different versions of ansible-test use the same sanity test
+          # ignore.txt file.
+        # - stable-2.9 # Only if your collection supports Ansible 2.9
+        # - stable-2.10 # Only if your collection supports ansible-base 2.10
+        # - stable-2.11
+        # - stable-2.12
+          - stable-2.13
+        # - stable-2.14
+        # - devel
+        # - milestone
+    runs-on: ubuntu-latest
+    steps:
+      # Run sanity tests inside a Docker container.
+      # The docker container has all the pinned dependencies that are
+      # required and all Python versions Ansible supports.
+      - name: Perform sanity testing
+        uses: ansible-community/ansible-test-gh-action@release/v1
+        with:
+          ansible-core-version: ${{ matrix.ansible }}
+          target-python-version: 3.9
+          target: >-
+            --skip-test import
+            plugins/
+            tests/
+          testing-type: sanity
+
+###
+# Unit tests (OPTIONAL)
+#
+# https://docs.ansible.com/ansible/latest/dev_guide/testing_units.html
+
+  units:
+    runs-on: ubuntu-latest
+    name: Units (Ⓐ${{ matrix.ansible }})
+    strategy:
+      # As soon as the first unit test fails, cancel the others to free up the CI queue
+      fail-fast: true
+      matrix:
+        ansible:
           # - stable-2.9 # Only if your collection supports Ansible 2.9
-          # - stable-2.10
+          # - stable-2.10 # Only if your collection supports ansible-base 2.10
           # - stable-2.11
           # - stable-2.12
           - stable-2.13
+          # - stable-2.14
           # - devel
-    runs-on: ubuntu-latest
+          # - milestone
+
     steps:
-
-      # ansible-test requires the collection to be in a directory in the form
-      # .../ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}/
-
-      - name: Check out code
-        uses: actions/checkout@v2
+      - name: >-
+          Perform unit testing against
+          Ansible version ${{ matrix.ansible }}
+        uses: ansible-community/ansible-test-gh-action@release/v1
         with:
-          path: ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          # it is just required to run that once as "ansible-test sanity" in the docker image
-          # will run on all python versions it supports.
-          python-version: 3.9
-
-      # Install the head of the given branch (devel, stable-2.10)
-      - name: Install ansible-base (${{ matrix.ansible }})
-        run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
-
-      # run ansible-test sanity on plugins
-      - name: Run sanity tests on plugins
-        run: ansible-test sanity --python=3.9 --requirements --skip-test import plugins/ --color --coverage
-        working-directory: ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}
-      # run ansible-test sanity on tests
-      - name: Run sanity tests on tests
-        run: ansible-test sanity --python=3.9 --requirements --skip-test import tests/ --color --coverage
-        working-directory: ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}
-
-        
-      # run ansible-test units on modules
-      - name: Install dependant packages for unit tests
-        run: pip install -r requirements.txt
-        working-directory: ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}
-      # Install dependant ansible plugins for unit tests
-      - name: Install dependant ansible plugins for unit tests
-        run: mkdir -p community/internal_test_tools && git clone https://github.com/ansible-collections/community.internal_test_tools.git && mv ./community.internal_test_tools/*  ./community/internal_test_tools
-        working-directory: ./ansible_collections
-      
-      # run ansible-test units on modules
-      - name: Run unit tests on modules
-        run: ansible-test units --python=3.9 --requirements tests/unit/modules/ --color --coverage
-        working-directory: ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}
+          ansible-core-version: ${{ matrix.ansible }}
+          target-python-version: 3.9
+          target: tests/unit/modules/
+          testing-type: units
+          # OPTIONAL If your unit tests require code
+          # from other collections, install them like this
+          test-deps: >-
+            git+https://github.com/ansible-collections/community.internal_test_tools.git
