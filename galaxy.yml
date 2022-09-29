@@ -7,8 +7,6 @@ authors:
     - "Harini Kantareddy"
     - "Kavya Handadi"
 description: "Ansible modules collection for IBM-Cloud."
-license:
-    - "GNU GPL-3.0"
 license_file: LICENSE
 tags: [ibm-cloud, ibm, cloud]
 repository: "https://github.com/ansible-collections/ibm.cloud"
