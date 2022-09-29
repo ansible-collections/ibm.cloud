@@ -8,7 +8,7 @@ authors:
     - "Kavya Handadi"
 description: "Ansible modules collection for IBM-Cloud."
 license_file: LICENSE
-tags: [ibm-cloud, ibm, cloud]
+tags: [ibm, cloud]
 repository: "https://github.com/ansible-collections/ibm.cloud"
 homepage: "https://github.com/ansible-collections/ibm.cloud"
 
