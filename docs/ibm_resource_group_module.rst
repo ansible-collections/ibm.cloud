@@ -37,13 +37,13 @@
 
 .. Title
 
-ibm.cloud.ibm_resource_group module -- Manage ibm\_resource\_group resources.
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ibm.cloud.ibm_resource_group module -- Manage \ :literal:`resource\_groups`\  for Resource Manager.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. Collection note
 
 .. note::
-    This module is part of the `ibm.cloud collection <https://galaxy.ansible.com/ibm/cloud>`_ (version 0.0.1-beta0).
+    This module is part of the `ibm.cloud collection <https://galaxy.ansible.com/ibm/cloud>`_ (version 0.0.1-beta1).
 
     To install it, use: :code:`ansible-galaxy collection install ibm.cloud`.
     You need further requirements to be able to use this module,
@@ -67,8 +67,7 @@ Synopsis
 
 .. Description
 
-- This module creates, updates, or deletes a ibm\_resource\_group.
-- By default the module will look for an existing ibm\_resource\_group.
+- This module creates, updates, or deletes a \ :literal:`resource\_group`\  resource for Resource Manager.
 
 
 .. Aliases
@@ -146,6 +145,19 @@ Parameters
   </tr>
   <tr class="row-odd">
     <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="parameter-resource_group_state"></div>
+      <p class="ansible-option-title"><strong>resource_group_state</strong></p>
+      <a class="ansibleOptionLink" href="#parameter-resource_group_state" title="Permalink to this option"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>The state of the resource group.</p>
+    </div></td>
+  </tr>
+  <tr class="row-even">
+    <td><div class="ansible-option-cell">
       <div class="ansibleOptionAnchor" id="parameter-state"></div>
       <p class="ansible-option-title"><strong>state</strong></p>
       <a class="ansibleOptionLink" href="#parameter-state" title="Permalink to this option"></a>
@@ -162,19 +174,6 @@ Parameters
       </ul>
     </div></td>
   </tr>
-  <tr class="row-even">
-    <td><div class="ansible-option-cell">
-      <div class="ansibleOptionAnchor" id="parameter-state_"></div>
-      <p class="ansible-option-title"><strong>state_</strong></p>
-      <a class="ansibleOptionLink" href="#parameter-state_" title="Permalink to this option"></a>
-      <p class="ansible-option-type-line">
-        <span class="ansible-option-type">string</span>
-      </p>
-    </div></td>
-    <td><div class="ansible-option-cell">
-      <p>The state of the resource group.</p>
-    </div></td>
-  </tr>
   </tbody>
   </table>
 
@@ -185,9 +184,22 @@ Parameters
 
 .. Notes
 
+Notes
+-----
+
+.. note::
+   - Authenticate this module by using an IBM Cloud API key. For more information about working with IBM Cloud API keys, see \ :emphasis:`Managing API keys`\ : \ https://cloud.ibm.com/docs/account?topic%3Daccount-manapikey\ .
+   - To configure the authentication, set your IBM Cloud API key on the \ :literal:`IC\_API\_KEY`\  environment variable. The API key will be used to authenticate all IBM Cloud modules that use this environment variable.
 
 .. Seealso
 
+See Also
+--------
+
+.. seealso::
+
+   `IBM Cloud Schematics docs <https://cloud.ibm.com/docs/schematics>`_
+       Use Schematics to run your Ansible playbooks to provision, configure, and manage IBM Cloud resources.
 
 .. Examples
 
@@ -197,7 +209,23 @@ Examples
 .. code-block:: yaml+jinja
 
     
-    Examples coming soon.
+    - name: Create ibm_resource_group
+      ibm_resource_group:
+        name: 'test1'
+        account_id: '25eba2a9-beef-450b-82cf-f5ad5e36c6dd'
+        state: present
+
+    - name: Update ibm_resource_group
+      ibm_resource_group:
+        id: 'testString'
+        name: 'testString'
+        resource_group_state: 'testString'
+        state: present
+
+    - name: Delete ibm_resource_group
+      ibm_resource_group:
+        id: 'testString'
+        state: absent
 
 
 
@@ -206,6 +234,80 @@ Examples
 
 
 .. Return values
+
+Return Values
+-------------
+Common return values are documented :ref:`here <common_return_values>`, the following are the fields unique to this module:
+
+.. raw:: html
+
+  <table class="colwidths-auto ansible-option-table docutils align-default" style="width: 100%">
+  <thead>
+  <tr class="row-odd">
+    <th class="head"><p>Key</p></th>
+    <th class="head"><p>Description</p></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="row-even">
+    <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-crn"></div>
+      <p class="ansible-option-title"><strong>crn</strong></p>
+      <a class="ansibleOptionLink" href="#return-crn" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>The full CRN (cloud resource name) associated with the resource group. For more on this format, see [Cloud Resource Names](https://cloud.ibm.com/docs/account?topic=account-crn).</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> on success for create, update operations</p>
+    </div></td>
+  </tr>
+  <tr class="row-odd">
+    <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-id"></div>
+      <p class="ansible-option-title"><strong>id</strong></p>
+      <a class="ansibleOptionLink" href="#return-id" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>An alpha-numeric value identifying the resource group.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> on success for create, update, delete operations</p>
+    </div></td>
+  </tr>
+  <tr class="row-even">
+    <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-msg"></div>
+      <p class="ansible-option-title"><strong>msg</strong></p>
+      <a class="ansibleOptionLink" href="#return-msg" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>an error message that describes what went wrong</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> on error</p>
+    </div></td>
+  </tr>
+  <tr class="row-odd">
+    <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-status"></div>
+      <p class="ansible-option-title"><strong>status</strong></p>
+      <a class="ansibleOptionLink" href="#return-status" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>The result status of the deletion</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> on delete</p>
+    </div></td>
+  </tr>
+  </tbody>
+  </table>
+
 
 
 ..  Status (Presently only deprecated)

@@ -18,10 +18,15 @@ plugins/modules/ibm_resource_aliases_info.py validate-modules:import-error
 plugins/modules/ibm_resource_binding_info.py validate-modules:import-error
 plugins/modules/ibm_resource_binding.py validate-modules:import-error
 plugins/modules/ibm_resource_bindings_info.py validate-modules:import-error
+plugins/modules/ibm_resource_group_info.py validate-modules:import-error
+plugins/modules/ibm_resource_group.py validate-modules:import-error
+plugins/modules/ibm_resource_groups_info.py validate-modules:import-error
 plugins/modules/ibm_resource_instance_info.py validate-modules:import-error
 plugins/modules/ibm_resource_key_info.py validate-modules:import-error
 plugins/modules/ibm_resource_key.py validate-modules:import-error
 plugins/modules/ibm_resource_keys_info.py validate-modules:import-error
+plugins/modules/ibm_resource_quota_info.py validate-modules:import-error
+plugins/modules/ibm_resource_quotas_info.py validate-modules:import-error
 plugins/modules/ibm_iam_access_group_members.py validate-modules:import-error
 plugins/modules/ibm_iam_service_ids_info.py validate-modules:import-error
 plugins/modules/ibm_iam_access_group_rule.py validate-modules:import-error
