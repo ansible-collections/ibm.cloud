@@ -43,7 +43,7 @@ ibm.cloud.ibm_iam_access_group_members module -- Manage ibm\_iam\_access\_group\
 .. Collection note
 
 .. note::
-    This module is part of the `ibm.cloud collection <https://galaxy.ansible.com/ibm/cloud>`_ (version 0.0.1-beta0).
+    This module is part of the `ibm.cloud collection <https://galaxy.ansible.com/ibm/cloud>`_ (version 0.0.1-beta1).
 
     To install it, use: :code:`ansible-galaxy collection install ibm.cloud`.
     You need further requirements to be able to use this module,

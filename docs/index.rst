@@ -6,7 +6,7 @@
 Ibm.Cloud
 =========
 
-Collection version 0.0.1-beta0
+Collection version 0.0.1-beta1
 
 .. contents::
    :local:
@@ -66,17 +66,17 @@ Modules
 * :ref:`ibm_resource_binding module <ansible_collections.ibm.cloud.ibm_resource_binding_module>` -- Manage ibm\_resource\_binding resources.
 * :ref:`ibm_resource_binding_info module <ansible_collections.ibm.cloud.ibm_resource_binding_info_module>` -- Manage ibm\_resource\_binding info.
 * :ref:`ibm_resource_bindings_info module <ansible_collections.ibm.cloud.ibm_resource_bindings_info_module>` -- Manage ibm\_resource\_bindings info.
-* :ref:`ibm_resource_group module <ansible_collections.ibm.cloud.ibm_resource_group_module>` -- Manage ibm\_resource\_group resources.
-* :ref:`ibm_resource_group_info module <ansible_collections.ibm.cloud.ibm_resource_group_info_module>` -- Manage ibm\_resource\_group info.
-* :ref:`ibm_resource_groups_info module <ansible_collections.ibm.cloud.ibm_resource_groups_info_module>` -- Manage ibm\_resource\_groups info.
+* :ref:`ibm_resource_group module <ansible_collections.ibm.cloud.ibm_resource_group_module>` -- Manage \ :literal:`resource\_groups`\  for Resource Manager.
+* :ref:`ibm_resource_group_info module <ansible_collections.ibm.cloud.ibm_resource_group_info_module>` -- Manage \ :literal:`resource\_group`\  for Resource Manager.
+* :ref:`ibm_resource_groups_info module <ansible_collections.ibm.cloud.ibm_resource_groups_info_module>` -- Manage \ :literal:`resource\_groups`\  for Resource Manager.
 * :ref:`ibm_resource_instance module <ansible_collections.ibm.cloud.ibm_resource_instance_module>` -- Manage ibm\_resource\_instance resources.
 * :ref:`ibm_resource_instance_info module <ansible_collections.ibm.cloud.ibm_resource_instance_info_module>` -- Manage ibm\_resource\_instance info.
 * :ref:`ibm_resource_instances_info module <ansible_collections.ibm.cloud.ibm_resource_instances_info_module>` -- Manage ibm\_resource\_instances info.
 * :ref:`ibm_resource_key module <ansible_collections.ibm.cloud.ibm_resource_key_module>` -- Manage ibm\_resource\_key resources.
 * :ref:`ibm_resource_key_info module <ansible_collections.ibm.cloud.ibm_resource_key_info_module>` -- Manage ibm\_resource\_key info.
 * :ref:`ibm_resource_keys_info module <ansible_collections.ibm.cloud.ibm_resource_keys_info_module>` -- Manage ibm\_resource\_keys info.
-* :ref:`ibm_resource_quota_info module <ansible_collections.ibm.cloud.ibm_resource_quota_info_module>` -- Manage ibm\_resource\_quota info.
-* :ref:`ibm_resource_quotas_info module <ansible_collections.ibm.cloud.ibm_resource_quotas_info_module>` -- Manage ibm\_resource\_quotas info.
+* :ref:`ibm_resource_quota_info module <ansible_collections.ibm.cloud.ibm_resource_quota_info_module>` -- Manage \ :literal:`resource\_quota`\  for Resource Manager.
+* :ref:`ibm_resource_quotas_info module <ansible_collections.ibm.cloud.ibm_resource_quotas_info_module>` -- Manage \ :literal:`resource\_quotas`\  for Resource Manager.
 * :ref:`ibm_resource_reclamations_info module <ansible_collections.ibm.cloud.ibm_resource_reclamations_info_module>` -- Manage ibm\_resource\_reclamations info.
 * :ref:`ibm_schematics_action module <ansible_collections.ibm.cloud.ibm_schematics_action_module>` -- Manage \ :literal:`schematics\_actions`\  for Schematics Service API.
 * :ref:`ibm_schematics_action_info module <ansible_collections.ibm.cloud.ibm_schematics_action_info_module>` -- Manage \ :literal:`schematics\_action`\  for Schematics Service API.

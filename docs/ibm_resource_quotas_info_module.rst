@@ -37,13 +37,13 @@
 
 .. Title
 
-ibm.cloud.ibm_resource_quotas_info module -- Manage ibm\_resource\_quotas info.
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ibm.cloud.ibm_resource_quotas_info module -- Manage \ :literal:`resource\_quotas`\  for Resource Manager.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. Collection note
 
 .. note::
-    This module is part of the `ibm.cloud collection <https://galaxy.ansible.com/ibm/cloud>`_ (version 0.0.1-beta0).
+    This module is part of the `ibm.cloud collection <https://galaxy.ansible.com/ibm/cloud>`_ (version 0.0.1-beta1).
 
     To install it, use: :code:`ansible-galaxy collection install ibm.cloud`.
     You need further requirements to be able to use this module,
@@ -67,7 +67,7 @@ Synopsis
 
 .. Description
 
-- This module retrieves one or more ibm\_resource\_quotas(s).
+- This module retrieves one or more \ :literal:`resource\_quotas`\  for Resource Manager.
 
 
 .. Aliases
@@ -96,9 +96,22 @@ The below requirements are needed on the host that executes this module.
 
 .. Notes
 
+Notes
+-----
+
+.. note::
+   - Authenticate this module by using an IBM Cloud API key. For more information about working with IBM Cloud API keys, see \ :emphasis:`Managing API keys`\ : \ https://cloud.ibm.com/docs/account?topic%3Daccount-manapikey\ .
+   - To configure the authentication, set your IBM Cloud API key on the \ :literal:`IC\_API\_KEY`\  environment variable. The API key will be used to authenticate all IBM Cloud modules that use this environment variable.
 
 .. Seealso
 
+See Also
+--------
+
+.. seealso::
+
+   `IBM Cloud Schematics docs <https://cloud.ibm.com/docs/schematics>`_
+       Use Schematics to run your Ansible playbooks to provision, configure, and manage IBM Cloud resources.
 
 .. Examples
 
@@ -108,7 +121,9 @@ Examples
 .. code-block:: yaml+jinja
 
     
-    Examples coming soon.
+
+    - name: List ibm_resource_quotas
+      ibm_resource_quotas_info:
 
 
 
@@ -117,6 +132,294 @@ Examples
 
 
 .. Return values
+
+Return Values
+-------------
+Common return values are documented :ref:`here <common_return_values>`, the following are the fields unique to this module:
+
+.. raw:: html
+
+  <table class="colwidths-auto ansible-option-table docutils align-default" style="width: 100%">
+  <thead>
+  <tr class="row-odd">
+    <th class="head"><p>Key</p></th>
+    <th class="head"><p>Description</p></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="row-even">
+    <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-msg"></div>
+      <p class="ansible-option-title"><strong>msg</strong></p>
+      <a class="ansibleOptionLink" href="#return-msg" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>an error message that describes what went wrong</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> on error</p>
+    </div></td>
+  </tr>
+  <tr class="row-odd">
+    <td><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources"></div>
+      <p class="ansible-option-title"><strong>resources</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">list</span>
+        / <span class="ansible-option-elements">elements=dictionary</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-cell">
+      <p>The list of quota definitions.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> on success for list operation</p>
+    </div></td>
+  </tr>
+  <tr class="row-even">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/created_at"></div>
+      <p class="ansible-option-title"><strong>created_at</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/created_at" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>The date when the quota was initially created.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+  <tr class="row-odd">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/default_number_of_instances_per_lite_plan"></div>
+      <p class="ansible-option-title"><strong>default_number_of_instances_per_lite_plan</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/default_number_of_instances_per_lite_plan" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">float</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>Default number of instances per lite plan.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+  <tr class="row-even">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/id"></div>
+      <p class="ansible-option-title"><strong>id</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/id" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>An alpha-numeric value identifying the quota.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+  <tr class="row-odd">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/instance_memory"></div>
+      <p class="ansible-option-title"><strong>instance_memory</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/instance_memory" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>The total memory of app instance.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+  <tr class="row-even">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/instances_per_app"></div>
+      <p class="ansible-option-title"><strong>instances_per_app</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/instances_per_app" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">float</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>The total instances limit per app.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+  <tr class="row-odd">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/name"></div>
+      <p class="ansible-option-title"><strong>name</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/name" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>The human-readable name of the quota.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+  <tr class="row-even">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/number_of_apps"></div>
+      <p class="ansible-option-title"><strong>number_of_apps</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/number_of_apps" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">float</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>The total app limit.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+  <tr class="row-odd">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/number_of_service_instances"></div>
+      <p class="ansible-option-title"><strong>number_of_service_instances</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/number_of_service_instances" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">float</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>The total service instances limit per app.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+  <tr class="row-even">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/resource_quotas"></div>
+      <p class="ansible-option-title"><strong>resource_quotas</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/resource_quotas" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">list</span>
+        / <span class="ansible-option-elements">elements=dictionary</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>The resource quotas associated with a quota definition.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+  <tr class="row-odd">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/resource_quotas/crn"></div>
+      <p class="ansible-option-title"><strong>crn</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/resource_quotas/crn" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>The full CRN (cloud resource name) associated with the quota. For more on this format, see https://cloud.ibm.com/docs/account?topic=account-crn.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+  <tr class="row-even">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/resource_quotas/id"></div>
+      <p class="ansible-option-title"><strong>id</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/resource_quotas/id" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>An alpha-numeric value identifying the quota.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+  <tr class="row-odd">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/resource_quotas/limit"></div>
+      <p class="ansible-option-title"><strong>limit</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/resource_quotas/limit" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">float</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>The limit number of this resource.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+  <tr class="row-even">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/resource_quotas/resource_id"></div>
+      <p class="ansible-option-title"><strong>resource_id</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/resource_quotas/resource_id" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>The human-readable name of the quota.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+
+  <tr class="row-odd">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/total_app_memory"></div>
+      <p class="ansible-option-title"><strong>total_app_memory</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/total_app_memory" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>The total app memory capacity.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+  <tr class="row-even">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/type"></div>
+      <p class="ansible-option-title"><strong>type</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/type" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>The type of the quota.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+  <tr class="row-odd">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/updated_at"></div>
+      <p class="ansible-option-title"><strong>updated_at</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/updated_at" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">string</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>The date when the quota was last updated.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+  <tr class="row-even">
+    <td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+      <div class="ansibleOptionAnchor" id="return-resources/vsi_limit"></div>
+      <p class="ansible-option-title"><strong>vsi_limit</strong></p>
+      <a class="ansibleOptionLink" href="#return-resources/vsi_limit" title="Permalink to this return value"></a>
+      <p class="ansible-option-type-line">
+        <span class="ansible-option-type">float</span>
+      </p>
+    </div></td>
+    <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+      <p>The VSI limit.</p>
+      <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+    </div></td>
+  </tr>
+
+  </tbody>
+  </table>
+
 
 
 ..  Status (Presently only deprecated)
