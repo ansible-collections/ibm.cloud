@@ -23,6 +23,10 @@ Ansible modules collection for IBM-Cloud.
 * Harini Kantareddy
 * Kavya Handadi
 
+**Supported ansible-core versions:**
+
+* 2.9.10 or newer
+
 .. raw:: html
 
   <p class="ansible-links">
@@ -91,12 +95,6 @@ Modules
 * :ref:`ibm_schematics_workspace_activity_info module <ansible_collections.ibm.cloud.ibm_schematics_workspace_activity_info_module>` -- Manage \ :literal:`schematics\_workspace\_activity`\  for Schematics Service API.
 * :ref:`ibm_schematics_workspace_info module <ansible_collections.ibm.cloud.ibm_schematics_workspace_info_module>` -- Manage \ :literal:`schematics\_workspace`\  for Schematics Service API.
 
-
-
-.. seealso::
-
-    List of :ref:`collections <list_of_collections>` with docs hosted here.
-
 .. toctree::
     :maxdepth: 1
     :hidden:
@@ -146,3 +144,5 @@ Modules
     ibm_schematics_workspace_module
     ibm_schematics_workspace_activity_info_module
     ibm_schematics_workspace_info_module
+
+

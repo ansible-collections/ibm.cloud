@@ -18,8 +18,7 @@
 .. role:: ansible-option-versionadded
 .. role:: ansible-option-aliases
 .. role:: ansible-option-choices
-.. role:: ansible-option-choices-entry
-.. role:: ansible-option-default
+.. role:: ansible-option-choices-default-mark
 .. role:: ansible-option-default-bold
 .. role:: ansible-option-configuration
 .. role:: ansible-option-returned-bold
@@ -53,7 +52,9 @@ ibm.cloud.ibm_schematics_action_info module -- Manage \ :literal:`schematics\_ac
 
 .. version_added
 
-.. versionadded:: 0.0.1-beta0 of ibm.cloud
+.. rst-class:: ansible-version-added
+
+New in ibm.cloud 0.0.1-beta0
 
 .. contents::
    :local:
@@ -93,7 +94,6 @@ The below requirements are needed on the host that executes this module.
 Parameters
 ----------
 
-
 .. raw:: html
 
   <table class="colwidths-auto ansible-option-table docutils align-default" style="width: 100%">
@@ -130,10 +130,11 @@ Parameters
       <p>Level of details returned by the get method.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">summary</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">detailed</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">ids</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;summary&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;detailed&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;ids&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   </tbody>
@@ -213,7 +214,7 @@ Common return values are documented :ref:`here <common_return_values>`, the foll
     </div></td>
     <td><div class="ansible-option-cell">
       <p>A dictionary that represents the result.
-      In case of &quot;read&quot;, it&#x27;s an <code class='docutils literal notranslate'>Action</code>.</p>
+      In case of "read", it&#x27;s an <code class='docutils literal notranslate'>Action</code>.</p>
       <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> always</p>
     </div></td>
   </tr>

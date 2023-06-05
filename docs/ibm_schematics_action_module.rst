@@ -18,8 +18,7 @@
 .. role:: ansible-option-versionadded
 .. role:: ansible-option-aliases
 .. role:: ansible-option-choices
-.. role:: ansible-option-choices-entry
-.. role:: ansible-option-default
+.. role:: ansible-option-choices-default-mark
 .. role:: ansible-option-default-bold
 .. role:: ansible-option-configuration
 .. role:: ansible-option-returned-bold
@@ -53,7 +52,9 @@ ibm.cloud.ibm_schematics_action module -- Manage \ :literal:`schematics\_actions
 
 .. version_added
 
-.. versionadded:: 0.0.1-beta0 of ibm.cloud
+.. rst-class:: ansible-version-added
+
+New in ibm.cloud 0.0.1-beta0
 
 .. contents::
    :local:
@@ -92,7 +93,6 @@ The below requirements are needed on the host that executes this module.
 
 Parameters
 ----------
-
 
 .. raw:: html
 
@@ -172,8 +172,9 @@ Parameters
       </p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">ssh</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;ssh&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -294,9 +295,10 @@ Parameters
       <p>If <b>true</b>, the variable is not displayed on UI or Command line.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -312,9 +314,10 @@ Parameters
       <p>Is the variable readonly ?.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -330,9 +333,10 @@ Parameters
       <p>The status of the link.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">normal</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">broken</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;normal&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;broken&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -361,9 +365,10 @@ Parameters
       <p>If the variable required?.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -392,9 +397,10 @@ Parameters
       <p>Type of the variable.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">string</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">link</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;string&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;link&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
 
@@ -424,9 +430,10 @@ Parameters
       <p>True, will ignore the data in the value attribute, instead the data in metadata.defaultI(value will be used.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -440,7 +447,7 @@ Parameters
     </div></td>
     <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
       <p>The credential value for the variable or reference to the value.
-      For example, <code class='docutils literal notranslate'>value = &quot;&lt;provide your sshI(key</code>value with \n&gt;&quot;).
+      For example, <code class='docutils literal notranslate'>value = "&lt;provide your sshI(key</code>value with \n&gt;").
       <b>Note</b> The SSH key should contain <code class='docutils literal notranslate'>\n</code> at the end of the key details in case of command line or API calls.
       </p>
     </div></td>
@@ -578,9 +585,10 @@ Parameters
       <p>If <b>true</b>, the variable is not displayed on UI or Command line.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -596,9 +604,10 @@ Parameters
       <p>Is the variable readonly ?.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -614,9 +623,10 @@ Parameters
       <p>The status of the link.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">normal</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">broken</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;normal&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;broken&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -645,9 +655,10 @@ Parameters
       <p>If the variable required?.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -676,9 +687,10 @@ Parameters
       <p>Type of the variable.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">string</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">link</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;string&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;link&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
 
@@ -709,9 +721,10 @@ Parameters
       </p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -725,7 +738,7 @@ Parameters
     </div></td>
     <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
       <p>The credential value for the variable or reference to the value.
-      For example, <code class='docutils literal notranslate'>value = &quot;&lt;provide your sshI(key</code>value with \n&gt;&quot;).
+      For example, <code class='docutils literal notranslate'>value = "&lt;provide your sshI(key</code>value with \n&gt;").
       <b>Note</b> The SSH key should contain <code class='docutils literal notranslate'>\n</code> at the end of the key details in case of command line or API calls.
       </p>
     </div></td>
@@ -757,9 +770,10 @@ Parameters
       <p>Equivalent to -force options in the command line.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -881,9 +895,10 @@ Parameters
       <p>If <b>true</b>, the variable is not displayed on UI or Command line.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -899,9 +914,10 @@ Parameters
       <p>Is the variable readonly ?.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -917,9 +933,10 @@ Parameters
       <p>The status of the link.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">normal</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">broken</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;normal&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;broken&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -1029,9 +1046,10 @@ Parameters
       <p>If the variable required?.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -1047,9 +1065,10 @@ Parameters
       <p>Is the variable secure or sensitive ?.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -1078,16 +1097,17 @@ Parameters
       <p>Type of the variable.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">boolean</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">string</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">integer</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">date</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">array</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">list</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">map</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">complex</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">link</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;boolean&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;string&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;integer&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;date&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;array&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;list&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;map&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;complex&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;link&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
 
@@ -1101,7 +1121,7 @@ Parameters
       </p>
     </div></td>
     <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
-      <p>The name of the variable. For example, <code class='docutils literal notranslate'>name = &quot;inventory username&quot;</code>.</p>
+      <p>The name of the variable. For example, <code class='docutils literal notranslate'>name = "inventory username"</code>.</p>
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -1117,9 +1137,10 @@ Parameters
       <p>True, will ignore the data in the value attribute, instead the data in metadata.defaultI(value will be used.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -1133,7 +1154,7 @@ Parameters
     </div></td>
     <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
       <p>The value for the variable or reference to the value.
-      For example, <code class='docutils literal notranslate'>value = &quot;&lt;provide your sshI(key</code>value with \n&gt;&quot;).
+      For example, <code class='docutils literal notranslate'>value = "&lt;provide your sshI(key</code>value with \n&gt;").
       <b>Note</b> The SSH key should contain <code class='docutils literal notranslate'>\n</code> at the end of the key details in case of command line or API calls.
       </p>
     </div></td>
@@ -1167,9 +1188,10 @@ Parameters
       </p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">ssh</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">winrm</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;ssh&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;winrm&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -1188,11 +1210,12 @@ Parameters
       </p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">us-south</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">us-east</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">eu-gb</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">eu-de</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;us-south&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;us-east&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;eu-gb&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;eu-de&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -1330,9 +1353,10 @@ Parameters
       <p>If <b>true</b>, the variable is not displayed on UI or Command line.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -1348,9 +1372,10 @@ Parameters
       <p>Is the variable readonly ?.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -1366,9 +1391,10 @@ Parameters
       <p>The status of the link.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">normal</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">broken</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;normal&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;broken&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -1479,9 +1505,10 @@ Parameters
       <p>If the variable required?.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -1497,9 +1524,10 @@ Parameters
       <p>Is the variable secure or sensitive ?.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -1528,16 +1556,17 @@ Parameters
       <p>Type of the variable.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">boolean</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">string</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">integer</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">date</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">array</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">list</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">map</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">complex</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">link</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;boolean&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;string&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;integer&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;date&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;array&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;list&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;map&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;complex&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;link&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
 
@@ -1551,7 +1580,7 @@ Parameters
       </p>
     </div></td>
     <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
-      <p>The name of the variable. For example, <code class='docutils literal notranslate'>name = &quot;inventory username&quot;</code>.</p>
+      <p>The name of the variable. For example, <code class='docutils literal notranslate'>name = "inventory username"</code>.</p>
     </div></td>
   </tr>
   <tr class="row-even">
@@ -1567,9 +1596,10 @@ Parameters
       <p>True, will ignore the data in the value attribute, instead the data in metadata.defaultI(value will be used.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -1583,7 +1613,7 @@ Parameters
     </div></td>
     <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
       <p>The value for the variable or reference to the value.
-      For example, <code class='docutils literal notranslate'>value = &quot;&lt;provide your sshI(key</code>value with \n&gt;&quot;).
+      For example, <code class='docutils literal notranslate'>value = "&lt;provide your sshI(key</code>value with \n&gt;").
       <b>Note</b> The SSH key should contain <code class='docutils literal notranslate'>\n</code> at the end of the key details in case of command line or API calls.
       </p>
     </div></td>
@@ -1602,10 +1632,11 @@ Parameters
       <p>Level of details returned by the get method.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">summary</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">detailed</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">ids</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;summary&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;detailed&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;ids&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -1621,9 +1652,10 @@ Parameters
       <p>Auto propagate the chaange or deletion to the dependent resources.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -1758,9 +1790,10 @@ Parameters
       <p>If <b>true</b>, the variable is not displayed on UI or Command line.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -1776,9 +1809,10 @@ Parameters
       <p>Is the variable readonly ?.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -1794,9 +1828,10 @@ Parameters
       <p>The status of the link.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">normal</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">broken</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;normal&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;broken&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -1906,9 +1941,10 @@ Parameters
       <p>If the variable required?.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -1924,9 +1960,10 @@ Parameters
       <p>Is the variable secure or sensitive ?.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -1955,16 +1992,17 @@ Parameters
       <p>Type of the variable.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">boolean</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">string</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">integer</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">date</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">array</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">list</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">map</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">complex</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">link</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;boolean&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;string&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;integer&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;date&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;array&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;list&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;map&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;complex&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;link&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
 
@@ -1978,7 +2016,7 @@ Parameters
       </p>
     </div></td>
     <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
-      <p>The name of the variable. For example, <code class='docutils literal notranslate'>name = &quot;inventory username&quot;</code>.</p>
+      <p>The name of the variable. For example, <code class='docutils literal notranslate'>name = "inventory username"</code>.</p>
     </div></td>
   </tr>
   <tr class="row-even">
@@ -1994,9 +2032,10 @@ Parameters
       <p>True, will ignore the data in the value attribute, instead the data in metadata.defaultI(value will be used.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -2010,7 +2049,7 @@ Parameters
     </div></td>
     <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
       <p>The value for the variable or reference to the value.
-      For example, <code class='docutils literal notranslate'>value = &quot;&lt;provide your sshI(key</code>value with \n&gt;&quot;).
+      For example, <code class='docutils literal notranslate'>value = "&lt;provide your sshI(key</code>value with \n&gt;").
       <b>Note</b> The SSH key should contain <code class='docutils literal notranslate'>\n</code> at the end of the key details in case of command line or API calls.
       </p>
     </div></td>
@@ -2265,13 +2304,14 @@ Parameters
       <p>Type of source for the Template.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">local</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">git_hub</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">git_hub_enterprise</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">git_lab</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">ibm_git_lab</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">ibm_cloud_catalog</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;local&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;git_hub&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;git_hub_enterprise&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;git_lab&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;ibm_git_lab&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;ibm_cloud_catalog&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
 
@@ -2301,13 +2341,14 @@ Parameters
       <p>Type of source for the Template.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">local</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">git_hub</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">git_hub_enterprise</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">git_lab</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">ibm_git_lab</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">ibm_cloud_catalog</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;local&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;git_hub&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;git_hub_enterprise&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;git_lab&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;ibm_git_lab&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;ibm_cloud_catalog&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -2323,9 +2364,10 @@ Parameters
       <p>Should the resource be present or absent.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-default-bold">present</span> <span class="ansible-option-default">← (default)</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">absent</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-default-bold">&#34;present&#34;</code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;absent&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -2354,11 +2396,12 @@ Parameters
       <p>Status of automation (workspace or action).</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">normal</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">pending</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">disabled</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">critical</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;normal&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;pending&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;disabled&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;critical&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -2414,9 +2457,10 @@ Parameters
       <p>Is the automation locked by a Schematic job ?.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-even">
@@ -2471,7 +2515,7 @@ Parameters
     </div></td>
     <td><div class="ansible-option-cell">
       <p>Inventory of host and host group for the playbook in <code class='docutils literal notranslate'>INI</code> file format.
-      For example, <code class='docutils literal notranslate'>&quot;targetsI(ini&quot;: &quot;[webserverhost] 72.22.192.6 [dbhost]172.22.192.5&quot;</code>.
+      For example, <code class='docutils literal notranslate'>"targetsI(ini": "[webserverhost] 72.22.192.6 [dbhost]172.22.192.5"</code>.
       For more information, about an inventory host group syntax,
       see [Inventory host groups](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-inventory-host-grps).
       </p>
@@ -2534,11 +2578,12 @@ Parameters
       </p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">draft</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">live</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">locked</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">disable</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;draft&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;live&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;locked&#34;</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;disable&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
 

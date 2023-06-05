@@ -18,8 +18,7 @@
 .. role:: ansible-option-versionadded
 .. role:: ansible-option-aliases
 .. role:: ansible-option-choices
-.. role:: ansible-option-choices-entry
-.. role:: ansible-option-default
+.. role:: ansible-option-choices-default-mark
 .. role:: ansible-option-default-bold
 .. role:: ansible-option-configuration
 .. role:: ansible-option-returned-bold
@@ -53,7 +52,9 @@ ibm.cloud.ibm_iam_access_group_rule module -- Manage ibm\_iam\_access\_group\_ru
 
 .. version_added
 
-.. versionadded:: 0.0.1-beta0 of ibm.cloud
+.. rst-class:: ansible-version-added
+
+New in ibm.cloud 0.0.1-beta0
 
 .. contents::
    :local:
@@ -93,7 +94,6 @@ The below requirements are needed on the host that executes this module.
 
 Parameters
 ----------
-
 
 .. raw:: html
 
@@ -252,9 +252,10 @@ Parameters
       <p>Should the resource be present or absent.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-default-bold">present</span> <span class="ansible-option-default">← (default)</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">absent</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-default-bold">&#34;present&#34;</code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;absent&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">

@@ -18,8 +18,7 @@
 .. role:: ansible-option-versionadded
 .. role:: ansible-option-aliases
 .. role:: ansible-option-choices
-.. role:: ansible-option-choices-entry
-.. role:: ansible-option-default
+.. role:: ansible-option-choices-default-mark
 .. role:: ansible-option-default-bold
 .. role:: ansible-option-configuration
 .. role:: ansible-option-returned-bold
@@ -53,7 +52,9 @@ ibm.cloud.ibm_iam_access_group_members module -- Manage ibm\_iam\_access\_group\
 
 .. version_added
 
-.. versionadded:: 0.0.1-beta0 of ibm.cloud
+.. rst-class:: ansible-version-added
+
+New in ibm.cloud 0.0.1-beta0
 
 .. contents::
    :local:
@@ -93,7 +94,6 @@ The below requirements are needed on the host that executes this module.
 
 Parameters
 ----------
-
 
 .. raw:: html
 
@@ -181,7 +181,7 @@ Parameters
       </p>
     </div></td>
     <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
-      <p>The type of the member, must be either &quot;user&quot;, &quot;service&quot; or &quot;trusted profile&quot;.</p>
+      <p>The type of the member, must be either "user", "service" or "trusted profile".</p>
     </div></td>
   </tr>
 
@@ -224,9 +224,10 @@ Parameters
       <p>Should the resource be present or absent.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-default-bold">present</span> <span class="ansible-option-default">← (default)</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">absent</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-default-bold">&#34;present&#34;</code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">&#34;absent&#34;</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   <tr class="row-odd">
@@ -271,9 +272,10 @@ Parameters
       <p>Return user&#x27;s email and name for each user ID or the name for each service ID or trusted profile.</p>
       <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
       <ul class="simple">
-        <li><p><span class="ansible-option-choices-entry">false</span></p></li>
-        <li><p><span class="ansible-option-choices-entry">true</span></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">false</code></p></li>
+        <li><p><code class="ansible-value literal notranslate ansible-option-choices-entry">true</code></p></li>
       </ul>
+
     </div></td>
   </tr>
   </tbody>
