@@ -1,0 +1,146 @@
+- name: resource_manager modules examples
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    # begin-list_resource_groups
+
+    - name: List ibm_resource_groups
+      ibm_resource_groups_info:
+        account_id: 'testString'
+        date: 'testString'
+        name: 'testString'
+        default: True
+        include_deleted: True
+      register: list_resource_groups_result
+
+    - name: Print list result
+      debug:
+        var: list_resource_groups_result
+
+    # end-list_resource_groups
+
+    - name: Assert ibm_resource_groups was listed
+      assert:
+        that:
+        - list_resource_groups_result is success
+        - list_resource_groups_result is not changed
+
+    # begin-create_resource_group
+
+    - name: Create ibm_resource_group
+      ibm_resource_group:
+        name: 'test1'
+        account_id: '25eba2a9-beef-450b-82cf-f5ad5e36c6dd'
+        state: present
+      register: create_resource_group_result
+
+    - name: Print create result
+      debug:
+        var: create_resource_group_result
+
+    # end-create_resource_group
+
+    - name: Assert ibm_resource_group was created
+      assert:
+        that:
+        - create_resource_group_result is success
+        - create_resource_group_result is changed
+
+    # begin-get_resource_group
+
+    - name: List ibm_resource_group
+      ibm_resource_group_info:
+        id: 'testString'
+      register: get_resource_group_result
+
+    - name: Print list result
+      debug:
+        var: get_resource_group_result
+
+    # end-get_resource_group
+
+    - name: Assert ibm_resource_group was listed
+      assert:
+        that:
+        - get_resource_group_result is success
+        - get_resource_group_result is not changed
+
+    # begin-update_resource_group
+
+    - name: Update ibm_resource_group
+      ibm_resource_group:
+        id: 'testString'
+        name: 'testString'
+        resource_group_state: 'testString'
+        state: present
+      register: update_resource_group_result
+
+    - name: Print update result
+      debug:
+        var: update_resource_group_result
+
+    # end-update_resource_group
+
+    - name: Assert ibm_resource_group was updated
+      assert:
+        that:
+        - update_resource_group_result is success
+        - update_resource_group_result is changed
+
+    # begin-list_quota_definitions
+
+    - name: List ibm_resource_quotas
+      ibm_resource_quotas_info:
+      register: list_quota_definitions_result
+
+    - name: Print list result
+      debug:
+        var: list_quota_definitions_result
+
+    # end-list_quota_definitions
+
+    - name: Assert ibm_resource_quotas was listed
+      assert:
+        that:
+        - list_quota_definitions_result is success
+        - list_quota_definitions_result is not changed
+
+    # begin-get_quota_definition
+
+    - name: List ibm_resource_quota
+      ibm_resource_quota_info:
+        id: 'testString'
+      register: get_quota_definition_result
+
+    - name: Print list result
+      debug:
+        var: get_quota_definition_result
+
+    # end-get_quota_definition
+
+    - name: Assert ibm_resource_quota was listed
+      assert:
+        that:
+        - get_quota_definition_result is success
+        - get_quota_definition_result is not changed
+
+    # begin-delete_resource_group
+
+    - name: Delete ibm_resource_group
+      ibm_resource_group:
+        id: 'testString'
+        state: absent
+      register: delete_resource_group_result
+
+    - name: Print delete result
+      debug:
+        var: delete_resource_group_result
+
+    # end-delete_resource_group
+
+    - name: Assert ibm_resource_group was deleted
+      assert:
+        that:
+        - delete_resource_group_result is success
+        - delete_resource_group_result is changed
+        - "delete_resource_group_result.msg.status == 'deleted'"

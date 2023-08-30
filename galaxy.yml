@@ -1,11 +1,12 @@
 namespace: "ibm"
 name: "cloud"
-version: "0.0.1-beta1"
+version: "1.0.0"
 readme: "README.md"
 authors:
-    - "Mujeebur Rahman"
-    - "Harini Kantareddy"
     - "Kavya Handadi"
+    - "Mujeeb Rahman"
+    - "Harini Kantareddy"
+    - "Umar Ali"
 description: "Ansible modules collection for IBM-Cloud."
 license_file: LICENSE
 tags: [ibm, cloud]
