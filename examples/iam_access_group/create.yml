@@ -42,11 +42,10 @@
     - name: Create access Group Rule
       ibm_iam_access_group_rule:
         name: "{{ access_group_name }}"
-        name             : "newrule"
-        expiration        : 4
+        expiration: 4
         realm_name: "test-idp.com"
         conditions: "{{conditions}}"
-        access_group_id : "{{ag_create_output.msg.id}}"
+        access_group_id: "{{ag_create_output.msg.id}}"
       register: ag_rule_create_output
 
     - name: Save newly created access group rule info as fact
@@ -62,8 +61,8 @@
     ## create access group members
     - name: Create access Group Members
       ibm_iam_access_group_members:
-        members : "{{members}}"
-        access_group_id : "{{ag_create_output.msg.id}}"
+        members: "{{members}}"
+        access_group_id: "{{ag_create_output.msg.id}}"
       register: ag_members_create_output
 
     - name: Save newly created access group members info as fact
@@ -78,8 +77,8 @@
     
     - name: Delete access Group Members
       ibm_iam_access_group_members:
-        iam_id : "{{iam_id}}"
-        access_group_id : "{{ag_create_output.msg.id}}"
+        iam_id: "{{iam_id}}"
+        access_group_id: "{{ag_create_output.msg.id}}"
         state: absent
       register: ag_members_delete_output
       when: access_group_members.members[0].iam_id is defined
@@ -87,7 +86,7 @@
     - name: Delete access Group Rule
       ibm_iam_access_group_rule:
         rule_id: "{{access_group_rule.id}}"
-        access_group_id : "{{ag_create_output.msg.id}}"
+        access_group_id: "{{ag_create_output.msg.id}}"
         state: absent
       register: ag_rule_delete_output
       when: access_group_rule.id is defined  

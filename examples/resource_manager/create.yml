@@ -1,34 +1,22 @@
 ---
-- name: Resource Group Creation.
+- name: resource_manager modules examples
   hosts: localhost
   collections:
    - ibm.cloud
   tasks:
+    # begin - load_varaibles
+
     - name: Fetch the variables from var file
       include_vars:
         file: vars.yml
 
-    - name: Check resource group Exists
-      ibm_resource_group_info:
-        id: "{{resource_group_id}}"
-      failed_when: 
-         - resource_group_output.id is not defined
-         - '"Invalid Id" not in resource_group_output'  
-         - '"missing" not in resource_group_output' 
-         - '"Failed to get a resource group." not in resource_group_output' 
-      register: resource_group_output
-    
-    - name: Save existing resource group info as fact
-      set_fact:
-        cacheable: True
-        resource_group: "{{ resource_group_output }}"
-      when: resource_group_output.id is defined
-    
-    - name: Create resource Group
+    # begin - Craete resource group
+    - name: Create ibm_resource_group
       ibm_resource_group:
         name: "{{ resource_group_name }}"
+        account_id: "{{ account_id }}"
+        state: present
       register: rg_create_output
-      when: resource_group is not defined
 
     - name: Save newly created resource group info as fact
       set_fact:
@@ -39,13 +27,61 @@
     - name: Print Resource group info 
       debug:
         msg: "Resource Group: {{ resource_group }}"
-      
+
+    # begin-get_resource_group
+
+    - name: Get ibm_resource_group
+      ibm_resource_group_info:
+        id: "{{ resource_group.id }}"
+      register: get_resource_group_result
+
+    - name: Print resource group
+      debug:
+        var: get_resource_group_result
+
+    
+
+    # begin-update_resource_group
+
+    - name: Update ibm_resource_group
+      ibm_resource_group:
+        id: "{{ resource_group.id }}"
+        name: "{{ updated_resource_group_name }}"
+        state: present
+      register: update_resource_group_result
+
+    - name: Print update resource group
+      debug:
+        var: update_resource_group_result
+
+    # # begin-list_resource_groups
+
+    - name: List ibm_resource_groups
+      ibm_resource_groups_info:
+        account_id: "{{ account_id }}"
+        default: True
+        include_deleted: True
+      register: list_resource_groups_result
+
+    - name: Print resource groups
+      debug:
+        var: list_resource_groups_result
+    
+    # # begin-delete_resource_group 
+
     - name: Delete Resource group
       ibm_resource_group:
         id: "{{ resource_group.id }}"
         state: absent
       register: output
-      when: rg_create_output.id is defined  
+      when: rg_create_output.id is defined
 
-    - name: Get details of all resource groups in an account
-      ibm_resource_groups_info:
+    # # begin-list_quota_definitions
+
+    - name: List ibm_resource_quotas
+      ibm_resource_quotas_info:
+      register: list_quota_definitions_result
+
+    - name: Print list result
+      debug:
+        var: list_quota_definitions_result

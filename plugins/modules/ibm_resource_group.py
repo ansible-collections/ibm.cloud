@@ -13,8 +13,10 @@ DOCUMENTATION = r'''
 ---
 module: ibm_resource_group
 short_description: Manage C(resource_groups) for Resource Manager.
-author: Kavya Handadi (@kavya498)
-version_added: "0.0.1-beta0"
+author:
+  - Kavya Handadi (@kavya498)
+  - Umar Ali (@umarali-nagoor)
+version_added: "1.0.0"
 description:
   - This module creates, updates, or deletes a C(resource_group) resource for Resource Manager.
 requirements:
