@@ -13,8 +13,8 @@ DOCUMENTATION = r'''
 ---
 module: ibm_resource_group_info
 short_description: Manage C(resource_group) for Resource Manager.
-author: Kavya Handadi (@kavya498)
-version_added: "0.0.1-beta0"
+author: IBM SDK Generator (@ibm)
+version_added: "1.0.0"
 description:
   - This module retrieves one or more C(resource_group) for Resource Manager.
 requirements:
