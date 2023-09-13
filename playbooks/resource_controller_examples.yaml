@@ -1,0 +1,557 @@
+- name: resource_controller modules examples
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    # begin-create_resource_instance
+
+    - name: Create ibm_resource_instance
+      ibm_resource_instance:
+        name: 'ExampleResourceInstance'
+        target: 'global'
+        resource_group: '13aa3ee48c3b44ddb64c05c79f7ab8ef'
+        resource_plan_id: 'a10e4960-3685-11e9-b210-d663bd873d93'
+        tags: ['testString']
+        allow_cleanup: False
+        parameters: {'anyKey': 'anyValue'}
+        entity_lock: False
+        state: present
+      register: create_resource_instance_result
+
+    - name: Print create result
+      debug:
+        var: create_resource_instance_result
+
+    # end-create_resource_instance
+
+    - name: Assert ibm_resource_instance was created
+      assert:
+        that:
+        - create_resource_instance_result is success
+        - create_resource_instance_result is changed
+
+    - name: Save link values from create_resource_instance
+      ansible.builtin.set_fact:
+        resource_instance_id_link: "{{ create_resource_instance_result.guid }}"
+
+    # begin-create_resource_key
+
+    - name: Create ibm_resource_key
+      vars:
+        resource_key_post_parameters_model:
+          serviceid_crn: 'crn:v1:bluemix:public:iam-identity::a/9fceaa56d1ab84893af6b9eec5ab81bb::serviceid:ServiceId-fe4c29b5-db13-410a-bacc-b5779a03d393'
+          foo: 'exampleValue'
+      ibm_resource_key:
+        name: 'ExampleResourceKey'
+        source: '381fd51a-f251-4f95-aff4-2b03fa8caa63'
+        parameters: '{{ resource_key_post_parameters_model }}'
+        role: 'Writer'
+        state: present
+      register: create_resource_key_result
+
+    - name: Print create result
+      debug:
+        var: create_resource_key_result
+
+    # end-create_resource_key
+
+    - name: Assert ibm_resource_key was created
+      assert:
+        that:
+        - create_resource_key_result is success
+        - create_resource_key_result is changed
+
+    - name: Save link values from create_resource_key
+      ansible.builtin.set_fact:
+        resource_key_id_link: "{{ create_resource_key_result.guid }}"
+
+    # begin-create_resource_binding
+
+    - name: Create ibm_resource_binding
+      vars:
+        resource_binding_post_parameters_model:
+          serviceid_crn: 'crn:v1:bluemix:public:iam-identity::a/9fceaa56d1ab84893af6b9eec5ab81bb::serviceid:ServiceId-fe4c29b5-db13-410a-bacc-b5779a03d393'
+          foo: 'exampleValue'
+      ibm_resource_binding:
+        source: 'faaec9d8-ec64-44d8-ab83-868632fac6a2'
+        target: 'crn:v1:staging:public:bluemix:us-south:s/e1773b6e-17b4-40c8-b5ed-d2a1c4b620d7::cf-application:8d9457e0-1303-4f32-b4b3-5525575f6205'
+        name: 'ExampleResourceBinding'
+        parameters: '{{ resource_binding_post_parameters_model }}'
+        role: 'Writer'
+        state: present
+      register: create_resource_binding_result
+
+    - name: Print create result
+      debug:
+        var: create_resource_binding_result
+
+    # end-create_resource_binding
+
+    - name: Assert ibm_resource_binding was created
+      assert:
+        that:
+        - create_resource_binding_result is success
+        - create_resource_binding_result is changed
+
+    - name: Save link values from create_resource_binding
+      ansible.builtin.set_fact:
+        resource_binding_id_link: "{{ create_resource_binding_result.guid }}"
+
+    # begin-create_resource_alias
+
+    - name: Create ibm_resource_alias
+      ibm_resource_alias:
+        name: 'ExampleResourceAlias'
+        source: '381fd51a-f251-4f95-aff4-2b03fa8caa63'
+        target: 'crn:v1:bluemix:public:bluemix:us-south:o/d35d4f0e-5076-4c89-9361-2522894b6548::cf-space:e1773b6e-17b4-40c8-b5ed-d2a1c4b620d7'
+        state: present
+      register: create_resource_alias_result
+
+    - name: Print create result
+      debug:
+        var: create_resource_alias_result
+
+    # end-create_resource_alias
+
+    - name: Assert ibm_resource_alias was created
+      assert:
+        that:
+        - create_resource_alias_result is success
+        - create_resource_alias_result is changed
+
+    - name: Save link values from create_resource_alias
+      ansible.builtin.set_fact:
+        resource_alias_id_link: "{{ create_resource_alias_result.guid }}"
+
+    # begin-list_resource_instances
+
+    - name: List ibm_resource_instances
+      ibm_resource_instances_info:
+        guid: 'testString'
+        name: 'testString'
+        resource_group_id: 'testString'
+        resource_id: 'testString'
+        resource_plan_id: 'testString'
+        type: 'testString'
+        sub_type: 'testString'
+        limit: 100
+        state: 'active'
+        updated_from: '2021-01-01'
+        updated_to: '2021-01-01'
+      register: list_resource_instances_result
+
+    - name: Print list result
+      debug:
+        var: list_resource_instances_result
+
+    # end-list_resource_instances
+
+    - name: Assert ibm_resource_instances was listed
+      assert:
+        that:
+        - list_resource_instances_result is success
+        - list_resource_instances_result is not changed
+
+    # begin-get_resource_instance
+
+    - name: List ibm_resource_instance
+      ibm_resource_instance_info:
+        id: "{{ resource_instance_id_link }}"
+      register: get_resource_instance_result
+
+    - name: Print list result
+      debug:
+        var: get_resource_instance_result
+
+    # end-get_resource_instance
+
+    - name: Assert ibm_resource_instance was listed
+      assert:
+        that:
+        - get_resource_instance_result is success
+        - get_resource_instance_result is not changed
+
+    # begin-update_resource_instance
+
+    - name: Update ibm_resource_instance
+      ibm_resource_instance:
+        id: "{{ resource_instance_id_link }}"
+        name: 'UpdatedExampleResourceInstance'
+        parameters: {'exampleProperty':'exampleValue'}
+        resource_plan_id: 'testString'
+        allow_cleanup: True
+        state: present
+      register: update_resource_instance_result
+
+    - name: Print update result
+      debug:
+        var: update_resource_instance_result
+
+    # end-update_resource_instance
+
+    - name: Assert ibm_resource_instance was updated
+      assert:
+        that:
+        - update_resource_instance_result is success
+        - update_resource_instance_result is changed
+
+    # begin-list_resource_aliases_for_instance
+
+    - name: List ibm_resource_aliases
+      ibm_resource_aliases_info:
+        id: 'testString'
+        limit: 100
+      register: list_resource_aliases_for_instance_result
+
+    - name: Print list result
+      debug:
+        var: list_resource_aliases_for_instance_result
+
+    # end-list_resource_aliases_for_instance
+
+    - name: Assert ibm_resource_aliases was listed
+      assert:
+        that:
+        - list_resource_aliases_for_instance_result is success
+        - list_resource_aliases_for_instance_result is not changed
+
+    # begin-list_resource_keys_for_instance
+
+    - name: Read ibm_resource_keys
+      ibm_resource_keys_info:
+        id: 'testString'
+        limit: 100
+      register: list_resource_keys_for_instance_result
+
+    - name: Print read result
+      debug:
+        var: list_resource_keys_for_instance_result
+
+    # end-list_resource_keys_for_instance
+
+    - name: Assert ibm_resource_keys was read
+      assert:
+        that:
+        - list_resource_keys_for_instance_result is success
+        - list_resource_keys_for_instance_result is not changed
+
+    # begin-list_resource_keys
+
+    - name: List ibm_resource_keys
+      ibm_resource_keys_info:
+        guid: 'testString'
+        name: 'testString'
+        resource_group_id: 'testString'
+        resource_id: 'testString'
+        limit: 100
+        updated_from: '2021-01-01'
+        updated_to: '2021-01-01'
+      register: list_resource_keys_result
+
+    - name: Print list result
+      debug:
+        var: list_resource_keys_result
+
+    # end-list_resource_keys
+
+    - name: Assert ibm_resource_keys was listed
+      assert:
+        that:
+        - list_resource_keys_result is success
+        - list_resource_keys_result is not changed
+
+    # begin-get_resource_key
+
+    - name: Read ibm_resource_key
+      ibm_resource_key_info:
+        id: "{{ resource_key_id_link }}"
+      register: get_resource_key_result
+
+    - name: Print read result
+      debug:
+        var: get_resource_key_result
+
+    # end-get_resource_key
+
+    - name: Assert ibm_resource_key was read
+      assert:
+        that:
+        - get_resource_key_result is success
+        - get_resource_key_result is not changed
+
+    # begin-update_resource_key
+
+    - name: Update ibm_resource_key
+      ibm_resource_key:
+        id: "{{ resource_key_id_link }}"
+        name: 'UpdatedExampleResourceKey'
+        state: present
+      register: update_resource_key_result
+
+    - name: Print update result
+      debug:
+        var: update_resource_key_result
+
+    # end-update_resource_key
+
+    - name: Assert ibm_resource_key was updated
+      assert:
+        that:
+        - update_resource_key_result is success
+        - update_resource_key_result is changed
+
+    # begin-list_resource_bindings
+
+    - name: List ibm_resource_bindings
+      ibm_resource_bindings_info:
+        guid: 'testString'
+        name: 'testString'
+        resource_group_id: 'testString'
+        resource_id: 'testString'
+        region_binding_id: 'testString'
+        limit: 100
+        updated_from: '2021-01-01'
+        updated_to: '2021-01-01'
+      register: list_resource_bindings_result
+
+    - name: Print list result
+      debug:
+        var: list_resource_bindings_result
+
+    # end-list_resource_bindings
+
+    - name: Assert ibm_resource_bindings was listed
+      assert:
+        that:
+        - list_resource_bindings_result is success
+        - list_resource_bindings_result is not changed
+
+    # begin-get_resource_binding
+
+    - name: Read ibm_resource_binding
+      ibm_resource_binding_info:
+        id: "{{ resource_binding_id_link }}"
+      register: get_resource_binding_result
+
+    - name: Print read result
+      debug:
+        var: get_resource_binding_result
+
+    # end-get_resource_binding
+
+    - name: Assert ibm_resource_binding was read
+      assert:
+        that:
+        - get_resource_binding_result is success
+        - get_resource_binding_result is not changed
+
+    # begin-update_resource_binding
+
+    - name: Update ibm_resource_binding
+      ibm_resource_binding:
+        id: "{{ resource_binding_id_link }}"
+        name: 'UpdatedExampleResourceBinding'
+        state: present
+      register: update_resource_binding_result
+
+    - name: Print update result
+      debug:
+        var: update_resource_binding_result
+
+    # end-update_resource_binding
+
+    - name: Assert ibm_resource_binding was updated
+      assert:
+        that:
+        - update_resource_binding_result is success
+        - update_resource_binding_result is changed
+
+    # begin-list_resource_aliases
+
+    - name: Read ibm_resource_aliases
+      ibm_resource_aliases_info:
+        guid: 'testString'
+        name: 'testString'
+        resource_instance_id: 'testString'
+        region_instance_id: 'testString'
+        resource_id: 'testString'
+        resource_group_id: 'testString'
+        limit: 100
+        updated_from: '2021-01-01'
+        updated_to: '2021-01-01'
+      register: list_resource_aliases_result
+
+    - name: Print read result
+      debug:
+        var: list_resource_aliases_result
+
+    # end-list_resource_aliases
+
+    - name: Assert ibm_resource_aliases was read
+      assert:
+        that:
+        - list_resource_aliases_result is success
+        - list_resource_aliases_result is not changed
+
+    # begin-get_resource_alias
+
+    - name: Read ibm_resource_alias
+      ibm_resource_alias_info:
+        id: "{{ resource_alias_id_link }}"
+      register: get_resource_alias_result
+
+    - name: Print read result
+      debug:
+        var: get_resource_alias_result
+
+    # end-get_resource_alias
+
+    - name: Assert ibm_resource_alias was read
+      assert:
+        that:
+        - get_resource_alias_result is success
+        - get_resource_alias_result is not changed
+
+    # begin-update_resource_alias
+
+    - name: Update ibm_resource_alias
+      ibm_resource_alias:
+        id: "{{ resource_alias_id_link }}"
+        name: 'UpdatedExampleResourceAlias'
+        state: present
+      register: update_resource_alias_result
+
+    - name: Print update result
+      debug:
+        var: update_resource_alias_result
+
+    # end-update_resource_alias
+
+    - name: Assert ibm_resource_alias was updated
+      assert:
+        that:
+        - update_resource_alias_result is success
+        - update_resource_alias_result is changed
+
+    # begin-list_resource_bindings_for_alias
+
+    - name: Read ibm_resource_bindings
+      ibm_resource_bindings_info:
+        id: 'testString'
+        limit: 100
+      register: list_resource_bindings_for_alias_result
+
+    - name: Print read result
+      debug:
+        var: list_resource_bindings_for_alias_result
+
+    # end-list_resource_bindings_for_alias
+
+    - name: Assert ibm_resource_bindings was read
+      assert:
+        that:
+        - list_resource_bindings_for_alias_result is success
+        - list_resource_bindings_for_alias_result is not changed
+
+    # begin-list_reclamations
+
+    - name: List ibm_resource_reclamations
+      ibm_resource_reclamations_info:
+        account_id: 'testString'
+        resource_instance_id: 'testString'
+        resource_group_id: 'testString'
+      register: list_reclamations_result
+
+    - name: Print list result
+      debug:
+        var: list_reclamations_result
+
+    # end-list_reclamations
+
+    - name: Assert ibm_resource_reclamations was listed
+      assert:
+        that:
+        - list_reclamations_result is success
+        - list_reclamations_result is not changed
+
+    # begin-delete_resource_key
+
+    - name: Delete ibm_resource_key
+      ibm_resource_key:
+        id: "{{ resource_key_id_link }}"
+        state: absent
+      register: delete_resource_key_result
+
+    - name: Print delete result
+      debug:
+        var: delete_resource_key_result
+
+    # end-delete_resource_key
+
+    - name: Assert ibm_resource_key was deleted
+      assert:
+        that:
+        - delete_resource_key_result is success
+        - delete_resource_key_result is changed
+        - "delete_resource_key_result.msg.status == 'deleted'"
+    # begin-delete_resource_instance
+
+    - name: Delete ibm_resource_instance
+      ibm_resource_instance:
+        id: "{{ resource_instance_id_link }}"
+        recursive: False
+        state: absent
+      register: delete_resource_instance_result
+
+    - name: Print delete result
+      debug:
+        var: delete_resource_instance_result
+
+    # end-delete_resource_instance
+
+    - name: Assert ibm_resource_instance was deleted
+      assert:
+        that:
+        - delete_resource_instance_result is success
+        - delete_resource_instance_result is changed
+        - "delete_resource_instance_result.msg.status == 'deleted'"
+    # begin-delete_resource_binding
+
+    - name: Delete ibm_resource_binding
+      ibm_resource_binding:
+        id: "{{ resource_binding_id_link }}"
+        state: absent
+      register: delete_resource_binding_result
+
+    - name: Print delete result
+      debug:
+        var: delete_resource_binding_result
+
+    # end-delete_resource_binding
+
+    - name: Assert ibm_resource_binding was deleted
+      assert:
+        that:
+        - delete_resource_binding_result is success
+        - delete_resource_binding_result is changed
+        - "delete_resource_binding_result.msg.status == 'deleted'"
+    # begin-delete_resource_alias
+
+    - name: Delete ibm_resource_alias
+      ibm_resource_alias:
+        id: "{{ resource_alias_id_link }}"
+        recursive: False
+        state: absent
+      register: delete_resource_alias_result
+
+    - name: Print delete result
+      debug:
+        var: delete_resource_alias_result
+
+    # end-delete_resource_alias
+
+    - name: Assert ibm_resource_alias was deleted
+      assert:
+        that:
+        - delete_resource_alias_result is success
+        - delete_resource_alias_result is changed
+        - "delete_resource_alias_result.msg.status == 'deleted'"

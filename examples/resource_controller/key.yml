@@ -22,8 +22,8 @@
     - name: Create resource key
       ibm_resource_key:
         name: "{{ name }}"
-        source: "{{ source }}"
         role: "{{ role }}"
+        source: "{{source}}"
       register: key_create_output
       when: resource_key.id is not defined
 
@@ -31,15 +31,6 @@
       set_fact:
         cacheable: True
         resource_key: "{{ key_create_output.msg }}"
-      when: key_create_output.msg.id is defined
-
-    - name: Print Resource key info 
-      debug:
-        msg: "Resource key: {{ resource_key }}"
-    
-    - name: Check resource key exists
-      ibm_resource_key_info:
-        id: "{{ key_create_output.msg.id }}"
       when: key_create_output.msg.id is defined
       
     - name: Delete Resource key
