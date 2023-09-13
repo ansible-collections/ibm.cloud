@@ -1,11 +1,3 @@
-plugins/modules/ibm_resource_instances_info.py validate-modules:import-error
-plugins/modules/ibm_resource_reclamations_info.py validate-modules:import-error
-plugins/modules/ibm_resource_instance.py validate-modules:import-error
-plugins/modules/ibm_resource_alias.py validate-modules:import-error
-plugins/modules/ibm_cm_catalog.py validate-modules:import-error
-plugins/modules/ibm_cm_offering_instance.py validate-modules:import-error
-plugins/modules/ibm_cm_version.py validate-modules:import-error
-plugins/modules/ibm_iam_access_group_info.py validate-modules:import-error
 plugins/modules/ibm_iam_access_group_members_info.py validate-modules:import-error
 plugins/modules/ibm_iam_access_group_rule_info.py validate-modules:import-error
 plugins/modules/ibm_iam_access_group_rules_info.py validate-modules:import-error
@@ -13,15 +5,6 @@ plugins/modules/ibm_iam_access_group.py validate-modules:import-error
 plugins/modules/ibm_iam_access_groups_info.py validate-modules:import-error
 plugins/modules/ibm_iam_service_id_info.py validate-modules:import-error
 plugins/modules/ibm_iam_service_id.py validate-modules:import-error
-plugins/modules/ibm_resource_alias_info.py validate-modules:import-error
-plugins/modules/ibm_resource_aliases_info.py validate-modules:import-error
-plugins/modules/ibm_resource_binding_info.py validate-modules:import-error
-plugins/modules/ibm_resource_binding.py validate-modules:import-error
-plugins/modules/ibm_resource_bindings_info.py validate-modules:import-error
-plugins/modules/ibm_resource_instance_info.py validate-modules:import-error
-plugins/modules/ibm_resource_key_info.py validate-modules:import-error
-plugins/modules/ibm_resource_key.py validate-modules:import-error
-plugins/modules/ibm_resource_keys_info.py validate-modules:import-error
 plugins/modules/ibm_iam_access_group_members.py validate-modules:import-error
 plugins/modules/ibm_iam_service_ids_info.py validate-modules:import-error
 plugins/modules/ibm_iam_access_group_rule.py validate-modules:import-error

@@ -1,9 +1,9 @@
 ---
-resource_group: "a06db00ce84e4b8a8ac81ef56748c513"
+resource_group: "19e34037c9fe41e5aa9d682c9089b044"
 plan: "tiered-pricing"
 service: "kms"
 location: "us-south"
-name: "test"
+name: "testne"
 # params: 
 #   num_compute_nodes: '1'
 #   hardware_config: default

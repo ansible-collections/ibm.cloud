@@ -1,4 +1,5 @@
 ---
-name: "test2"
-source: "crn:v1:bluemix:public:databases-for-mongodb:eu-gb:a/4448261269a14562b839e0a3019ed980:cc420766-a319-4c3e-b183-38a6019b4c4f::"
-role: "Viewer"
+# Sample values
+name: "test"
+source: "crn:v1:bluemix:public:kms:us-south:a/fcdb102154c7ea8e1b79d3a64afe0:6ebef6-a889-42ab-b827-ab879ba86073::"
+role: "Reader"
