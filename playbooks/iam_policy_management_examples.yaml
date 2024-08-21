@@ -1,0 +1,847 @@
+- name: iam_policy_management modules examples
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    # begin-list_policies
+
+    - name: Read ibm_iam_service_policy
+      ibm_iam_service_policy_info:
+        account_id: 'testString'
+        accept_language: 'default'
+        iam_id: 'testString'
+        access_group_id: 'testString'
+        type: 'access'
+        service_type: 'service'
+        tag_name: 'testString'
+        tag_value: 'testString'
+        sort: 'id'
+        format: 'include_last_permit'
+        state: 'active'
+      register: list_policies_result
+
+    - name: Print read result
+      debug:
+        var: list_policies_result
+
+    # end-list_policies
+
+    - name: Assert ibm_iam_service_policy was read
+      assert:
+        that:
+        - list_policies_result is success
+        - list_policies_result is not changed
+
+    # begin-create_policy
+
+    - name: Create ibm_iam_service_policy
+      vars:
+        subject_attribute_model:
+          name: 'testString'
+          value: 'testString'
+        policy_subject_model:
+          attributes: [subject_attribute_model]
+        policy_role_model:
+          role_id: 'testString'
+        resource_attribute_model:
+          name: 'testString'
+          value: 'testString'
+          operator: 'testString'
+        resource_tag_model:
+          name: 'testString'
+          value: 'testString'
+          operator: 'testString'
+        policy_resource_model:
+          attributes: [resource_attribute_model]
+          tags: [resource_tag_model]
+      ibm_iam_service_policy:
+        type: 'testString'
+        subjects: [policy_subject_model]
+        roles: [policy_role_model]
+        resources: [policy_resource_model]
+        description: 'testString'
+        accept_language: 'default'
+        state: present
+      register: create_policy_result
+
+    - name: Print create result
+      debug:
+        var: create_policy_result
+
+    # end-create_policy
+
+    - name: Assert ibm_iam_service_policy was created
+      assert:
+        that:
+        - create_policy_result is success
+        - create_policy_result is changed
+
+    # begin-replace_policy
+
+    - name: Update ibm_iam_service_policy
+      vars:
+        subject_attribute_model:
+          name: 'testString'
+          value: 'testString'
+        policy_subject_model:
+          attributes: [subject_attribute_model]
+        policy_role_model:
+          role_id: 'testString'
+        resource_attribute_model:
+          name: 'testString'
+          value: 'testString'
+          operator: 'testString'
+        resource_tag_model:
+          name: 'testString'
+          value: 'testString'
+          operator: 'testString'
+        policy_resource_model:
+          attributes: [resource_attribute_model]
+          tags: [resource_tag_model]
+      ibm_iam_service_policy:
+        policy_id: 'testString'
+        if_match: 'testString'
+        type: 'testString'
+        subjects: [policy_subject_model]
+        roles: [policy_role_model]
+        resources: [policy_resource_model]
+        description: 'testString'
+        state: present
+      register: replace_policy_result
+
+    - name: Print update result
+      debug:
+        var: replace_policy_result
+
+    # end-replace_policy
+
+    - name: Assert ibm_iam_service_policy was updated
+      assert:
+        that:
+        - replace_policy_result is success
+        - replace_policy_result is changed
+
+    # begin-get_policy
+
+    - name: Read ibm_iam_service_policy
+      ibm_iam_service_policy_info:
+        policy_id: 'testString'
+      register: get_policy_result
+
+    - name: Print read result
+      debug:
+        var: get_policy_result
+
+    # end-get_policy
+
+    - name: Assert ibm_iam_service_policy was read
+      assert:
+        that:
+        - get_policy_result is success
+        - get_policy_result is not changed
+
+    # begin-list_roles
+
+    - name: Read ibm_iam_service_role
+      ibm_iam_service_role_info:
+        accept_language: 'default'
+        account_id: 'testString'
+        service_name: 'iam-groups'
+        source_service_name: 'iam-groups'
+        policy_type: 'authorization'
+        service_group_id: 'IAM'
+      register: list_roles_result
+
+    - name: Print read result
+      debug:
+        var: list_roles_result
+
+    # end-list_roles
+
+    - name: Assert ibm_iam_service_role was read
+      assert:
+        that:
+        - list_roles_result is success
+        - list_roles_result is not changed
+
+    # begin-create_role
+
+    - name: Create ibm_iam_service_role
+      ibm_iam_service_role:
+        display_name: 'testString'
+        actions: ['testString']
+        name: 'Developer'
+        account_id: 'testString'
+        service_name: 'iam-groups'
+        description: 'testString'
+        accept_language: 'default'
+        state: present
+      register: create_role_result
+
+    - name: Print create result
+      debug:
+        var: create_role_result
+
+    # end-create_role
+
+    - name: Assert ibm_iam_service_role was created
+      assert:
+        that:
+        - create_role_result is success
+        - create_role_result is changed
+
+    # begin-replace_role
+
+    - name: Update ibm_iam_service_role
+      ibm_iam_service_role:
+        role_id: 'testString'
+        if_match: 'testString'
+        display_name: 'testString'
+        actions: ['testString']
+        description: 'testString'
+        state: present
+      register: replace_role_result
+
+    - name: Print update result
+      debug:
+        var: replace_role_result
+
+    # end-replace_role
+
+    - name: Assert ibm_iam_service_role was updated
+      assert:
+        that:
+        - replace_role_result is success
+        - replace_role_result is changed
+
+    # begin-get_role
+
+    - name: Read ibm_iam_service_role
+      ibm_iam_service_role_info:
+        role_id: 'testString'
+      register: get_role_result
+
+    - name: Print read result
+      debug:
+        var: get_role_result
+
+    # end-get_role
+
+    - name: Assert ibm_iam_service_role was read
+      assert:
+        that:
+        - get_role_result is success
+        - get_role_result is not changed
+
+    # begin-list_v2_policies
+
+    - name: Read ibm_iam_service_v2policy
+      ibm_iam_service_v2policy_info:
+        account_id: 'testString'
+        accept_language: 'default'
+        iam_id: 'testString'
+        access_group_id: 'testString'
+        type: 'access'
+        service_type: 'service'
+        service_name: 'testString'
+        service_group_id: 'testString'
+        sort: 'testString'
+        format: 'include_last_permit'
+        state: 'active'
+      register: list_v2_policies_result
+
+    - name: Print read result
+      debug:
+        var: list_v2_policies_result
+
+    # end-list_v2_policies
+
+    - name: Assert ibm_iam_service_v2policy was read
+      assert:
+        that:
+        - list_v2_policies_result is success
+        - list_v2_policies_result is not changed
+
+    # begin-create_v2_policy
+
+    - name: Create ibm_iam_service_v2policy
+      vars:
+        roles_model:
+          role_id: 'testString'
+        grant_model:
+          roles: [roles_model]
+        control_model:
+          grant: grant_model
+        v2_policy_subject_attribute_model:
+          key: 'testString'
+          operator: 'stringEquals'
+          value: 'testString'
+        v2_policy_subject_model:
+          attributes: [v2_policy_subject_attribute_model]
+        v2_policy_resource_attribute_model:
+          key: 'testString'
+          operator: 'stringEquals'
+          value: 'testString'
+        v2_policy_resource_tag_model:
+          key: 'testString'
+          value: 'testString'
+          operator: 'stringEquals'
+        v2_policy_resource_model:
+          attributes: [v2_policy_resource_attribute_model]
+          tags: [v2_policy_resource_tag_model]
+        v2_policy_rule_model:
+          key: 'testString'
+          operator: 'stringEquals'
+          value: 'testString'
+      ibm_iam_service_v2policy:
+        control: '{{ control_model }}'
+        type: 'access'
+        description: 'testString'
+        subject: '{{ v2_policy_subject_model }}'
+        resource: '{{ v2_policy_resource_model }}'
+        pattern: 'testString'
+        rule: '{{ v2_policy_rule_model }}'
+        accept_language: 'default'
+        state: present
+      register: create_v2_policy_result
+
+    - name: Print create result
+      debug:
+        var: create_v2_policy_result
+
+    # end-create_v2_policy
+
+    - name: Assert ibm_iam_service_v2policy was created
+      assert:
+        that:
+        - create_v2_policy_result is success
+        - create_v2_policy_result is changed
+
+    # begin-replace_v2_policy
+
+    - name: Update ibm_iam_service_v2policy
+      vars:
+        roles_model:
+          role_id: 'testString'
+        grant_model:
+          roles: [roles_model]
+        control_model:
+          grant: grant_model
+        v2_policy_subject_attribute_model:
+          key: 'testString'
+          operator: 'stringEquals'
+          value: 'testString'
+        v2_policy_subject_model:
+          attributes: [v2_policy_subject_attribute_model]
+        v2_policy_resource_attribute_model:
+          key: 'testString'
+          operator: 'stringEquals'
+          value: 'testString'
+        v2_policy_resource_tag_model:
+          key: 'testString'
+          value: 'testString'
+          operator: 'stringEquals'
+        v2_policy_resource_model:
+          attributes: [v2_policy_resource_attribute_model]
+          tags: [v2_policy_resource_tag_model]
+        v2_policy_rule_model:
+          key: 'testString'
+          operator: 'stringEquals'
+          value: 'testString'
+      ibm_iam_service_v2policy:
+        id: 'testString'
+        if_match: 'testString'
+        control: '{{ control_model }}'
+        type: 'access'
+        description: 'testString'
+        subject: '{{ v2_policy_subject_model }}'
+        resource: '{{ v2_policy_resource_model }}'
+        pattern: 'testString'
+        rule: '{{ v2_policy_rule_model }}'
+        state: present
+      register: replace_v2_policy_result
+
+    - name: Print update result
+      debug:
+        var: replace_v2_policy_result
+
+    # end-replace_v2_policy
+
+    - name: Assert ibm_iam_service_v2policy was updated
+      assert:
+        that:
+        - replace_v2_policy_result is success
+        - replace_v2_policy_result is changed
+
+    # begin-get_v2_policy
+
+    - name: Read ibm_iam_service_v2policy
+      ibm_iam_service_v2policy_info:
+        id: 'testString'
+        format: 'include_last_permit'
+      register: get_v2_policy_result
+
+    - name: Print read result
+      debug:
+        var: get_v2_policy_result
+
+    # end-get_v2_policy
+
+    - name: Assert ibm_iam_service_v2policy was read
+      assert:
+        that:
+        - get_v2_policy_result is success
+        - get_v2_policy_result is not changed
+
+    # begin-list_policy_templates
+
+    - name: Read ibm_iam_service_policy_template
+      ibm_iam_service_policy_template_info:
+        account_id: 'testString'
+        accept_language: 'default'
+        state: 'active'
+        name: 'testString'
+        policy_service_type: 'service'
+        policy_service_name: 'testString'
+        policy_service_group_id: 'testString'
+        policy_type: 'access'
+      register: list_policy_templates_result
+
+    - name: Print read result
+      debug:
+        var: list_policy_templates_result
+
+    # end-list_policy_templates
+
+    - name: Assert ibm_iam_service_policy_template was read
+      assert:
+        that:
+        - list_policy_templates_result is success
+        - list_policy_templates_result is not changed
+
+    # begin-create_policy_template
+
+    - name: Create ibm_iam_service_policy_template
+      vars:
+        v2_policy_resource_attribute_model:
+          key: 'testString'
+          operator: 'stringEquals'
+          value: 'testString'
+        v2_policy_resource_tag_model:
+          key: 'testString'
+          value: 'testString'
+          operator: 'stringEquals'
+        v2_policy_resource_model:
+          attributes: [v2_policy_resource_attribute_model]
+          tags: [v2_policy_resource_tag_model]
+        v2_policy_subject_attribute_model:
+          key: 'testString'
+          operator: 'stringEquals'
+          value: 'testString'
+        v2_policy_subject_model:
+          attributes: [v2_policy_subject_attribute_model]
+        v2_policy_rule_model:
+          key: 'testString'
+          operator: 'stringEquals'
+          value: 'testString'
+        roles_model:
+          role_id: 'testString'
+        grant_model:
+          roles: [roles_model]
+        control_model:
+          grant: grant_model
+        template_policy_model:
+          type: 'access'
+          description: 'testString'
+          resource: v2_policy_resource_model
+          subject: v2_policy_subject_model
+          pattern: 'testString'
+          rule: v2_policy_rule_model
+          control: control_model
+      ibm_iam_service_policy_template:
+        name: 'testString'
+        account_id: 'testString'
+        policy: '{{ template_policy_model }}'
+        description: 'testString'
+        committed: True
+        accept_language: 'default'
+        state: present
+      register: create_policy_template_result
+
+    - name: Print create result
+      debug:
+        var: create_policy_template_result
+
+    # end-create_policy_template
+
+    - name: Assert ibm_iam_service_policy_template was created
+      assert:
+        that:
+        - create_policy_template_result is success
+        - create_policy_template_result is changed
+
+    # begin-get_policy_template
+
+    - name: Read ibm_iam_service_policy_template
+      ibm_iam_service_policy_template_info:
+        policy_template_id: 'testString'
+        iam_service_policy_template_state: 'active'
+      register: get_policy_template_result
+
+    - name: Print read result
+      debug:
+        var: get_policy_template_result
+
+    # end-get_policy_template
+
+    - name: Assert ibm_iam_service_policy_template was read
+      assert:
+        that:
+        - get_policy_template_result is success
+        - get_policy_template_result is not changed
+
+    # begin-create_policy_template_version
+
+    - name: Create ibm_iam_service_policy_template
+      vars:
+        v2_policy_resource_attribute_model:
+          key: 'testString'
+          operator: 'stringEquals'
+          value: 'testString'
+        v2_policy_resource_tag_model:
+          key: 'testString'
+          value: 'testString'
+          operator: 'stringEquals'
+        v2_policy_resource_model:
+          attributes: [v2_policy_resource_attribute_model]
+          tags: [v2_policy_resource_tag_model]
+        v2_policy_subject_attribute_model:
+          key: 'testString'
+          operator: 'stringEquals'
+          value: 'testString'
+        v2_policy_subject_model:
+          attributes: [v2_policy_subject_attribute_model]
+        v2_policy_rule_model:
+          key: 'testString'
+          operator: 'stringEquals'
+          value: 'testString'
+        roles_model:
+          role_id: 'testString'
+        grant_model:
+          roles: [roles_model]
+        control_model:
+          grant: grant_model
+        template_policy_model:
+          type: 'access'
+          description: 'testString'
+          resource: v2_policy_resource_model
+          subject: v2_policy_subject_model
+          pattern: 'testString'
+          rule: v2_policy_rule_model
+          control: control_model
+      ibm_iam_service_policy_template:
+        policy_template_id: 'testString'
+        policy: '{{ template_policy_model }}'
+        name: 'testString'
+        description: 'testString'
+        committed: True
+        state: present
+      register: create_policy_template_version_result
+
+    - name: Print create result
+      debug:
+        var: create_policy_template_version_result
+
+    # end-create_policy_template_version
+
+    - name: Assert ibm_iam_service_policy_template was created
+      assert:
+        that:
+        - create_policy_template_version_result is success
+        - create_policy_template_version_result is changed
+
+    # begin-replace_policy_template
+
+    - name: Update ibm_iam_service_policy_template
+      vars:
+        v2_policy_resource_attribute_model:
+          key: 'testString'
+          operator: 'stringEquals'
+          value: 'testString'
+        v2_policy_resource_tag_model:
+          key: 'testString'
+          value: 'testString'
+          operator: 'stringEquals'
+        v2_policy_resource_model:
+          attributes: [v2_policy_resource_attribute_model]
+          tags: [v2_policy_resource_tag_model]
+        v2_policy_subject_attribute_model:
+          key: 'testString'
+          operator: 'stringEquals'
+          value: 'testString'
+        v2_policy_subject_model:
+          attributes: [v2_policy_subject_attribute_model]
+        v2_policy_rule_model:
+          key: 'testString'
+          operator: 'stringEquals'
+          value: 'testString'
+        roles_model:
+          role_id: 'testString'
+        grant_model:
+          roles: [roles_model]
+        control_model:
+          grant: grant_model
+        template_policy_model:
+          type: 'access'
+          description: 'testString'
+          resource: v2_policy_resource_model
+          subject: v2_policy_subject_model
+          pattern: 'testString'
+          rule: v2_policy_rule_model
+          control: control_model
+      ibm_iam_service_policy_template:
+        policy_template_id: 'testString'
+        version: 'testString'
+        if_match: 'testString'
+        policy: '{{ template_policy_model }}'
+        name: 'testString'
+        description: 'testString'
+        committed: True
+        state: present
+      register: replace_policy_template_result
+
+    - name: Print update result
+      debug:
+        var: replace_policy_template_result
+
+    # end-replace_policy_template
+
+    - name: Assert ibm_iam_service_policy_template was updated
+      assert:
+        that:
+        - replace_policy_template_result is success
+        - replace_policy_template_result is changed
+
+    # begin-get_policy_template_version
+
+    - name: Read ibm_iam_service_policy_template
+      ibm_iam_service_policy_template_info:
+        policy_template_id: 'testString'
+        version: 'testString'
+      register: get_policy_template_version_result
+
+    - name: Print read result
+      debug:
+        var: get_policy_template_version_result
+
+    # end-get_policy_template_version
+
+    - name: Assert ibm_iam_service_policy_template was read
+      assert:
+        that:
+        - get_policy_template_version_result is success
+        - get_policy_template_version_result is not changed
+
+    # begin-list_policy_assignments
+
+    - name: List ibm_iam_service_policy_assignment
+      ibm_iam_service_policy_assignment_info:
+        version: '1.0'
+        account_id: 'testString'
+        accept_language: 'default'
+        template_id: 'testString'
+        template_version: 'testString'
+      register: list_policy_assignments_result
+
+    - name: Print list result
+      debug:
+        var: list_policy_assignments_result
+
+    # end-list_policy_assignments
+
+    - name: Assert ibm_iam_service_policy_assignment was listed
+      assert:
+        that:
+        - list_policy_assignments_result is success
+        - list_policy_assignments_result is not changed
+
+    # begin-create_policy_template_assignment
+
+    - name: Create ibm_iam_service_policy_assignment
+      vars:
+        assignment_target_details_model:
+          type: 'Account'
+          id: 'testString'
+        policy_assignment_v1_options_root_template_model:
+          id: 'testString'
+          version: 'testString'
+        policy_assignment_v1_options_root_model:
+          requester_id: 'testString'
+          assignment_id: 'testString'
+          template: policy_assignment_v1_options_root_template_model
+        policy_assignment_v1_options_model:
+          root: policy_assignment_v1_options_root_model
+        assignment_template_details_model:
+          id: 'testString'
+          version: 'testString'
+      ibm_iam_service_policy_assignment:
+        version: '1.0'
+        policy_assignment_v1_request: 'unknown type: PolicyAssignmentV1Request'
+        accept_language: 'default'
+        state: present
+      register: create_policy_template_assignment_result
+
+    - name: Print create result
+      debug:
+        var: create_policy_template_assignment_result
+
+    # end-create_policy_template_assignment
+
+    - name: Assert ibm_iam_service_policy_assignment was created
+      assert:
+        that:
+        - create_policy_template_assignment_result is success
+        - create_policy_template_assignment_result is changed
+
+    # begin-get_policy_assignment
+
+    - name: Read ibm_iam_service_policy_assignment
+      ibm_iam_service_policy_assignment_info:
+        assignment_id: 'testString'
+        version: '1.0'
+      register: get_policy_assignment_result
+
+    - name: Print read result
+      debug:
+        var: get_policy_assignment_result
+
+    # end-get_policy_assignment
+
+    - name: Assert ibm_iam_service_policy_assignment was read
+      assert:
+        that:
+        - get_policy_assignment_result is success
+        - get_policy_assignment_result is not changed
+
+    # begin-update_policy_assignment
+
+    - name: Update ibm_iam_service_policy_assignment
+      ibm_iam_service_policy_assignment:
+        assignment_id: 'testString'
+        version: '1.0'
+        if_match: 'testString'
+        template_version: 'testString'
+        state: present
+      register: update_policy_assignment_result
+
+    - name: Print update result
+      debug:
+        var: update_policy_assignment_result
+
+    # end-update_policy_assignment
+
+    - name: Assert ibm_iam_service_policy_assignment was updated
+      assert:
+        that:
+        - update_policy_assignment_result is success
+        - update_policy_assignment_result is changed
+
+    # begin-delete_policy
+
+    - name: Delete ibm_iam_service_policy
+      ibm_iam_service_policy:
+        policy_id: 'testString'
+        state: absent
+      register: delete_policy_result
+
+    - name: Print delete result
+      debug:
+        var: delete_policy_result
+
+    # end-delete_policy
+
+    - name: Assert ibm_iam_service_policy was deleted
+      assert:
+        that:
+        - delete_policy_result is success
+        - delete_policy_result is changed
+        - "delete_policy_result.msg.status == 'deleted'"
+    # begin-delete_role
+
+    - name: Delete ibm_iam_service_role
+      ibm_iam_service_role:
+        role_id: 'testString'
+        state: absent
+      register: delete_role_result
+
+    - name: Print delete result
+      debug:
+        var: delete_role_result
+
+    # end-delete_role
+
+    - name: Assert ibm_iam_service_role was deleted
+      assert:
+        that:
+        - delete_role_result is success
+        - delete_role_result is changed
+        - "delete_role_result.msg.status == 'deleted'"
+    # begin-delete_v2_policy
+
+    - name: Delete ibm_iam_service_v2policy
+      ibm_iam_service_v2policy:
+        id: 'testString'
+        state: absent
+      register: delete_v2_policy_result
+
+    - name: Print delete result
+      debug:
+        var: delete_v2_policy_result
+
+    # end-delete_v2_policy
+
+    - name: Assert ibm_iam_service_v2policy was deleted
+      assert:
+        that:
+        - delete_v2_policy_result is success
+        - delete_v2_policy_result is changed
+        - "delete_v2_policy_result.msg.status == 'deleted'"
+    # begin-delete_policy_template
+
+    - name: Delete ibm_iam_service_policy_template
+      ibm_iam_service_policy_template:
+        policy_template_id: 'testString'
+        state: absent
+      register: delete_policy_template_result
+
+    - name: Print delete result
+      debug:
+        var: delete_policy_template_result
+
+    # end-delete_policy_template
+
+    - name: Assert ibm_iam_service_policy_template was deleted
+      assert:
+        that:
+        - delete_policy_template_result is success
+        - delete_policy_template_result is changed
+        - "delete_policy_template_result.msg.status == 'deleted'"
+    # begin-delete_policy_assignment
+
+    - name: Delete ibm_iam_service_policy_assignment
+      ibm_iam_service_policy_assignment:
+        assignment_id: 'testString'
+        state: absent
+      register: delete_policy_assignment_result
+
+    - name: Print delete result
+      debug:
+        var: delete_policy_assignment_result
+
+    # end-delete_policy_assignment
+
+    - name: Assert ibm_iam_service_policy_assignment was deleted
+      assert:
+        that:
+        - delete_policy_assignment_result is success
+        - delete_policy_assignment_result is changed
+        - "delete_policy_assignment_result.msg.status == 'deleted'"
