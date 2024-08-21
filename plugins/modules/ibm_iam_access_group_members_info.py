@@ -12,7 +12,9 @@ DOCUMENTATION = r'''
 ---
 module: ibm_iam_access_group_members_info
 short_description: Manage ibm_iam_access_group_members info.
-author: Kavya Handadi (@kavya498)
+author: 
+  - Kavya Handadi (@kavya498)
+  - Gannayak Pabra (@Gannayak0722)
 version_added: "0.0.1-beta0"
 description:
     - This module retrieves one or more ibm_iam_access_group_members(s).

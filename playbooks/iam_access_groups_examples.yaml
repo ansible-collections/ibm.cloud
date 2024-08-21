@@ -1,0 +1,738 @@
+- name: iam_access_groups modules examples
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    # begin-create_access_group
+
+    - name: Create ibm_iam_access_group
+      ibm_iam_access_group:
+        account_id: 'testString'
+        name: 'Managers'
+        description: 'Group for managers'
+        transaction_id: 'testString'
+        state: present
+      register: create_access_group_result
+
+    - name: Print create result
+      debug:
+        var: create_access_group_result
+
+    # end-create_access_group
+
+    - name: Assert ibm_iam_access_group was created
+      assert:
+        that:
+        - create_access_group_result is success
+        - create_access_group_result is changed
+
+    - name: Save link values from create_access_group
+      ansible.builtin.set_fact:
+        access_group_id_link: "{{ create_access_group_result.id }}"
+
+    # begin-get_access_group
+
+    - name: Read ibm_iam_access_groups
+      ibm_iam_access_groups_info:
+        access_group_id: "{{ access_group_id_link }}"
+        transaction_id: 'testString'
+        show_federated: False
+      register: get_access_group_result
+
+    - name: Print read result
+      debug:
+        var: get_access_group_result
+
+    # end-get_access_group
+
+    - name: Assert ibm_iam_access_groups was read
+      assert:
+        that:
+        - get_access_group_result is success
+        - get_access_group_result is not changed
+
+    - name: Save link values from get_access_group
+      ansible.builtin.set_fact:
+        access_group_e_tag_link: "{{ get_access_group_result.etag }}"
+
+    # begin-list_access_groups
+
+    - name: List ibm_iam_access_groups
+      ibm_iam_access_groups_info:
+        account_id: 'testString'
+        transaction_id: 'testString'
+        iam_id: 'testString'
+        search: 'testString'
+        membership_type: 'static'
+        limit: 50
+        sort: 'name'
+        show_federated: False
+        hide_public_access: False
+      register: list_access_groups_result
+
+    - name: Print list result
+      debug:
+        var: list_access_groups_result
+
+    # end-list_access_groups
+
+    - name: Assert ibm_iam_access_groups was listed
+      assert:
+        that:
+        - list_access_groups_result is success
+        - list_access_groups_result is not changed
+
+    # begin-update_access_group
+
+    - name: Update ibm_iam_access_group
+      ibm_iam_access_group:
+        access_group_id: "{{ access_group_id_link }}"
+        if_match: "{{ access_group_e_tag_link }}"
+        name: 'Awesome Managers'
+        description: 'Group for awesome managers.'
+        transaction_id: 'testString'
+        state: present
+      register: update_access_group_result
+
+    - name: Print update result
+      debug:
+        var: update_access_group_result
+
+    # end-update_access_group
+
+    - name: Assert ibm_iam_access_group was updated
+      assert:
+        that:
+        - update_access_group_result is success
+        - update_access_group_result is changed
+
+    # begin-add_members_to_access_group
+
+    - name: Update ibm_iam_access_group_members
+      vars:
+        add_group_members_request_members_item_model:
+          iam_id: 'IBMid-user1'
+          type: 'user'
+      ibm_iam_access_group_members:
+        access_group_id: 'testString'
+        members: [add_group_members_request_members_item_model]
+        transaction_id: 'testString'
+        state: present
+      register: add_members_to_access_group_result
+
+    - name: Print update result
+      debug:
+        var: add_members_to_access_group_result
+
+    # end-add_members_to_access_group
+
+    - name: Assert ibm_iam_access_group_members was updated
+      assert:
+        that:
+        - add_members_to_access_group_result is success
+        - add_members_to_access_group_result is changed
+
+    # begin-add_access_group_rule
+
+    - name: Create ibm_iam_access_group_rule
+      vars:
+        rule_conditions_model:
+          claim: 'isManager'
+          operator: 'EQUALS'
+          value: 'true'
+      ibm_iam_access_group_rule:
+        access_group_id: "{{ access_group_id_link }}"
+        expiration: 12
+        realm_name: 'https://idp.example.org/SAML2'
+        conditions: [rule_conditions_model]
+        name: 'Manager group rule'
+        transaction_id: 'testString'
+        state: present
+      register: add_access_group_rule_result
+
+    - name: Print create result
+      debug:
+        var: add_access_group_rule_result
+
+    # end-add_access_group_rule
+
+    - name: Assert ibm_iam_access_group_rule was created
+      assert:
+        that:
+        - add_access_group_rule_result is success
+        - add_access_group_rule_result is changed
+
+    # begin-list_access_group_rules
+
+    - name: Read ibm_iam_access_group_rule
+      ibm_iam_access_group_rule_info:
+        access_group_id: 'testString'
+        transaction_id: 'testString'
+      register: list_access_group_rules_result
+
+    - name: Print read result
+      debug:
+        var: list_access_group_rules_result
+
+    # end-list_access_group_rules
+
+    - name: Assert ibm_iam_access_group_rule was read
+      assert:
+        that:
+        - list_access_group_rules_result is success
+        - list_access_group_rules_result is not changed
+
+    # begin-get_access_group_rule
+
+    - name: Read ibm_iam_access_group_rule
+      ibm_iam_access_group_rule_info:
+        access_group_id: "{{ access_group_id_link }}"
+        rule_id: 'testString'
+        transaction_id: 'testString'
+      register: get_access_group_rule_result
+
+    - name: Print read result
+      debug:
+        var: get_access_group_rule_result
+
+    # end-get_access_group_rule
+
+    - name: Assert ibm_iam_access_group_rule was read
+      assert:
+        that:
+        - get_access_group_rule_result is success
+        - get_access_group_rule_result is not changed
+
+    # begin-replace_access_group_rule
+
+    - name: Update ibm_iam_access_group_rule
+      vars:
+        rule_conditions_model:
+          claim: 'isManager'
+          operator: 'EQUALS'
+          value: 'true'
+      ibm_iam_access_group_rule:
+        access_group_id: "{{ access_group_id_link }}"
+        rule_id: 'testString'
+        if_match: 'testString'
+        expiration: 12
+        realm_name: 'https://idp.example.org/SAML2'
+        conditions: [rule_conditions_model]
+        name: 'Manager group rule'
+        transaction_id: 'testString'
+        state: present
+      register: replace_access_group_rule_result
+
+    - name: Print update result
+      debug:
+        var: replace_access_group_rule_result
+
+    # end-replace_access_group_rule
+
+    - name: Assert ibm_iam_access_group_rule was updated
+      assert:
+        that:
+        - replace_access_group_rule_result is success
+        - replace_access_group_rule_result is changed
+
+    # begin-create_template
+
+    - name: Create ibm_iam_access_group_template
+      vars:
+        members_action_controls_model:
+          add: True
+          remove: False
+        members_model:
+          users: ['IBMid-50PJGPKYJJ', 'IBMid-665000T8WY']
+          services: ['iam-ServiceId-345', 'iam-ServiceId-456']
+          action_controls: members_action_controls_model
+        conditions_model:
+          claim: 'blueGroup'
+          operator: 'CONTAINS'
+          value: 'test-bluegroup-saml'
+        rule_action_controls_model:
+          remove: False
+        assertions_rule_model:
+          name: 'Manager group rule'
+          expiration: 12
+          realm_name: 'https://idp.example.org/SAML2'
+          conditions: [conditions_model]
+          action_controls: rule_action_controls_model
+        assertions_action_controls_model:
+          add: False
+          remove: True
+        assertions_model:
+          rules: [assertions_rule_model]
+          action_controls: assertions_action_controls_model
+        access_action_controls_model:
+          add: False
+        group_action_controls_model:
+          access: access_action_controls_model
+        access_group_request_model:
+          name: 'IAM Admin Group'
+          description: 'This access group template allows admin access to all IAM platform services in the account.'
+          members: members_model
+          assertions: assertions_model
+          action_controls: group_action_controls_model
+        policy_templates_model:
+          id: 'policyTemplateId-123'
+          version: '1'
+      ibm_iam_access_group_template:
+        name: 'IAM Admin Group template'
+        account_id: 'accountID-123'
+        description: 'This access group template allows admin access to all IAM platform services in the account.'
+        group: '{{ access_group_request_model }}'
+        policy_template_references: [policy_templates_model]
+        transaction_id: 'testString'
+        state: present
+      register: create_template_result
+
+    - name: Print create result
+      debug:
+        var: create_template_result
+
+    # end-create_template
+
+    - name: Assert ibm_iam_access_group_template was created
+      assert:
+        that:
+        - create_template_result is success
+        - create_template_result is changed
+
+    # begin-list_templates
+
+    - name: List ibm_iam_access_group_template
+      ibm_iam_access_group_template_info:
+        account_id: 'accountID-123'
+        transaction_id: 'testString'
+        limit: 50
+        verbose: True
+      register: list_templates_result
+
+    - name: Print list result
+      debug:
+        var: list_templates_result
+
+    # end-list_templates
+
+    - name: Assert ibm_iam_access_group_template was listed
+      assert:
+        that:
+        - list_templates_result is success
+        - list_templates_result is not changed
+
+    # begin-create_template_version
+
+    - name: Create ibm_iam_access_group_template_version
+      vars:
+        members_action_controls_model:
+          add: True
+          remove: False
+        members_model:
+          users: ['IBMid-50PJGPKYJJ', 'IBMid-665000T8WY']
+          services: ['iam-ServiceId-345']
+          action_controls: members_action_controls_model
+        conditions_model:
+          claim: 'blueGroup'
+          operator: 'CONTAINS'
+          value: 'test-bluegroup-saml'
+        rule_action_controls_model:
+          remove: False
+        assertions_rule_model:
+          name: 'Manager group rule'
+          expiration: 12
+          realm_name: 'https://idp.example.org/SAML2'
+          conditions: [conditions_model]
+          action_controls: rule_action_controls_model
+        assertions_action_controls_model:
+          add: False
+          remove: True
+        assertions_model:
+          rules: [assertions_rule_model]
+          action_controls: assertions_action_controls_model
+        access_action_controls_model:
+          add: False
+        group_action_controls_model:
+          access: access_action_controls_model
+        access_group_request_model:
+          name: 'IAM Admin Group 8'
+          description: 'This access group template allows admin access to all IAM platform services in the account.'
+          members: members_model
+          assertions: assertions_model
+          action_controls: group_action_controls_model
+        policy_templates_model:
+          id: 'policyTemplateId-123'
+          version: '1'
+      ibm_iam_access_group_template_version:
+        template_id: 'testString'
+        name: 'IAM Admin Group template 2'
+        description: 'This access group template allows admin access to all IAM platform services in the account.'
+        group: '{{ access_group_request_model }}'
+        policy_template_references: [policy_templates_model]
+        transaction_id: 'testString'
+        state: present
+      register: create_template_version_result
+
+    - name: Print create result
+      debug:
+        var: create_template_version_result
+
+    # end-create_template_version
+
+    - name: Assert ibm_iam_access_group_template_version was created
+      assert:
+        that:
+        - create_template_version_result is success
+        - create_template_version_result is changed
+
+    # begin-list_template_versions
+
+    - name: List ibm_iam_access_group_template_version
+      ibm_iam_access_group_template_version_info:
+        template_id: 'testString'
+        limit: 100
+      register: list_template_versions_result
+
+    - name: Print list result
+      debug:
+        var: list_template_versions_result
+
+    # end-list_template_versions
+
+    - name: Assert ibm_iam_access_group_template_version was listed
+      assert:
+        that:
+        - list_template_versions_result is success
+        - list_template_versions_result is not changed
+
+    # begin-get_template_version
+
+    - name: Read ibm_iam_access_group_template_version
+      ibm_iam_access_group_template_version_info:
+        template_id: 'testString'
+        version_num: 'testString'
+        verbose: True
+        transaction_id: 'testString'
+      register: get_template_version_result
+
+    - name: Print read result
+      debug:
+        var: get_template_version_result
+
+    # end-get_template_version
+
+    - name: Assert ibm_iam_access_group_template_version was read
+      assert:
+        that:
+        - get_template_version_result is success
+        - get_template_version_result is not changed
+
+    # begin-update_template_version
+
+    - name: Update ibm_iam_access_group_template_version
+      vars:
+        members_action_controls_model:
+          add: True
+          remove: False
+        members_model:
+          users: ['IBMid-665000T8WY']
+          services: ['iam-ServiceId-e371b0e5-1c80-48e3-bf12-c6a8ef2b1a11']
+          action_controls: members_action_controls_model
+        conditions_model:
+          claim: 'blueGroup'
+          operator: 'CONTAINS'
+          value: 'test-bluegroup-saml'
+        rule_action_controls_model:
+          remove: False
+        assertions_rule_model:
+          name: 'Manager group rule'
+          expiration: 12
+          realm_name: 'https://idp.example.org/SAML2'
+          conditions: [conditions_model]
+          action_controls: rule_action_controls_model
+        assertions_action_controls_model:
+          add: False
+          remove: True
+        assertions_model:
+          rules: [assertions_rule_model]
+          action_controls: assertions_action_controls_model
+        access_action_controls_model:
+          add: False
+        group_action_controls_model:
+          access: access_action_controls_model
+        access_group_request_model:
+          name: 'IAM Admin Group 8'
+          description: 'This access group template allows admin access to all IAM platform services in the account.'
+          members: members_model
+          assertions: assertions_model
+          action_controls: group_action_controls_model
+        policy_templates_model:
+          id: 'policyTemplateId-123'
+          version: '1'
+      ibm_iam_access_group_template_version:
+        template_id: 'testString'
+        version_num: 'testString'
+        if_match: 'testString'
+        name: 'IAM Admin Group template 2'
+        description: 'This access group template allows admin access to all IAM platform services in the account.'
+        group: '{{ access_group_request_model }}'
+        policy_template_references: [policy_templates_model]
+        transaction_id: '83adf5bd-de790caa3'
+        state: present
+      register: update_template_version_result
+
+    - name: Print update result
+      debug:
+        var: update_template_version_result
+
+    # end-update_template_version
+
+    - name: Assert ibm_iam_access_group_template_version was updated
+      assert:
+        that:
+        - update_template_version_result is success
+        - update_template_version_result is changed
+
+    # begin-get_latest_template_version
+
+    - name: Read ibm_iam_access_group_template
+      ibm_iam_access_group_template_info:
+        template_id: 'testString'
+        verbose: True
+        transaction_id: 'testString'
+      register: get_latest_template_version_result
+
+    - name: Print read result
+      debug:
+        var: get_latest_template_version_result
+
+    # end-get_latest_template_version
+
+    - name: Assert ibm_iam_access_group_template was read
+      assert:
+        that:
+        - get_latest_template_version_result is success
+        - get_latest_template_version_result is not changed
+
+    # begin-create_assignment
+
+    - name: Create ibm_iam_access_group_template_assignment
+      ibm_iam_access_group_template_assignment:
+        template_id: 'AccessGroupTemplateId-4be4'
+        template_version: '1'
+        target_type: 'AccountGroup'
+        target: '0a45594d0f-123'
+        transaction_id: 'testString'
+        state: present
+      register: create_assignment_result
+
+    - name: Print create result
+      debug:
+        var: create_assignment_result
+
+    # end-create_assignment
+
+    - name: Assert ibm_iam_access_group_template_assignment was created
+      assert:
+        that:
+        - create_assignment_result is success
+        - create_assignment_result is changed
+
+    # begin-list_assignments
+
+    - name: List ibm_iam_access_group_template_assignment
+      ibm_iam_access_group_template_assignment_info:
+        account_id: 'accountID-123'
+        template_id: 'testString'
+        template_version: 'testString'
+        target: 'testString'
+        status: 'accepted'
+        transaction_id: 'testString'
+        limit: 50
+        offset: 0
+      register: list_assignments_result
+
+    - name: Print list result
+      debug:
+        var: list_assignments_result
+
+    # end-list_assignments
+
+    - name: Assert ibm_iam_access_group_template_assignment was listed
+      assert:
+        that:
+        - list_assignments_result is success
+        - list_assignments_result is not changed
+
+    # begin-get_assignment
+
+    - name: Read ibm_iam_access_group_template_assignment
+      ibm_iam_access_group_template_assignment_info:
+        assignment_id: 'testString'
+        transaction_id: 'testString'
+        verbose: False
+      register: get_assignment_result
+
+    - name: Print read result
+      debug:
+        var: get_assignment_result
+
+    # end-get_assignment
+
+    - name: Assert ibm_iam_access_group_template_assignment was read
+      assert:
+        that:
+        - get_assignment_result is success
+        - get_assignment_result is not changed
+
+    # begin-update_assignment
+
+    - name: Update ibm_iam_access_group_template_assignment
+      ibm_iam_access_group_template_assignment:
+        assignment_id: 'testString'
+        if_match: 'testString'
+        template_version: '1'
+        state: present
+      register: update_assignment_result
+
+    - name: Print update result
+      debug:
+        var: update_assignment_result
+
+    # end-update_assignment
+
+    - name: Assert ibm_iam_access_group_template_assignment was updated
+      assert:
+        that:
+        - update_assignment_result is success
+        - update_assignment_result is changed
+
+    # begin-delete_access_group
+
+    - name: Delete ibm_iam_access_group
+      ibm_iam_access_group:
+        access_group_id: "{{ access_group_id_link }}"
+        transaction_id: 'testString'
+        force: False
+        state: absent
+      register: delete_access_group_result
+
+    - name: Print delete result
+      debug:
+        var: delete_access_group_result
+
+    # end-delete_access_group
+
+    - name: Assert ibm_iam_access_group was deleted
+      assert:
+        that:
+        - delete_access_group_result is success
+        - delete_access_group_result is changed
+        - "delete_access_group_result.msg.status == 'deleted'"
+    # begin-remove_member_from_access_group
+
+    - name: Delete ibm_iam_access_group_members
+      ibm_iam_access_group_members:
+        access_group_id: 'testString'
+        iam_id: 'testString'
+        transaction_id: 'testString'
+        state: absent
+      register: remove_member_from_access_group_result
+
+    - name: Print delete result
+      debug:
+        var: remove_member_from_access_group_result
+
+    # end-remove_member_from_access_group
+
+    - name: Assert ibm_iam_access_group_members was deleted
+      assert:
+        that:
+        - remove_member_from_access_group_result is success
+        - remove_member_from_access_group_result is changed
+        - "remove_member_from_access_group_result.msg.status == 'deleted'"
+    # begin-remove_access_group_rule
+
+    - name: Delete ibm_iam_access_group_rule
+      ibm_iam_access_group_rule:
+        access_group_id: "{{ access_group_id_link }}"
+        rule_id: 'testString'
+        transaction_id: 'testString'
+        state: absent
+      register: remove_access_group_rule_result
+
+    - name: Print delete result
+      debug:
+        var: remove_access_group_rule_result
+
+    # end-remove_access_group_rule
+
+    - name: Assert ibm_iam_access_group_rule was deleted
+      assert:
+        that:
+        - remove_access_group_rule_result is success
+        - remove_access_group_rule_result is changed
+        - "remove_access_group_rule_result.msg.status == 'deleted'"
+    # begin-delete_template_version
+
+    - name: Delete ibm_iam_access_group_template_version
+      ibm_iam_access_group_template_version:
+        template_id: 'testString'
+        version_num: 'testString'
+        transaction_id: 'testString'
+        state: absent
+      register: delete_template_version_result
+
+    - name: Print delete result
+      debug:
+        var: delete_template_version_result
+
+    # end-delete_template_version
+
+    - name: Assert ibm_iam_access_group_template_version was deleted
+      assert:
+        that:
+        - delete_template_version_result is success
+        - delete_template_version_result is changed
+        - "delete_template_version_result.msg.status == 'deleted'"
+    # begin-delete_template
+
+    - name: Delete ibm_iam_access_group_template
+      ibm_iam_access_group_template:
+        template_id: 'testString'
+        transaction_id: 'testString'
+        state: absent
+      register: delete_template_result
+
+    - name: Print delete result
+      debug:
+        var: delete_template_result
+
+    # end-delete_template
+
+    - name: Assert ibm_iam_access_group_template was deleted
+      assert:
+        that:
+        - delete_template_result is success
+        - delete_template_result is changed
+        - "delete_template_result.msg.status == 'deleted'"
+    # begin-delete_assignment
+
+    - name: Delete ibm_iam_access_group_template_assignment
+      ibm_iam_access_group_template_assignment:
+        assignment_id: 'testString'
+        transaction_id: 'testString'
+        state: absent
+      register: delete_assignment_result
+
+    - name: Print delete result
+      debug:
+        var: delete_assignment_result
+
+    # end-delete_assignment
+
+    - name: Assert ibm_iam_access_group_template_assignment was deleted
+      assert:
+        that:
+        - delete_assignment_result is success
+        - delete_assignment_result is changed
+        - "delete_assignment_result.msg.status == 'deleted'"
