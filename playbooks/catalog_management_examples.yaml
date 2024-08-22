@@ -1,0 +1,1228 @@
+- name: catalog_management modules examples
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    # begin-create_catalog
+
+    - name: Create ibm_cm_catalog
+      vars:
+        feature_model:
+          title: 'testString'
+          title_i18n: {'key1': 'testString'}
+          description: 'testString'
+          description_i18n: {'key1': 'testString'}
+        filter_terms_model:
+          filter_terms: ['testString']
+        category_filter_model:
+          include: True
+          filter: filter_terms_model
+        id_filter_model:
+          include: filter_terms_model
+          exclude: filter_terms_model
+        filters_model:
+          include_all: True
+          category_filters: category_filter_model
+          id_filters: id_filter_model
+        trusted_profile_info_model:
+          trusted_profile_id: 'testString'
+          catalog_crn: 'testString'
+          catalog_name: 'testString'
+          target_service_id: 'testString'
+        target_account_context_model:
+          api_key: 'testString'
+          trusted_profile: trusted_profile_info_model
+          name: 'testString'
+          label: 'testString'
+          project_id: 'testString'
+      ibm_cm_catalog:
+        label: 'testString'
+        label_i18n: 'testString'
+        short_description: 'testString'
+        short_description_i18n: 'testString'
+        catalog_icon_url: 'testString'
+        catalog_banner_url: 'testString'
+        tags: ['testString']
+        features: [feature_model]
+        disabled: True
+        resource_group_id: 'testString'
+        owning_account: 'testString'
+        catalog_filters: '{{ filters_model }}'
+        kind: 'testString'
+        metadata: {'anyKey': 'anyValue'}
+        target_account_contexts: [target_account_context_model]
+        state: present
+      register: create_catalog_result
+
+    - name: Print create result
+      debug:
+        var: create_catalog_result
+
+    # end-create_catalog
+
+    - name: Assert ibm_cm_catalog was created
+      assert:
+        that:
+        - create_catalog_result is success
+        - create_catalog_result is changed
+
+    - name: Save link values from create_catalog
+      ansible.builtin.set_fact:
+        catalog_id_link: "{{ create_catalog_result.id }}"
+        catalog_rev_link: "{{ create_catalog_result.['_rev'] }}"
+
+    # begin-get_catalog
+
+    - name: Read ibm_cm_catalog
+      ibm_cm_catalog_info:
+        catalog_identifier: "{{ catalog_id_link }}"
+      register: get_catalog_result
+
+    - name: Print read result
+      debug:
+        var: get_catalog_result
+
+    # end-get_catalog
+
+    - name: Assert ibm_cm_catalog was read
+      assert:
+        that:
+        - get_catalog_result is success
+        - get_catalog_result is not changed
+
+    - name: Save link values from get_catalog
+      ansible.builtin.set_fact:
+        catalog_rev_link: "{{ get_catalog_result.['_rev'] }}"
+
+    # begin-replace_catalog
+
+    - name: Update ibm_cm_catalog
+      vars:
+        feature_model:
+          title: 'testString'
+          title_i18n: {'key1': 'testString'}
+          description: 'testString'
+          description_i18n: {'key1': 'testString'}
+        filter_terms_model:
+          filter_terms: ['testString']
+        category_filter_model:
+          include: True
+          filter: filter_terms_model
+        id_filter_model:
+          include: filter_terms_model
+          exclude: filter_terms_model
+        filters_model:
+          include_all: True
+          category_filters: category_filter_model
+          id_filters: id_filter_model
+        trusted_profile_info_model:
+          trusted_profile_id: 'testString'
+          catalog_crn: 'testString'
+          catalog_name: 'testString'
+          target_service_id: 'testString'
+        target_account_context_model:
+          api_key: 'testString'
+          trusted_profile: trusted_profile_info_model
+          name: 'testString'
+          label: 'testString'
+          project_id: 'testString'
+      ibm_cm_catalog:
+        catalog_identifier: "{{ catalog_id_link }}"
+        id: 'testString'
+        rev: 'testString'
+        label: 'testString'
+        label_i18n: 'testString'
+        short_description: 'testString'
+        short_description_i18n: 'testString'
+        catalog_icon_url: 'testString'
+        catalog_banner_url: 'testString'
+        tags: ['testString']
+        features: [feature_model]
+        disabled: True
+        resource_group_id: 'testString'
+        owning_account: 'testString'
+        catalog_filters: '{{ filters_model }}'
+        kind: 'testString'
+        metadata: {'anyKey': 'anyValue'}
+        target_account_contexts: [target_account_context_model]
+        state: present
+      register: replace_catalog_result
+
+    - name: Print update result
+      debug:
+        var: replace_catalog_result
+
+    # end-replace_catalog
+
+    - name: Assert ibm_cm_catalog was updated
+      assert:
+        that:
+        - replace_catalog_result is success
+        - replace_catalog_result is changed
+
+    - name: Save link values from replace_catalog
+      ansible.builtin.set_fact:
+        catalog_rev_link: "{{ replace_catalog_result.['_rev'] }}"
+
+    # begin-import_offering_version
+
+    - name: Create ibm_cm_offering
+      vars:
+        flavor_model:
+          name: 'testString'
+          label: 'testString'
+          label_i18n: {'key1': 'testString'}
+          index: 38
+        import_offering_body_metadata_operating_system_model:
+          dedicated_host_only: True
+          vendor: 'testString'
+          name: 'testString'
+          href: 'testString'
+          display_name: 'testString'
+          family: 'testString'
+          version: 'testString'
+          architecture: 'testString'
+        import_offering_body_metadata_file_model:
+          size: 38
+        import_offering_body_metadata_images_item_model:
+          id: 'testString'
+          name: 'testString'
+          region: 'testString'
+        import_offering_body_metadata_model:
+          operating_system: import_offering_body_metadata_operating_system_model
+          file: import_offering_body_metadata_file_model
+          minimum_provisioned_size: 38
+          images: [import_offering_body_metadata_images_item_model]
+      ibm_cm_offering:
+        catalog_identifier: 'testString'
+        offering_id: 'testString'
+        tags: ['testString']
+        content: b'This is a mock byte array value.'
+        name: 'testString'
+        label: 'testString'
+        install_kind: 'testString'
+        target_kinds: ['testString']
+        format_kind: 'testString'
+        product_kind: 'testString'
+        product_kind_label: 'testString'
+        sha: 'testString'
+        version: 'testString'
+        flavor: '{{ flavor_model }}'
+        metadata: '{{ import_offering_body_metadata_model }}'
+        working_directory: 'testString'
+        install_type: 'testString'
+        zipurl: 'testString'
+        target_version: 'testString'
+        include_config: True
+        is_vsi: True
+        repotype: 'testString'
+        x_auth_token: 'testString'
+        state: present
+      register: import_offering_version_result
+
+    - name: Print create result
+      debug:
+        var: import_offering_version_result
+
+    # end-import_offering_version
+
+    - name: Assert ibm_cm_offering was created
+      assert:
+        that:
+        - import_offering_version_result is success
+        - import_offering_version_result is changed
+
+    - name: Save link values from import_offering_version
+      ansible.builtin.set_fact:
+        offering_id_link: "{{ import_offering_version_result.['id'] }}"
+        offering_rev_link: "{{ import_offering_version_result.['_rev'] }}"
+        version_locator_link: "{{ import_offering_version_result.['kinds'][0]['versions'][0]['version_locator'] }}"
+        version_id_link: "{{ import_offering_version_result.['kinds'][0]['versions'][0]['version_locator'] }}"
+        version_rev_link: "{{ import_offering_version_result.['kinds'][0]['versions'][0]['_rev'] }}"
+
+    # begin-import_offering
+
+    - name: Create ibm_cm_offering
+      vars:
+        flavor_model:
+          name: 'testString'
+          label: 'testString'
+          label_i18n: {'key1': 'testString'}
+          index: 38
+        import_offering_body_metadata_operating_system_model:
+          dedicated_host_only: True
+          vendor: 'testString'
+          name: 'testString'
+          href: 'testString'
+          display_name: 'testString'
+          family: 'testString'
+          version: 'testString'
+          architecture: 'testString'
+        import_offering_body_metadata_file_model:
+          size: 38
+        import_offering_body_metadata_images_item_model:
+          id: 'testString'
+          name: 'testString'
+          region: 'testString'
+        import_offering_body_metadata_model:
+          operating_system: import_offering_body_metadata_operating_system_model
+          file: import_offering_body_metadata_file_model
+          minimum_provisioned_size: 38
+          images: [import_offering_body_metadata_images_item_model]
+      ibm_cm_offering:
+        catalog_identifier: 'testString'
+        tags: ['testString']
+        content: b'This is a mock byte array value.'
+        name: 'testString'
+        label: 'testString'
+        install_kind: 'testString'
+        target_kinds: ['testString']
+        format_kind: 'testString'
+        product_kind: 'testString'
+        product_kind_label: 'testString'
+        sha: 'testString'
+        version: 'testString'
+        flavor: '{{ flavor_model }}'
+        metadata: '{{ import_offering_body_metadata_model }}'
+        working_directory: 'testString'
+        install_type: 'testString'
+        zipurl: 'testString'
+        offering_id: 'testString'
+        target_version: 'testString'
+        include_config: True
+        is_vsi: True
+        repotype: 'testString'
+        x_auth_token: 'testString'
+        state: present
+      register: import_offering_result
+
+    - name: Print create result
+      debug:
+        var: import_offering_result
+
+    # end-import_offering
+
+    - name: Assert ibm_cm_offering was created
+      assert:
+        that:
+        - import_offering_result is success
+        - import_offering_result is changed
+
+    - name: Save link values from import_offering
+      ansible.builtin.set_fact:
+        offering_rev_link: "{{ import_offering_result.['_rev'] }}"
+        version_locator_link: "{{ import_offering_result.['kinds'][0]['versions'][0]['version_locator'] }}"
+
+    # begin-get_offering
+
+    - name: Read ibm_cm_offering
+      ibm_cm_offering_info:
+        catalog_identifier: 'testString'
+        offering_id: 'testString'
+        type: 'testString'
+        digest: True
+      register: get_offering_result
+
+    - name: Print read result
+      debug:
+        var: get_offering_result
+
+    # end-get_offering
+
+    - name: Assert ibm_cm_offering was read
+      assert:
+        that:
+        - get_offering_result is success
+        - get_offering_result is not changed
+
+    - name: Save link values from get_offering
+      ansible.builtin.set_fact:
+        offering_rev_link: "{{ get_offering_result.['_rev'] }}"
+        version_locator_link: "{{ get_offering_result.['kinds'][0]['versions'][0]['version_locator'] }}"
+        version_id_link: "{{ get_offering_result.['kinds'][0]['versions'][0]['version_locator'] }}"
+        version_rev_link: "{{ get_offering_result.['kinds'][0]['versions'][0]['_rev'] }}"
+
+    # begin-create_offering
+
+    - name: Create ibm_cm_offering
+      vars:
+        rating_model:
+          one_star_count: 38
+          two_star_count: 38
+          three_star_count: 38
+          four_star_count: 38
+        feature_model:
+          title: 'testString'
+          title_i18n: {'key1': 'testString'}
+          description: 'testString'
+          description_i18n: {'key1': 'testString'}
+        flavor_model:
+          name: 'testString'
+          label: 'testString'
+          label_i18n: {'key1': 'testString'}
+          index: 38
+        render_type_associations_parameters_item_model:
+          name: 'testString'
+          options_refresh: True
+        render_type_associations_model:
+          parameters: [render_type_associations_parameters_item_model]
+        render_type_model:
+          type: 'testString'
+          grouping: 'testString'
+          original_grouping: 'testString'
+          grouping_index: 38
+          config_constraints: {'anyKey': 'anyValue'}
+          associations: render_type_associations_model
+        configuration_model:
+          key: 'testString'
+          type: 'testString'
+          default_value: 'testString'
+          display_name: 'testString'
+          value_constraint: 'testString'
+          description: 'testString'
+          required: True
+          options: ['testString']
+          hidden: True
+          custom_config: render_type_model
+          type_metadata: 'testString'
+        output_model:
+          key: 'testString'
+          description: 'testString'
+        iam_resource_model:
+          name: 'testString'
+          description: 'testString'
+          role_crns: ['testString']
+        iam_permission_model:
+          service_name: 'testString'
+          role_crns: ['testString']
+          resources: [iam_resource_model]
+        validation_model:
+          validated: '2019-01-01T12:00:00.000Z'
+          requested: '2019-01-01T12:00:00.000Z'
+          state: 'testString'
+          last_operation: 'testString'
+          target: {'anyKey': 'anyValue'}
+          message_: 'testString'
+        resource_model:
+          type: 'mem'
+          value: 'testString'
+        schematics_env_values_model:
+          value: '[{"name": "TF_LOG","value": "TRACE","secure": false,"hidden": false}]'
+          sm_ref: 'cmsm_v1:{"name": "envVarSecret","id":"1234567890","service_id":"crn:v1:bluemix:public:secrets-manager:eu-gb:a/1234567890:1234567890::","service_name":"My SM Instance","group_id":"1234567890","group_name":"My SM Group","resource_group_id":"1234567890","region":"eu-gb","type":"arbitrary"}'
+        script_model:
+          instructions: 'testString'
+          instructions_i18n: {'key1': 'testString'}
+          script: 'testString'
+          script_permission: 'testString'
+          delete_script: 'testString'
+          scope: 'testString'
+        script_ref_model:
+          short_description: 'testString'
+          type: 'ansible'
+          path: 'scripts/validate-post-ansible-playbook.yaml'
+          stage: 'pre'
+          action: 'validate'
+        version_entitlement_model:
+          provider_name: 'testString'
+          provider_id: 'testString'
+          product_id: 'testString'
+          part_numbers: ['testString']
+          image_repo_name: 'testString'
+        license_model:
+          id: 'testString'
+          name: 'testString'
+          type: 'testString'
+          url: 'testString'
+          description: 'testString'
+        state_model:
+          current: 'testString'
+          current_entered: '2019-01-01T12:00:00.000Z'
+          pending: 'testString'
+          pending_requested: '2019-01-01T12:00:00.000Z'
+          previous: 'testString'
+        deprecate_pending_model:
+          deprecate_date: '2019-01-01T12:00:00.000Z'
+          deprecate_state: 'testString'
+          description: 'testString'
+        url_proxy_model:
+          url: 'testString'
+          sha: 'testString'
+        media_item_model:
+          url: 'testString'
+          api_url: 'testString'
+          url_proxy: url_proxy_model
+          caption: 'testString'
+          caption_i18n: {'key1': 'testString'}
+          type: 'testString'
+          thumbnail_url: 'testString'
+        architecture_diagram_model:
+          diagram: media_item_model
+          description: 'testString'
+          description_i18n: {'key1': 'testString'}
+        cost_component_model:
+          name: 'testString'
+          unit: 'testString'
+          hourly_quantity: 'testString'
+          monthly_quantity: 'testString'
+          price: 'testString'
+          hourly_cost: 'testString'
+          monthly_cost: 'testString'
+        cost_resource_model:
+          name: 'testString'
+          metadata: {'anyKey': 'anyValue'}
+          hourly_cost: 'testString'
+          monthly_cost: 'testString'
+          cost_components: [cost_component_model]
+        cost_breakdown_model:
+          total_hourly_cost: 'testString'
+          total_monthly_cost: 'testString'
+          resources: [cost_resource_model]
+        cost_summary_model:
+          total_detected_resources: 38
+          total_supported_resources: 38
+          total_unsupported_resources: 38
+          total_usage_based_resources: 38
+          total_no_price_resources: 38
+          unsupported_resource_counts: {'key1': 38}
+          no_price_resource_counts: {'key1': 38}
+        project_model:
+          name: 'testString'
+          metadata: {'anyKey': 'anyValue'}
+          past_breakdown: cost_breakdown_model
+          breakdown: cost_breakdown_model
+          diff: cost_breakdown_model
+          summary: cost_summary_model
+        cost_estimate_model:
+          version: 'testString'
+          currency: 'testString'
+          projects: [project_model]
+          summary: cost_summary_model
+          total_hourly_cost: 'testString'
+          total_monthly_cost: 'testString'
+          past_total_hourly_cost: 'testString'
+          past_total_monthly_cost: 'testString'
+          diff_total_hourly_cost: 'testString'
+          diff_total_monthly_cost: 'testString'
+          time_generated: '2019-01-01T12:00:00.000Z'
+        offering_reference_model:
+          catalog_id: 'testString'
+          id: 'testString'
+          name: 'testString'
+          kind: 'testString'
+          version: 'testString'
+          flavors: ['testString']
+        solution_info_model:
+          architecture_diagrams: [architecture_diagram_model]
+          features: [feature_model]
+          cost_estimate: cost_estimate_model
+          dependencies: [offering_reference_model]
+          install_type: 'testString'
+        scc_profile_model:
+          id: 'testString'
+          name: 'testString'
+          version: 'testString'
+          description: 'testString'
+          type: 'testString'
+          ui_href: 'testString'
+        claimed_control_model:
+          profile: scc_profile_model
+          names: ['testString']
+        claims_model:
+          profiles: [scc_profile_model]
+          controls: [claimed_control_model]
+        result_model:
+          failure_count: 38
+          scan_time: '2019-01-01T12:00:00.000Z'
+          error_message: 'testString'
+          complete_scan: True
+          unscanned_resources: ['testString']
+        scc_assessment_model:
+          id: 'testString'
+          description: 'testString'
+          version: 'testString'
+          type: 'testString'
+          method: 'testString'
+          ui_href: 'testString'
+        scc_specification_model:
+          id: 'testString'
+          description: 'testString'
+          component_name: 'testString'
+          assessments: [scc_assessment_model]
+          ui_href: 'testString'
+        scc_control_model:
+          id: 'testString'
+          name: 'testString'
+          version: 'testString'
+          description: 'testString'
+          profile: scc_profile_model
+          parent_name: 'testString'
+          specifications: [scc_specification_model]
+          ui_href: 'testString'
+        evaluated_control_model:
+          id: 'testString'
+          name: 'testString'
+          description: 'testString'
+          specifications: [scc_specification_model]
+          failure_count: 38
+          pass_count: 38
+          parent: scc_control_model
+          ui_href: 'testString'
+        evaluation_model:
+          scan_id: 'testString'
+          account_id: 'testString'
+          profile: scc_profile_model
+          result: result_model
+          controls: [evaluated_control_model]
+        compliance_model:
+          authority: 'testString'
+          claims: claims_model
+          evaluations: [evaluation_model]
+        change_notices_model:
+          breaking: [feature_model]
+          new: [feature_model]
+          update: [feature_model]
+        version_model:
+          crn: 'testString'
+          version: 'testString'
+          flavor: flavor_model
+          sha: 'testString'
+          created: '2019-01-01T12:00:00.000Z'
+          updated: '2019-01-01T12:00:00.000Z'
+          offering_id: offering_id_link
+          catalog_id: catalog_id_link
+          kind_id: 'testString'
+          tags: ['testString']
+          repo_url: 'testString'
+          source_url: 'testString'
+          tgz_url: 'testString'
+          configuration: [configuration_model]
+          outputs: [output_model]
+          iam_permissions: [iam_permission_model]
+          metadata: {'anyKey': 'anyValue'}
+          validation: validation_model
+          required_resources: [resource_model]
+          single_instance: True
+          schematics_env_values: schematics_env_values_model
+          install: script_model
+          pre_install: [script_model]
+          scripts: script_ref_model
+          entitlement: version_entitlement_model
+          licenses: [license_model]
+          image_manifest_url: 'testString'
+          deprecated: True
+          package_version: 'testString'
+          state: state_model
+          version_locator: version_id_link
+          long_description: 'testString'
+          long_description_i18n: {'key1': 'testString'}
+          whitelisted_accounts: ['testString']
+          image_pull_key_name: 'testString'
+          deprecate_pending: deprecate_pending_model
+          solution_info: solution_info_model
+          is_consumable: True
+          compliance_v3: compliance_model
+          change_notices: change_notices_model
+          plan_ids: ['testString']
+          stack: {'anyKey': 'anyValue'}
+        kind_model:
+          id: 'testString'
+          format_kind: 'testString'
+          format_kind_label: 'testString'
+          install_kind: 'testString'
+          install_kind_label: 'testString'
+          target_kind: 'testString'
+          target_kind_label: 'testString'
+          metadata: {'anyKey': 'anyValue'}
+          tags: ['testString']
+          additional_features: [feature_model]
+          created: '2019-01-01T12:00:00.000Z'
+          updated: '2019-01-01T12:00:00.000Z'
+          versions: [version_model]
+        publish_object_model:
+          pc_managed: True
+          approval_type: 'testString'
+          publish_approved: True
+          share_with_all: True
+          share_with_ibm: True
+          share_enabled: True
+          original_crn: 'testString'
+          public_crn: 'testString'
+          approval_record: {'anyKey': 'anyValue'}
+          permit_ibm_public_publish: True
+          ibm_approved: True
+          public_approved: True
+        provider_info_model:
+          id: 'testString'
+          name: 'testString'
+        repo_info_model:
+          token: 'testString'
+          type: 'testString'
+        image_pull_key_model:
+          name: 'testString'
+          value: 'testString'
+          description: 'testString'
+        support_wait_time_model:
+          value: 38
+          type: 'testString'
+        support_time_model:
+          day: 38
+          start_time: 'testString'
+          end_time: 'testString'
+        support_availability_model:
+          times: [support_time_model]
+          timezone: 'testString'
+          always_available: True
+        support_detail_model:
+          type: 'testString'
+          contact: 'testString'
+          response_wait_time: support_wait_time_model
+          availability: support_availability_model
+        support_escalation_model:
+          escalation_wait_time: support_wait_time_model
+          response_wait_time: support_wait_time_model
+          contact: 'testString'
+        support_model:
+          url: 'testString'
+          process: 'testString'
+          process_i18n: {'key1': 'testString'}
+          locations: ['testString']
+          support_details: [support_detail_model]
+          support_escalation: support_escalation_model
+          support_type: 'testString'
+        learn_more_links_model:
+          first_party: 'testString'
+          third_party: 'testString'
+        constraint_model:
+          type: 'testString'
+          rule: 'testString'
+        badge_model:
+          id: 'testString'
+          label: 'testString'
+          label_i18n: {'key1': 'testString'}
+          description: 'testString'
+          description_i18n: {'key1': 'testString'}
+          icon: 'testString'
+          authority: 'testString'
+          tag: 'testString'
+          learn_more_links: learn_more_links_model
+          constraints: [constraint_model]
+        version_range_model:
+          kinds: ['testString']
+          version: 'testString'
+          flavors: ['testString']
+        plan_model:
+          url: 'testString'
+          crn: 'testString'
+          created: '2019-01-01T12:00:00.000Z'
+          updated: '2019-01-01T12:00:00.000Z'
+          offering_id: offering_id_link
+          catalog_id: catalog_id_link
+          label: 'testString'
+          label_i18n: {'key1': 'testString'}
+          name: 'testString'
+          short_description: 'testString'
+          short_description_i18n: {'key1': 'testString'}
+          pricing_tags: ['testString']
+          version_range: version_range_model
+          features: [feature_model]
+          state: state_model
+          deprecate_pending: deprecate_pending_model
+          metadata: {'anyKey': 'anyValue'}
+          publish_approved: True
+      ibm_cm_offering:
+        catalog_identifier: 'testString'
+        url: 'testString'
+        crn: 'testString'
+        label: 'testString'
+        label_i18n: 'testString'
+        name: 'testString'
+        offering_icon_url: 'testString'
+        offering_docs_url: 'testString'
+        offering_support_url: 'testString'
+        tags: ['testString']
+        keywords: ['testString']
+        rating: '{{ rating_model }}'
+        created: '2019-01-01T12:00:00.000Z'
+        updated: '2019-01-01T12:00:00.000Z'
+        short_description: 'testString'
+        short_description_i18n: 'testString'
+        long_description: 'testString'
+        long_description_i18n: 'testString'
+        features: [feature_model]
+        kinds: [kind_model]
+        publish: '{{ publish_object_model }}'
+        pc_managed: True
+        publish_approved: True
+        share_with_all: True
+        share_with_ibm: True
+        share_enabled: True
+        public_original_crn: 'testString'
+        publish_public_crn: 'testString'
+        portal_approval_record: 'testString'
+        portal_ui_url: 'testString'
+        catalog_id: 'testString'
+        catalog_name: 'testString'
+        metadata: {'anyKey': 'anyValue'}
+        disclaimer: 'testString'
+        hidden: True
+        provider: 'testString'
+        provider_info: '{{ provider_info_model }}'
+        repo_info: '{{ repo_info_model }}'
+        image_pull_keys: [image_pull_key_model]
+        support: '{{ support_model }}'
+        media: [media_item_model]
+        deprecate_pending: '{{ deprecate_pending_model }}'
+        product_kind: 'testString'
+        badges: [badge_model]
+        plans: [plan_model]
+        state: present
+      register: create_offering_result
+
+    - name: Print create result
+      debug:
+        var: create_offering_result
+
+    # end-create_offering
+
+    - name: Assert ibm_cm_offering was created
+      assert:
+        that:
+        - create_offering_result is success
+        - create_offering_result is changed
+
+    - name: Save link values from create_offering
+      ansible.builtin.set_fact:
+        offering_id_link: "{{ create_offering_result.['id'] }}"
+        offering_rev_link: "{{ create_offering_result.['_rev'] }}"
+        version_locator_link: "{{ create_offering_result.['kinds'][0]['versions'][0]['version_locator'] }}"
+        version_id_link: "{{ create_offering_result.['kinds'][0]['versions'][0]['version_locator'] }}"
+        version_rev_link: "{{ create_offering_result.['kinds'][0]['versions'][0]['_rev'] }}"
+
+    # begin-create_object
+
+    - name: Create ibm_cm_object
+      vars:
+        publish_object_model:
+          pc_managed: True
+          approval_type: 'testString'
+          publish_approved: True
+          share_with_all: True
+          share_with_ibm: True
+          share_enabled: True
+          original_crn: 'testString'
+          public_crn: 'testString'
+          approval_record: {'anyKey': 'anyValue'}
+          permit_ibm_public_publish: True
+          ibm_approved: True
+          public_approved: True
+        state_model:
+          current: 'testString'
+          current_entered: '2019-01-01T12:00:00.000Z'
+          pending: 'testString'
+          pending_requested: '2019-01-01T12:00:00.000Z'
+          previous: 'testString'
+      ibm_cm_object:
+        catalog_identifier: "{{ catalog_id_link }}"
+        name: 'testString'
+        crn: 'testString'
+        url: 'testString'
+        parent_id: 'testString'
+        label_i18n: 'testString'
+        label: 'testString'
+        tags: ['testString']
+        created: '2019-01-01T12:00:00.000Z'
+        updated: '2019-01-01T12:00:00.000Z'
+        short_description: 'testString'
+        short_description_i18n: 'testString'
+        kind: 'testString'
+        publish: '{{ publish_object_model }}'
+        cm_object_state: '{{ state_model }}'
+        catalog_id: 'testString'
+        catalog_name: 'testString'
+        data: {'anyKey': 'anyValue'}
+        state: present
+      register: create_object_result
+
+    - name: Print create result
+      debug:
+        var: create_object_result
+
+    # end-create_object
+
+    - name: Assert ibm_cm_object was created
+      assert:
+        that:
+        - create_object_result is success
+        - create_object_result is changed
+
+    - name: Save link values from create_object
+      ansible.builtin.set_fact:
+        object_id_link: "{{ create_object_result.id }}"
+        object_rev_link: "{{ create_object_result.['_rev'] }}"
+
+    # begin-get_object
+
+    - name: Read ibm_cm_object
+      ibm_cm_object_info:
+        catalog_identifier: "{{ catalog_id_link }}"
+        object_identifier: "{{ object_id_link }}"
+      register: get_object_result
+
+    - name: Print read result
+      debug:
+        var: get_object_result
+
+    # end-get_object
+
+    - name: Assert ibm_cm_object was read
+      assert:
+        that:
+        - get_object_result is success
+        - get_object_result is not changed
+
+    - name: Save link values from get_object
+      ansible.builtin.set_fact:
+        object_rev_link: "{{ get_object_result.['_rev'] }}"
+
+    # begin-replace_object
+
+    - name: Update ibm_cm_object
+      vars:
+        publish_object_model:
+          pc_managed: True
+          approval_type: 'testString'
+          publish_approved: True
+          share_with_all: True
+          share_with_ibm: True
+          share_enabled: True
+          original_crn: 'testString'
+          public_crn: 'testString'
+          approval_record: {'anyKey': 'anyValue'}
+          permit_ibm_public_publish: True
+          ibm_approved: True
+          public_approved: True
+        state_model:
+          current: 'testString'
+          current_entered: '2019-01-01T12:00:00.000Z'
+          pending: 'testString'
+          pending_requested: '2019-01-01T12:00:00.000Z'
+          previous: 'testString'
+      ibm_cm_object:
+        catalog_identifier: "{{ catalog_id_link }}"
+        object_identifier: "{{ object_id_link }}"
+        id: 'testString'
+        rev: 'testString'
+        name: 'testString'
+        crn: 'testString'
+        url: 'testString'
+        parent_id: 'testString'
+        label_i18n: 'testString'
+        label: 'testString'
+        tags: ['testString']
+        created: '2019-01-01T12:00:00.000Z'
+        updated: '2019-01-01T12:00:00.000Z'
+        short_description: 'testString'
+        short_description_i18n: 'testString'
+        kind: 'testString'
+        publish: '{{ publish_object_model }}'
+        cm_object_state: '{{ state_model }}'
+        catalog_id: 'testString'
+        catalog_name: 'testString'
+        data: {'anyKey': 'anyValue'}
+        state: present
+      register: replace_object_result
+
+    - name: Print update result
+      debug:
+        var: replace_object_result
+
+    # end-replace_object
+
+    - name: Assert ibm_cm_object was updated
+      assert:
+        that:
+        - replace_object_result is success
+        - replace_object_result is changed
+
+    - name: Save link values from replace_object
+      ansible.builtin.set_fact:
+        object_rev_link: "{{ replace_object_result.['_rev'] }}"
+
+    # begin-list_catalogs
+
+    - name: List ibm_cm_catalog
+      ibm_cm_catalog_info:
+      register: list_catalogs_result
+
+    - name: Print list result
+      debug:
+        var: list_catalogs_result
+
+    # end-list_catalogs
+
+    - name: Assert ibm_cm_catalog was listed
+      assert:
+        that:
+        - list_catalogs_result is success
+        - list_catalogs_result is not changed
+
+    # begin-get_offering_working_copy
+
+    - name: Create ibm_cm_version
+      ibm_cm_version:
+        version_loc_id: 'testString'
+        state: present
+      register: get_offering_working_copy_result
+
+    - name: Print create result
+      debug:
+        var: get_offering_working_copy_result
+
+    # end-get_offering_working_copy
+
+    - name: Assert ibm_cm_version was created
+      assert:
+        that:
+        - get_offering_working_copy_result is success
+        - get_offering_working_copy_result is changed
+
+    # begin-get_version
+
+    - name: Read ibm_cm_offering
+      ibm_cm_offering_info:
+        version_loc_id: 'testString'
+      register: get_version_result
+
+    - name: Print read result
+      debug:
+        var: get_version_result
+
+    # end-get_version
+
+    - name: Assert ibm_cm_offering was read
+      assert:
+        that:
+        - get_version_result is success
+        - get_version_result is not changed
+
+    # begin-list_objects
+
+    - name: List ibm_cm_object
+      ibm_cm_object_info:
+        catalog_identifier: 'testString'
+        limit: 100
+        name: 'testString'
+        sort: 'testString'
+      register: list_objects_result
+
+    - name: Print list result
+      debug:
+        var: list_objects_result
+
+    # end-list_objects
+
+    - name: Assert ibm_cm_object was listed
+      assert:
+        that:
+        - list_objects_result is success
+        - list_objects_result is not changed
+
+    # begin-create_offering_instance
+
+    - name: Create ibm_cm_offering_instance
+      vars:
+        offering_instance_last_operation_model:
+          operation: 'testString'
+          state: 'testString'
+          message_: 'testString'
+          transaction_id: 'testString'
+          updated: '2019-01-01T12:00:00.000Z'
+          code: 'testString'
+      ibm_cm_offering_instance:
+        x_auth_refresh_token: 'testString'
+        id: 'testString'
+        rev: 'testString'
+        url: 'testString'
+        crn: 'testString'
+        label: 'testString'
+        catalog_id: 'testString'
+        offering_id: 'testString'
+        kind_format: 'testString'
+        kind_format_label: 'testString'
+        version: 'testString'
+        version_id: 'testString'
+        cluster_id: 'testString'
+        cluster_region: 'testString'
+        cluster_namespaces: ['testString']
+        cluster_all_namespaces: True
+        schematics_workspace_id: 'testString'
+        install_plan: 'testString'
+        channel: 'testString'
+        created: '2019-01-01T12:00:00.000Z'
+        updated: '2019-01-01T12:00:00.000Z'
+        metadata: {'anyKey': 'anyValue'}
+        resource_group_id: 'testString'
+        location: 'testString'
+        disabled: True
+        account: 'testString'
+        last_operation: '{{ offering_instance_last_operation_model }}'
+        kind_target: 'testString'
+        kind_target_label: 'testString'
+        sha: 'testString'
+        plan_id: 'testString'
+        parent_crn: 'testString'
+        state: present
+      register: create_offering_instance_result
+
+    - name: Print create result
+      debug:
+        var: create_offering_instance_result
+
+    # end-create_offering_instance
+
+    - name: Assert ibm_cm_offering_instance was created
+      assert:
+        that:
+        - create_offering_instance_result is success
+        - create_offering_instance_result is changed
+
+    # begin-get_offering_instance
+
+    - name: Read ibm_cm_offering_instance
+      ibm_cm_offering_instance_info:
+        instance_identifier: 'testString'
+      register: get_offering_instance_result
+
+    - name: Print read result
+      debug:
+        var: get_offering_instance_result
+
+    # end-get_offering_instance
+
+    - name: Assert ibm_cm_offering_instance was read
+      assert:
+        that:
+        - get_offering_instance_result is success
+        - get_offering_instance_result is not changed
+
+    # begin-put_offering_instance
+
+    - name: Update ibm_cm_offering_instance
+      vars:
+        offering_instance_last_operation_model:
+          operation: 'testString'
+          state: 'testString'
+          message_: 'testString'
+          transaction_id: 'testString'
+          updated: '2019-01-01T12:00:00.000Z'
+          code: 'testString'
+      ibm_cm_offering_instance:
+        instance_identifier: 'testString'
+        x_auth_refresh_token: 'testString'
+        id: 'testString'
+        rev: 'testString'
+        url: 'testString'
+        crn: 'testString'
+        label: 'testString'
+        catalog_id: 'testString'
+        offering_id: 'testString'
+        kind_format: 'testString'
+        kind_format_label: 'testString'
+        version: 'testString'
+        version_id: 'testString'
+        cluster_id: 'testString'
+        cluster_region: 'testString'
+        cluster_namespaces: ['testString']
+        cluster_all_namespaces: True
+        schematics_workspace_id: 'testString'
+        install_plan: 'testString'
+        channel: 'testString'
+        created: '2019-01-01T12:00:00.000Z'
+        updated: '2019-01-01T12:00:00.000Z'
+        metadata: {'anyKey': 'anyValue'}
+        resource_group_id: 'testString'
+        location: 'testString'
+        disabled: True
+        account: 'testString'
+        last_operation: '{{ offering_instance_last_operation_model }}'
+        kind_target: 'testString'
+        kind_target_label: 'testString'
+        sha: 'testString'
+        plan_id: 'testString'
+        parent_crn: 'testString'
+        state: present
+      register: put_offering_instance_result
+
+    - name: Print update result
+      debug:
+        var: put_offering_instance_result
+
+    # end-put_offering_instance
+
+    - name: Assert ibm_cm_offering_instance was updated
+      assert:
+        that:
+        - put_offering_instance_result is success
+        - put_offering_instance_result is changed
+
+    # begin-delete_object
+
+    - name: Delete ibm_cm_object
+      ibm_cm_object:
+        catalog_identifier: "{{ catalog_id_link }}"
+        object_identifier: "{{ object_id_link }}"
+        state: absent
+      register: delete_object_result
+
+    - name: Print delete result
+      debug:
+        var: delete_object_result
+
+    # end-delete_object
+
+    - name: Assert ibm_cm_object was deleted
+      assert:
+        that:
+        - delete_object_result is success
+        - delete_object_result is changed
+        - "delete_object_result.msg.status == 'deleted'"
+    # begin-delete_catalog
+
+    - name: Delete ibm_cm_catalog
+      ibm_cm_catalog:
+        catalog_identifier: "{{ catalog_id_link }}"
+        state: absent
+      register: delete_catalog_result
+
+    - name: Print delete result
+      debug:
+        var: delete_catalog_result
+
+    # end-delete_catalog
+
+    - name: Assert ibm_cm_catalog was deleted
+      assert:
+        that:
+        - delete_catalog_result is success
+        - delete_catalog_result is changed
+        - "delete_catalog_result.msg.status == 'deleted'"
+    # begin-delete_offering_instance
+
+    - name: Delete ibm_cm_offering_instance
+      ibm_cm_offering_instance:
+        instance_identifier: 'testString'
+        x_auth_refresh_token: 'testString'
+        state: absent
+      register: delete_offering_instance_result
+
+    - name: Print delete result
+      debug:
+        var: delete_offering_instance_result
+
+    # end-delete_offering_instance
+
+    - name: Assert ibm_cm_offering_instance was deleted
+      assert:
+        that:
+        - delete_offering_instance_result is success
+        - delete_offering_instance_result is changed
+        - "delete_offering_instance_result.msg.status == 'deleted'"
