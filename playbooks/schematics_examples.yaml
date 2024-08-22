@@ -1,0 +1,1771 @@
+- name: schematics modules examples
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    # begin-list_workspaces
+
+    - name: List ibm_schematics_workspace
+      ibm_schematics_workspace_info:
+        offset: 0
+        limit: 100
+        profile: 'ids'
+        resource_group: 'testString'
+      register: list_workspaces_result
+
+    - name: Print list result
+      debug:
+        var: list_workspaces_result
+
+    # end-list_workspaces
+
+    - name: Assert ibm_schematics_workspace was listed
+      assert:
+        that:
+        - list_workspaces_result is success
+        - list_workspaces_result is not changed
+
+    # begin-create_workspace
+
+    - name: Create ibm_schematics_workspace
+      vars:
+        service_extensions_model:
+          name: 'flavor'
+          value: 'testString'
+          type: 'string'
+        catalog_ref_model:
+          dry_run: True
+          owning_account: 'testString'
+          item_icon_url: 'testString'
+          item_id: 'testString'
+          item_name: 'testString'
+          item_readme_url: 'testString'
+          item_url: 'testString'
+          launch_url: 'testString'
+          offering_version: 'testString'
+          service_extensions: [service_extensions_model]
+        dependencies_model:
+          parents: ['testString']
+          children: ['testString']
+        shared_target_data_model:
+          cluster_created_on: 'testString'
+          cluster_id: 'testString'
+          cluster_name: 'testString'
+          cluster_type: 'testString'
+          entitlement_keys: [{'anyKey': 'anyValue'}]
+          namespace: 'testString'
+          region: 'testString'
+          resource_group_id: 'testString'
+          worker_count: 26
+          worker_machine_type: 'testString'
+        environment_values_metadata_model:
+          hidden: True
+          name: 'testString'
+          secure: True
+        inject_terraform_template_inner_tft_parameters_item_model:
+          name: 'testString'
+          value: 'testString'
+        inject_terraform_template_inner_model:
+          tft_git_url: 'testString'
+          tft_git_token: 'testString'
+          tft_prefix: 'testString'
+          injection_type: 'testString'
+          tft_name: 'testString'
+          tft_parameters: [inject_terraform_template_inner_tft_parameters_item_model]
+        workspace_variable_request_model:
+          description: 'testString'
+          name: 'testString'
+          secure: True
+          type: 'testString'
+          use_default: True
+          value: 'testString'
+        template_source_data_request_model:
+          env_values: [{'anyKey': 'anyValue'}]
+          env_values_metadata: [environment_values_metadata_model]
+          folder: 'testString'
+          compact: True
+          init_state_file: 'testString'
+          injectors: [inject_terraform_template_inner_model]
+          type: 'testString'
+          uninstall_script_name: 'testString'
+          values: 'testString'
+          values_metadata: [{'anyKey': 'anyValue'}]
+          variablestore: [workspace_variable_request_model]
+        template_repo_request_model:
+          branch: 'testString'
+          release: 'testString'
+          repo_sha_value: 'testString'
+          repo_url: 'testString'
+          url: 'testString'
+        workspace_status_request_model:
+          frozen: True
+          frozen_at: '2019-01-01T12:00:00.000Z'
+          frozen_by: 'testString'
+          locked: True
+          locked_by: 'testString'
+          locked_time: '2019-01-01T12:00:00.000Z'
+        variable_metadata_model:
+          type: 'boolean'
+          aliases: ['testString']
+          description: 'testString'
+          cloud_data_type: 'testString'
+          default_value: 'testString'
+          link_status: 'normal'
+          secure: True
+          immutable: True
+          hidden: True
+          required: True
+          options: ['testString']
+          min_value: 38
+          max_value: 38
+          min_length: 38
+          max_length: 38
+          matches: 'testString'
+          position: 38
+          group_by: 'testString'
+          source: 'testString'
+        variable_data_model:
+          name: 'testString'
+          value: 'testString'
+          use_default: True
+          metadata: variable_metadata_model
+      ibm_schematics_workspace:
+        applied_shareddata_ids: ['testString']
+        catalog_ref: '{{ catalog_ref_model }}'
+        dependencies: '{{ dependencies_model }}'
+        description: 'testString'
+        location: 'testString'
+        name: 'testString'
+        resource_group: 'testString'
+        shared_data: '{{ shared_target_data_model }}'
+        tags: ['testString']
+        template_data: [template_source_data_request_model]
+        template_ref: 'testString'
+        template_repo: '{{ template_repo_request_model }}'
+        type: ['testString']
+        workspace_status: '{{ workspace_status_request_model }}'
+        agent_id: 'testString'
+        settings: [variable_data_model]
+        x_github_token: 'testString'
+        state: present
+      register: create_workspace_result
+
+    - name: Print create result
+      debug:
+        var: create_workspace_result
+
+    # end-create_workspace
+
+    - name: Assert ibm_schematics_workspace was created
+      assert:
+        that:
+        - create_workspace_result is success
+        - create_workspace_result is changed
+
+    # begin-get_workspace
+
+    - name: Read ibm_schematics_workspace
+      ibm_schematics_workspace_info:
+        w_id: 'testString'
+      register: get_workspace_result
+
+    - name: Print read result
+      debug:
+        var: get_workspace_result
+
+    # end-get_workspace
+
+    - name: Assert ibm_schematics_workspace was read
+      assert:
+        that:
+        - get_workspace_result is success
+        - get_workspace_result is not changed
+
+    # begin-update_workspace
+
+    - name: Update ibm_schematics_workspace
+      vars:
+        service_extensions_model:
+          name: 'flavor'
+          value: 'testString'
+          type: 'string'
+        catalog_ref_model:
+          dry_run: True
+          owning_account: 'testString'
+          item_icon_url: 'testString'
+          item_id: 'testString'
+          item_name: 'testString'
+          item_readme_url: 'testString'
+          item_url: 'testString'
+          launch_url: 'testString'
+          offering_version: 'testString'
+          service_extensions: [service_extensions_model]
+        dependencies_model:
+          parents: ['testString']
+          children: ['testString']
+        shared_target_data_model:
+          cluster_created_on: 'testString'
+          cluster_id: 'testString'
+          cluster_name: 'testString'
+          cluster_type: 'testString'
+          entitlement_keys: [{'anyKey': 'anyValue'}]
+          namespace: 'testString'
+          region: 'testString'
+          resource_group_id: 'testString'
+          worker_count: 26
+          worker_machine_type: 'testString'
+        environment_values_metadata_model:
+          hidden: True
+          name: 'testString'
+          secure: True
+        inject_terraform_template_inner_tft_parameters_item_model:
+          name: 'testString'
+          value: 'testString'
+        inject_terraform_template_inner_model:
+          tft_git_url: 'testString'
+          tft_git_token: 'testString'
+          tft_prefix: 'testString'
+          injection_type: 'testString'
+          tft_name: 'testString'
+          tft_parameters: [inject_terraform_template_inner_tft_parameters_item_model]
+        workspace_variable_request_model:
+          description: 'testString'
+          name: 'testString'
+          secure: True
+          type: 'testString'
+          use_default: True
+          value: 'testString'
+        template_source_data_request_model:
+          env_values: [{'anyKey': 'anyValue'}]
+          env_values_metadata: [environment_values_metadata_model]
+          folder: 'testString'
+          compact: True
+          init_state_file: 'testString'
+          injectors: [inject_terraform_template_inner_model]
+          type: 'testString'
+          uninstall_script_name: 'testString'
+          values: 'testString'
+          values_metadata: [{'anyKey': 'anyValue'}]
+          variablestore: [workspace_variable_request_model]
+        template_repo_update_request_model:
+          branch: 'testString'
+          release: 'testString'
+          repo_sha_value: 'testString'
+          repo_url: 'testString'
+          url: 'testString'
+        workspace_status_update_request_model:
+          frozen: True
+          frozen_at: '2019-01-01T12:00:00.000Z'
+          frozen_by: 'testString'
+          locked: True
+          locked_by: 'testString'
+          locked_time: '2019-01-01T12:00:00.000Z'
+        workspace_status_message_model:
+          status_code: 'testString'
+          status_msg: 'testString'
+        variable_metadata_model:
+          type: 'boolean'
+          aliases: ['testString']
+          description: 'testString'
+          cloud_data_type: 'testString'
+          default_value: 'testString'
+          link_status: 'normal'
+          secure: True
+          immutable: True
+          hidden: True
+          required: True
+          options: ['testString']
+          min_value: 38
+          max_value: 38
+          min_length: 38
+          max_length: 38
+          matches: 'testString'
+          position: 38
+          group_by: 'testString'
+          source: 'testString'
+        variable_data_model:
+          name: 'testString'
+          value: 'testString'
+          use_default: True
+          metadata: variable_metadata_model
+      ibm_schematics_workspace:
+        w_id: 'testString'
+        catalog_ref: '{{ catalog_ref_model }}'
+        description: 'testString'
+        dependencies: '{{ dependencies_model }}'
+        name: 'testString'
+        shared_data: '{{ shared_target_data_model }}'
+        tags: ['testString']
+        template_data: [template_source_data_request_model]
+        template_repo_update_request_template_repo: '{{ template_repo_update_request_model }}'
+        type: ['testString']
+        workspace_status_update_request_workspace_status: '{{ workspace_status_update_request_model }}'
+        workspace_status_msg: '{{ workspace_status_message_model }}'
+        agent_id: 'testString'
+        settings: [variable_data_model]
+        state: present
+      register: update_workspace_result
+
+    - name: Print update result
+      debug:
+        var: update_workspace_result
+
+    # end-update_workspace
+
+    - name: Assert ibm_schematics_workspace was updated
+      assert:
+        that:
+        - update_workspace_result is success
+        - update_workspace_result is changed
+
+    # begin-get_workspace_template_state
+
+    - name: List ibm_schematics_state
+      ibm_schematics_state_info:
+        w_id: 'testString'
+        t_id: 'testString'
+      register: get_workspace_template_state_result
+
+    - name: Print list result
+      debug:
+        var: get_workspace_template_state_result
+
+    # end-get_workspace_template_state
+
+    - name: Assert ibm_schematics_state was listed
+      assert:
+        that:
+        - get_workspace_template_state_result is success
+        - get_workspace_template_state_result is not changed
+
+    # begin-list_actions
+
+    - name: List ibm_schematics_action
+      ibm_schematics_action_info:
+        offset: 0
+        limit: 100
+        sort: 'testString'
+        profile: 'ids'
+      register: list_actions_result
+
+    - name: Print list result
+      debug:
+        var: list_actions_result
+
+    # end-list_actions
+
+    - name: Assert ibm_schematics_action was listed
+      assert:
+        that:
+        - list_actions_result is success
+        - list_actions_result is not changed
+
+    # begin-create_action
+
+    - name: Create ibm_schematics_action
+      vars:
+        user_state_model:
+          state: 'draft'
+          set_by: 'testString'
+          set_at: '2019-01-01T12:00:00.000Z'
+        git_source_model:
+          computed_git_repo_url: 'testString'
+          git_repo_url: 'testString'
+          git_token: 'testString'
+          git_repo_folder: 'testString'
+          git_release: 'testString'
+          git_branch: 'testString'
+        catalog_source_model:
+          catalog_name: 'testString'
+          catalog_id: 'testString'
+          offering_name: 'testString'
+          offering_version: 'testString'
+          offering_kind: 'testString'
+          offering_target_kind: 'testString'
+          offering_id: 'testString'
+          offering_version_id: 'testString'
+          offering_version_flavour_name: 'testString'
+          offering_repo_url: 'testString'
+          offering_provisioner_working_directory: 'testString'
+          dry_run: True
+          owning_account: 'testString'
+          item_icon_url: 'testString'
+          item_id: 'testString'
+          item_name: 'testString'
+          item_readme_url: 'testString'
+          item_url: 'testString'
+          launch_url: 'testString'
+        external_source_model:
+          source_type: 'local'
+          git: git_source_model
+          catalog: catalog_source_model
+        credential_variable_metadata_model:
+          type: 'string'
+          aliases: ['testString']
+          description: 'testString'
+          cloud_data_type: 'testString'
+          default_value: 'testString'
+          link_status: 'normal'
+          immutable: True
+          hidden: True
+          required: True
+          position: 38
+          group_by: 'testString'
+          source: 'testString'
+        credential_variable_data_model:
+          name: 'testString'
+          value: 'testString'
+          use_default: True
+          metadata: credential_variable_metadata_model
+        bastion_resource_definition_model:
+          name: 'testString'
+          host: 'testString'
+        variable_metadata_model:
+          type: 'boolean'
+          aliases: ['testString']
+          description: 'testString'
+          cloud_data_type: 'testString'
+          default_value: 'testString'
+          link_status: 'normal'
+          secure: True
+          immutable: True
+          hidden: True
+          required: True
+          options: ['testString']
+          min_value: 38
+          max_value: 38
+          min_length: 38
+          max_length: 38
+          matches: 'testString'
+          position: 38
+          group_by: 'testString'
+          source: 'testString'
+        variable_data_model:
+          name: 'testString'
+          value: 'testString'
+          use_default: True
+          metadata: variable_metadata_model
+      ibm_schematics_action:
+        name: 'Stop Action'
+        description: 'The description of your action. The description can be up to 2048 characters long in size. **Example** you can use the description to stop the targets.'
+        location: 'us-south'
+        resource_group: 'testString'
+        bastion_connection_type: 'ssh'
+        inventory_connection_type: 'ssh'
+        tags: ['testString']
+        user_state: '{{ user_state_model }}'
+        source_readme_url: 'testString'
+        source: '{{ external_source_model }}'
+        source_type: 'local'
+        command_parameter: 'testString'
+        inventory: 'testString'
+        credentials: [credential_variable_data_model]
+        bastion: '{{ bastion_resource_definition_model }}'
+        bastion_credential: '{{ credential_variable_data_model }}'
+        targets_ini: 'testString'
+        inputs: [variable_data_model]
+        outputs: [variable_data_model]
+        settings: [variable_data_model]
+        x_github_token: 'testString'
+        state: present
+      register: create_action_result
+
+    - name: Print create result
+      debug:
+        var: create_action_result
+
+    # end-create_action
+
+    - name: Assert ibm_schematics_action was created
+      assert:
+        that:
+        - create_action_result is success
+        - create_action_result is changed
+
+    # begin-get_action
+
+    - name: Read ibm_schematics_action
+      ibm_schematics_action_info:
+        action_id: 'testString'
+        profile: 'summary'
+      register: get_action_result
+
+    - name: Print read result
+      debug:
+        var: get_action_result
+
+    # end-get_action
+
+    - name: Assert ibm_schematics_action was read
+      assert:
+        that:
+        - get_action_result is success
+        - get_action_result is not changed
+
+    # begin-update_action
+
+    - name: Update ibm_schematics_action
+      vars:
+        user_state_model:
+          state: 'draft'
+          set_by: 'testString'
+          set_at: '2019-01-01T12:00:00.000Z'
+        git_source_model:
+          computed_git_repo_url: 'testString'
+          git_repo_url: 'testString'
+          git_token: 'testString'
+          git_repo_folder: 'testString'
+          git_release: 'testString'
+          git_branch: 'testString'
+        catalog_source_model:
+          catalog_name: 'testString'
+          catalog_id: 'testString'
+          offering_name: 'testString'
+          offering_version: 'testString'
+          offering_kind: 'testString'
+          offering_target_kind: 'testString'
+          offering_id: 'testString'
+          offering_version_id: 'testString'
+          offering_version_flavour_name: 'testString'
+          offering_repo_url: 'testString'
+          offering_provisioner_working_directory: 'testString'
+          dry_run: True
+          owning_account: 'testString'
+          item_icon_url: 'testString'
+          item_id: 'testString'
+          item_name: 'testString'
+          item_readme_url: 'testString'
+          item_url: 'testString'
+          launch_url: 'testString'
+        external_source_model:
+          source_type: 'local'
+          git: git_source_model
+          catalog: catalog_source_model
+        credential_variable_metadata_model:
+          type: 'string'
+          aliases: ['testString']
+          description: 'testString'
+          cloud_data_type: 'testString'
+          default_value: 'testString'
+          link_status: 'normal'
+          immutable: True
+          hidden: True
+          required: True
+          position: 38
+          group_by: 'testString'
+          source: 'testString'
+        credential_variable_data_model:
+          name: 'testString'
+          value: 'testString'
+          use_default: True
+          metadata: credential_variable_metadata_model
+        bastion_resource_definition_model:
+          name: 'testString'
+          host: 'testString'
+        variable_metadata_model:
+          type: 'boolean'
+          aliases: ['testString']
+          description: 'testString'
+          cloud_data_type: 'testString'
+          default_value: 'testString'
+          link_status: 'normal'
+          secure: True
+          immutable: True
+          hidden: True
+          required: True
+          options: ['testString']
+          min_value: 38
+          max_value: 38
+          min_length: 38
+          max_length: 38
+          matches: 'testString'
+          position: 38
+          group_by: 'testString'
+          source: 'testString'
+        variable_data_model:
+          name: 'testString'
+          value: 'testString'
+          use_default: True
+          metadata: variable_metadata_model
+      ibm_schematics_action:
+        action_id: 'testString'
+        name: 'Stop Action'
+        description: 'The description of your action. The description can be up to 2048 characters long in size. **Example** you can use the description to stop the targets.'
+        location: 'us-south'
+        resource_group: 'testString'
+        bastion_connection_type: 'ssh'
+        inventory_connection_type: 'ssh'
+        tags: ['testString']
+        user_state: '{{ user_state_model }}'
+        source_readme_url: 'testString'
+        source: '{{ external_source_model }}'
+        source_type: 'local'
+        command_parameter: 'testString'
+        inventory: 'testString'
+        credentials: [credential_variable_data_model]
+        bastion: '{{ bastion_resource_definition_model }}'
+        bastion_credential: '{{ credential_variable_data_model }}'
+        targets_ini: 'testString'
+        inputs: [variable_data_model]
+        outputs: [variable_data_model]
+        settings: [variable_data_model]
+        x_github_token: 'testString'
+        state: present
+      register: update_action_result
+
+    - name: Print update result
+      debug:
+        var: update_action_result
+
+    # end-update_action
+
+    - name: Assert ibm_schematics_action was updated
+      assert:
+        that:
+        - update_action_result is success
+        - update_action_result is changed
+
+    # begin-list_jobs
+
+    - name: List ibm_schematics_job
+      ibm_schematics_job_info:
+        offset: 0
+        limit: 100
+        sort: 'testString'
+        profile: 'ids'
+        resource: 'workspaces'
+        resource_id: 'testString'
+        action_id: 'testString'
+        workspace_id: 'testString'
+        list: 'all'
+      register: list_jobs_result
+
+    - name: Print list result
+      debug:
+        var: list_jobs_result
+
+    # end-list_jobs
+
+    - name: Assert ibm_schematics_job was listed
+      assert:
+        that:
+        - list_jobs_result is success
+        - list_jobs_result is not changed
+
+    # begin-create_job
+
+    - name: Create ibm_schematics_job
+      vars:
+        variable_metadata_model:
+          type: 'boolean'
+          aliases: ['testString']
+          description: 'testString'
+          cloud_data_type: 'testString'
+          default_value: 'testString'
+          link_status: 'normal'
+          secure: True
+          immutable: True
+          hidden: True
+          required: True
+          options: ['testString']
+          min_value: 38
+          max_value: 38
+          min_length: 38
+          max_length: 38
+          matches: 'testString'
+          position: 38
+          group_by: 'testString'
+          source: 'testString'
+        variable_data_model:
+          name: 'testString'
+          value: 'testString'
+          use_default: True
+          metadata: variable_metadata_model
+        job_status_workitem_model:
+          workspace_id: 'testString'
+          workspace_name: 'testString'
+          job_id: 'testString'
+          status_code: 'job_pending'
+          status_message: 'testString'
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_status_flow_model:
+          flow_id: 'testString'
+          flow_name: 'testString'
+          status_code: 'job_pending'
+          status_message: 'testString'
+          workitems: [job_status_workitem_model]
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_status_template_model:
+          template_id: 'testString'
+          template_name: 'testString'
+          flow_index: 38
+          status_code: 'job_pending'
+          status_message: 'testString'
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_status_workspace_model:
+          workspace_name: 'testString'
+          status_code: 'job_pending'
+          status_message: 'testString'
+          flow_status: job_status_flow_model
+          template_status: [job_status_template_model]
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_status_action_model:
+          action_name: 'testString'
+          status_code: 'job_pending'
+          status_message: 'testString'
+          bastion_status_code: 'none'
+          bastion_status_message: 'testString'
+          targets_status_code: 'none'
+          targets_status_message: 'testString'
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_status_schematics_resources_model:
+          status_code: 'job_pending'
+          status_message: 'testString'
+          schematics_resource_id: 'testString'
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_status_system_model:
+          system_status_message: 'testString'
+          system_status_code: 'job_pending'
+          schematics_resource_status: [job_status_schematics_resources_model]
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_status_model:
+          position_in_queue: 72.5
+          total_in_queue: 72.5
+          workspace_job_status: job_status_workspace_model
+          action_job_status: job_status_action_model
+          system_job_status: job_status_system_model
+          flow_job_status: job_status_flow_model
+        cart_order_data_model:
+          name: 'testString'
+          value: 'testString'
+          type: 'testString'
+          usage_kind: ['servicetags']
+        job_data_template_model:
+          template_id: 'testString'
+          template_name: 'testString'
+          flow_index: 38
+          inputs: [variable_data_model]
+          outputs: [variable_data_model]
+          settings: [variable_data_model]
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_data_workspace_model:
+          workspace_name: 'testString'
+          flow_id: 'testString'
+          flow_name: 'testString'
+          inputs: [variable_data_model]
+          outputs: [variable_data_model]
+          settings: [variable_data_model]
+          template_data: [job_data_template_model]
+          updated_at: '2019-01-01T12:00:00.000Z'
+        inventory_resource_record_model:
+          name: 'testString'
+          description: 'testString'
+          location: 'us-south'
+          resource_group: 'testString'
+          inventories_ini: 'testString'
+          resource_queries: ['testString']
+        job_data_action_model:
+          action_name: 'testString'
+          inputs: [variable_data_model]
+          outputs: [variable_data_model]
+          settings: [variable_data_model]
+          updated_at: '2019-01-01T12:00:00.000Z'
+          inventory_record: inventory_resource_record_model
+          materialized_inventory: 'testString'
+        job_data_system_model:
+          key_id: 'testString'
+          schematics_resource_id: ['testString']
+          updated_at: '2019-01-01T12:00:00.000Z'
+        git_source_model:
+          computed_git_repo_url: 'testString'
+          git_repo_url: 'testString'
+          git_token: 'testString'
+          git_repo_folder: 'testString'
+          git_release: 'testString'
+          git_branch: 'testString'
+        catalog_source_model:
+          catalog_name: 'testString'
+          catalog_id: 'testString'
+          offering_name: 'testString'
+          offering_version: 'testString'
+          offering_kind: 'testString'
+          offering_target_kind: 'testString'
+          offering_id: 'testString'
+          offering_version_id: 'testString'
+          offering_version_flavour_name: 'testString'
+          offering_repo_url: 'testString'
+          offering_provisioner_working_directory: 'testString'
+          dry_run: True
+          owning_account: 'testString'
+          item_icon_url: 'testString'
+          item_id: 'testString'
+          item_name: 'testString'
+          item_readme_url: 'testString'
+          item_url: 'testString'
+          launch_url: 'testString'
+        external_source_model:
+          source_type: 'local'
+          git: git_source_model
+          catalog: catalog_source_model
+        job_data_work_item_last_job_model:
+          command_object: 'workspace'
+          command_object_name: 'testString'
+          command_object_id: 'testString'
+          command_name: 'workspace_plan'
+          job_id: 'testString'
+          job_status: 'job_pending'
+        job_data_work_item_model:
+          command_object_id: 'testString'
+          command_object_name: 'testString'
+          layers: 'testString'
+          source_type: 'local'
+          source: external_source_model
+          inputs: [variable_data_model]
+          outputs: [variable_data_model]
+          settings: [variable_data_model]
+          last_job: job_data_work_item_last_job_model
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_data_flow_model:
+          flow_id: 'testString'
+          flow_name: 'testString'
+          workitems: [job_data_work_item_model]
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_data_model:
+          job_type: 'repo_download_job'
+          workspace_job_data: job_data_workspace_model
+          action_job_data: job_data_action_model
+          system_job_data: job_data_system_model
+          flow_job_data: job_data_flow_model
+        bastion_resource_definition_model:
+          name: 'testString'
+          host: 'testString'
+        job_log_summary_repo_download_job_model:
+        job_log_summary_workspace_job_model:
+        job_log_summary_workitems_model:
+          workspace_id: 'testString'
+          job_id: 'testString'
+          log_url: 'testString'
+        job_log_summary_flow_job_model:
+          workitems: [job_log_summary_workitems_model]
+        job_log_summary_action_job_recap_model:
+          target: ['testString']
+          ok: 72.5
+          changed: 72.5
+          failed: 72.5
+          skipped: 72.5
+          unreachable: 72.5
+        job_log_summary_action_job_model:
+          recap: job_log_summary_action_job_recap_model
+        job_log_summary_system_job_model:
+          success: 72.5
+          failed: 72.5
+        job_log_summary_model:
+          job_type: 'repo_download_job'
+          repo_download_job: job_log_summary_repo_download_job_model
+          workspace_job: job_log_summary_workspace_job_model
+          flow_job: job_log_summary_flow_job_model
+          action_job: job_log_summary_action_job_model
+          system_job: job_log_summary_system_job_model
+        agent_info_model:
+          id: 'testString'
+          name: 'testString'
+          assignment_policy_id: 'testString'
+      ibm_schematics_job:
+        refresh_token: 'testString'
+        command_object: 'workspace'
+        command_object_id: 'testString'
+        command_name: 'workspace_plan'
+        command_parameter: 'testString'
+        command_options: ['testString']
+        inputs: [variable_data_model]
+        settings: [variable_data_model]
+        tags: ['testString']
+        location: 'us-south'
+        schematics_job_status: '{{ job_status_model }}'
+        cart_order_data: [cart_order_data_model]
+        data: '{{ job_data_model }}'
+        bastion: '{{ bastion_resource_definition_model }}'
+        log_summary: '{{ job_log_summary_model }}'
+        agent: '{{ agent_info_model }}'
+        state: present
+      register: create_job_result
+
+    - name: Print create result
+      debug:
+        var: create_job_result
+
+    # end-create_job
+
+    - name: Assert ibm_schematics_job was created
+      assert:
+        that:
+        - create_job_result is success
+        - create_job_result is changed
+
+    # begin-get_job
+
+    - name: Read ibm_schematics_job
+      ibm_schematics_job_info:
+        job_id: 'testString'
+        profile: 'summary'
+      register: get_job_result
+
+    - name: Print read result
+      debug:
+        var: get_job_result
+
+    # end-get_job
+
+    - name: Assert ibm_schematics_job was read
+      assert:
+        that:
+        - get_job_result is success
+        - get_job_result is not changed
+
+    # begin-update_job
+
+    - name: Update ibm_schematics_job
+      vars:
+        variable_metadata_model:
+          type: 'boolean'
+          aliases: ['testString']
+          description: 'testString'
+          cloud_data_type: 'testString'
+          default_value: 'testString'
+          link_status: 'normal'
+          secure: True
+          immutable: True
+          hidden: True
+          required: True
+          options: ['testString']
+          min_value: 38
+          max_value: 38
+          min_length: 38
+          max_length: 38
+          matches: 'testString'
+          position: 38
+          group_by: 'testString'
+          source: 'testString'
+        variable_data_model:
+          name: 'testString'
+          value: 'testString'
+          use_default: True
+          metadata: variable_metadata_model
+        job_status_workitem_model:
+          workspace_id: 'testString'
+          workspace_name: 'testString'
+          job_id: 'testString'
+          status_code: 'job_pending'
+          status_message: 'testString'
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_status_flow_model:
+          flow_id: 'testString'
+          flow_name: 'testString'
+          status_code: 'job_pending'
+          status_message: 'testString'
+          workitems: [job_status_workitem_model]
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_status_template_model:
+          template_id: 'testString'
+          template_name: 'testString'
+          flow_index: 38
+          status_code: 'job_pending'
+          status_message: 'testString'
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_status_workspace_model:
+          workspace_name: 'testString'
+          status_code: 'job_pending'
+          status_message: 'testString'
+          flow_status: job_status_flow_model
+          template_status: [job_status_template_model]
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_status_action_model:
+          action_name: 'testString'
+          status_code: 'job_pending'
+          status_message: 'testString'
+          bastion_status_code: 'none'
+          bastion_status_message: 'testString'
+          targets_status_code: 'none'
+          targets_status_message: 'testString'
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_status_schematics_resources_model:
+          status_code: 'job_pending'
+          status_message: 'testString'
+          schematics_resource_id: 'testString'
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_status_system_model:
+          system_status_message: 'testString'
+          system_status_code: 'job_pending'
+          schematics_resource_status: [job_status_schematics_resources_model]
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_status_model:
+          position_in_queue: 72.5
+          total_in_queue: 72.5
+          workspace_job_status: job_status_workspace_model
+          action_job_status: job_status_action_model
+          system_job_status: job_status_system_model
+          flow_job_status: job_status_flow_model
+        cart_order_data_model:
+          name: 'testString'
+          value: 'testString'
+          type: 'testString'
+          usage_kind: ['servicetags']
+        job_data_template_model:
+          template_id: 'testString'
+          template_name: 'testString'
+          flow_index: 38
+          inputs: [variable_data_model]
+          outputs: [variable_data_model]
+          settings: [variable_data_model]
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_data_workspace_model:
+          workspace_name: 'testString'
+          flow_id: 'testString'
+          flow_name: 'testString'
+          inputs: [variable_data_model]
+          outputs: [variable_data_model]
+          settings: [variable_data_model]
+          template_data: [job_data_template_model]
+          updated_at: '2019-01-01T12:00:00.000Z'
+        inventory_resource_record_model:
+          name: 'testString'
+          description: 'testString'
+          location: 'us-south'
+          resource_group: 'testString'
+          inventories_ini: 'testString'
+          resource_queries: ['testString']
+        job_data_action_model:
+          action_name: 'testString'
+          inputs: [variable_data_model]
+          outputs: [variable_data_model]
+          settings: [variable_data_model]
+          updated_at: '2019-01-01T12:00:00.000Z'
+          inventory_record: inventory_resource_record_model
+          materialized_inventory: 'testString'
+        job_data_system_model:
+          key_id: 'testString'
+          schematics_resource_id: ['testString']
+          updated_at: '2019-01-01T12:00:00.000Z'
+        git_source_model:
+          computed_git_repo_url: 'testString'
+          git_repo_url: 'testString'
+          git_token: 'testString'
+          git_repo_folder: 'testString'
+          git_release: 'testString'
+          git_branch: 'testString'
+        catalog_source_model:
+          catalog_name: 'testString'
+          catalog_id: 'testString'
+          offering_name: 'testString'
+          offering_version: 'testString'
+          offering_kind: 'testString'
+          offering_target_kind: 'testString'
+          offering_id: 'testString'
+          offering_version_id: 'testString'
+          offering_version_flavour_name: 'testString'
+          offering_repo_url: 'testString'
+          offering_provisioner_working_directory: 'testString'
+          dry_run: True
+          owning_account: 'testString'
+          item_icon_url: 'testString'
+          item_id: 'testString'
+          item_name: 'testString'
+          item_readme_url: 'testString'
+          item_url: 'testString'
+          launch_url: 'testString'
+        external_source_model:
+          source_type: 'local'
+          git: git_source_model
+          catalog: catalog_source_model
+        job_data_work_item_last_job_model:
+          command_object: 'workspace'
+          command_object_name: 'testString'
+          command_object_id: 'testString'
+          command_name: 'workspace_plan'
+          job_id: 'testString'
+          job_status: 'job_pending'
+        job_data_work_item_model:
+          command_object_id: 'testString'
+          command_object_name: 'testString'
+          layers: 'testString'
+          source_type: 'local'
+          source: external_source_model
+          inputs: [variable_data_model]
+          outputs: [variable_data_model]
+          settings: [variable_data_model]
+          last_job: job_data_work_item_last_job_model
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_data_flow_model:
+          flow_id: 'testString'
+          flow_name: 'testString'
+          workitems: [job_data_work_item_model]
+          updated_at: '2019-01-01T12:00:00.000Z'
+        job_data_model:
+          job_type: 'repo_download_job'
+          workspace_job_data: job_data_workspace_model
+          action_job_data: job_data_action_model
+          system_job_data: job_data_system_model
+          flow_job_data: job_data_flow_model
+        bastion_resource_definition_model:
+          name: 'testString'
+          host: 'testString'
+        job_log_summary_repo_download_job_model:
+        job_log_summary_workspace_job_model:
+        job_log_summary_workitems_model:
+          workspace_id: 'testString'
+          job_id: 'testString'
+          log_url: 'testString'
+        job_log_summary_flow_job_model:
+          workitems: [job_log_summary_workitems_model]
+        job_log_summary_action_job_recap_model:
+          target: ['testString']
+          ok: 72.5
+          changed: 72.5
+          failed: 72.5
+          skipped: 72.5
+          unreachable: 72.5
+        job_log_summary_action_job_model:
+          recap: job_log_summary_action_job_recap_model
+        job_log_summary_system_job_model:
+          success: 72.5
+          failed: 72.5
+        job_log_summary_model:
+          job_type: 'repo_download_job'
+          repo_download_job: job_log_summary_repo_download_job_model
+          workspace_job: job_log_summary_workspace_job_model
+          flow_job: job_log_summary_flow_job_model
+          action_job: job_log_summary_action_job_model
+          system_job: job_log_summary_system_job_model
+        agent_info_model:
+          id: 'testString'
+          name: 'testString'
+          assignment_policy_id: 'testString'
+      ibm_schematics_job:
+        job_id: 'testString'
+        refresh_token: 'testString'
+        command_object: 'workspace'
+        command_object_id: 'testString'
+        command_name: 'workspace_plan'
+        command_parameter: 'testString'
+        command_options: ['testString']
+        inputs: [variable_data_model]
+        settings: [variable_data_model]
+        tags: ['testString']
+        location: 'us-south'
+        schematics_job_status: '{{ job_status_model }}'
+        cart_order_data: [cart_order_data_model]
+        data: '{{ job_data_model }}'
+        bastion: '{{ bastion_resource_definition_model }}'
+        log_summary: '{{ job_log_summary_model }}'
+        agent: '{{ agent_info_model }}'
+        state: present
+      register: update_job_result
+
+    - name: Print update result
+      debug:
+        var: update_job_result
+
+    # end-update_job
+
+    - name: Assert ibm_schematics_job was updated
+      assert:
+        that:
+        - update_job_result is success
+        - update_job_result is changed
+
+    # begin-list_inventories
+
+    - name: List ibm_schematics_inventory
+      ibm_schematics_inventory_info:
+        offset: 0
+        limit: 100
+        sort: 'testString'
+        profile: 'ids'
+      register: list_inventories_result
+
+    - name: Print list result
+      debug:
+        var: list_inventories_result
+
+    # end-list_inventories
+
+    - name: Assert ibm_schematics_inventory was listed
+      assert:
+        that:
+        - list_inventories_result is success
+        - list_inventories_result is not changed
+
+    # begin-create_inventory
+
+    - name: Create ibm_schematics_inventory
+      ibm_schematics_inventory:
+        name: 'testString'
+        description: 'testString'
+        location: 'us-south'
+        resource_group: 'testString'
+        inventories_ini: 'testString'
+        resource_queries: ['testString']
+        state: present
+      register: create_inventory_result
+
+    - name: Print create result
+      debug:
+        var: create_inventory_result
+
+    # end-create_inventory
+
+    - name: Assert ibm_schematics_inventory was created
+      assert:
+        that:
+        - create_inventory_result is success
+        - create_inventory_result is changed
+
+    # begin-get_inventory
+
+    - name: Read ibm_schematics_inventory
+      ibm_schematics_inventory_info:
+        inventory_id: 'testString'
+        profile: 'summary'
+      register: get_inventory_result
+
+    - name: Print read result
+      debug:
+        var: get_inventory_result
+
+    # end-get_inventory
+
+    - name: Assert ibm_schematics_inventory was read
+      assert:
+        that:
+        - get_inventory_result is success
+        - get_inventory_result is not changed
+
+    # begin-replace_inventory
+
+    - name: Update ibm_schematics_inventory
+      ibm_schematics_inventory:
+        inventory_id: 'testString'
+        name: 'testString'
+        description: 'testString'
+        location: 'us-south'
+        resource_group: 'testString'
+        inventories_ini: 'testString'
+        resource_queries: ['testString']
+        state: present
+      register: replace_inventory_result
+
+    - name: Print update result
+      debug:
+        var: replace_inventory_result
+
+    # end-replace_inventory
+
+    - name: Assert ibm_schematics_inventory was updated
+      assert:
+        that:
+        - replace_inventory_result is success
+        - replace_inventory_result is changed
+
+    # begin-list_resource_query
+
+    - name: List ibm_schematics_resource_query
+      ibm_schematics_resource_query_info:
+        offset: 0
+        limit: 100
+        sort: 'testString'
+        profile: 'ids'
+      register: list_resource_query_result
+
+    - name: Print list result
+      debug:
+        var: list_resource_query_result
+
+    # end-list_resource_query
+
+    - name: Assert ibm_schematics_resource_query was listed
+      assert:
+        that:
+        - list_resource_query_result is success
+        - list_resource_query_result is not changed
+
+    # begin-create_resource_query
+
+    - name: Create ibm_schematics_resource_query
+      vars:
+        resource_query_param_model:
+          name: 'testString'
+          value: 'testString'
+          description: 'testString'
+        resource_query_model:
+          query_type: 'workspaces'
+          query_condition: [resource_query_param_model]
+          query_select: ['testString']
+      ibm_schematics_resource_query:
+        type: 'vsi'
+        name: 'testString'
+        queries: [resource_query_model]
+        state: present
+      register: create_resource_query_result
+
+    - name: Print create result
+      debug:
+        var: create_resource_query_result
+
+    # end-create_resource_query
+
+    - name: Assert ibm_schematics_resource_query was created
+      assert:
+        that:
+        - create_resource_query_result is success
+        - create_resource_query_result is changed
+
+    # begin-get_resources_query
+
+    - name: Read ibm_schematics_resource_query
+      ibm_schematics_resource_query_info:
+        query_id: 'testString'
+      register: get_resources_query_result
+
+    - name: Print read result
+      debug:
+        var: get_resources_query_result
+
+    # end-get_resources_query
+
+    - name: Assert ibm_schematics_resource_query was read
+      assert:
+        that:
+        - get_resources_query_result is success
+        - get_resources_query_result is not changed
+
+    # begin-replace_resources_query
+
+    - name: Update ibm_schematics_resource_query
+      vars:
+        resource_query_param_model:
+          name: 'testString'
+          value: 'testString'
+          description: 'testString'
+        resource_query_model:
+          query_type: 'workspaces'
+          query_condition: [resource_query_param_model]
+          query_select: ['testString']
+      ibm_schematics_resource_query:
+        query_id: 'testString'
+        type: 'vsi'
+        name: 'testString'
+        queries: [resource_query_model]
+        state: present
+      register: replace_resources_query_result
+
+    - name: Print update result
+      debug:
+        var: replace_resources_query_result
+
+    # end-replace_resources_query
+
+    - name: Assert ibm_schematics_resource_query was updated
+      assert:
+        that:
+        - replace_resources_query_result is success
+        - replace_resources_query_result is changed
+
+    # begin-list_agent
+
+    - name: List ibm_schematics_agents
+      ibm_schematics_agents_info:
+        offset: 0
+        limit: 100
+        profile: 'summary'
+        filter: 'all'
+      register: list_agent_result
+
+    - name: Print list result
+      debug:
+        var: list_agent_result
+
+    # end-list_agent
+
+    - name: Assert ibm_schematics_agents was listed
+      assert:
+        that:
+        - list_agent_result is success
+        - list_agent_result is not changed
+
+    # begin-register_agent
+
+    - name: Create ibm_schematics_agents
+      vars:
+        agent_user_state_model:
+          state: 'enable'
+      ibm_schematics_agents:
+        name: 'MyDevAgent'
+        agent_location: 'us-south'
+        location: 'us-south'
+        profile_id: 'testString'
+        description: 'Register agent'
+        resource_group: 'testString'
+        tags: ['testString']
+        user_state: '{{ agent_user_state_model }}'
+        state: present
+      register: register_agent_result
+
+    - name: Print create result
+      debug:
+        var: register_agent_result
+
+    # end-register_agent
+
+    - name: Assert ibm_schematics_agents was created
+      assert:
+        that:
+        - register_agent_result is success
+        - register_agent_result is changed
+
+    # begin-get_agent
+
+    - name: Read ibm_schematics_agents
+      ibm_schematics_agents_info:
+        agent_id: 'testString'
+        profile: 'summary'
+      register: get_agent_result
+
+    - name: Print read result
+      debug:
+        var: get_agent_result
+
+    # end-get_agent
+
+    - name: Assert ibm_schematics_agents was read
+      assert:
+        that:
+        - get_agent_result is success
+        - get_agent_result is not changed
+
+    # begin-update_agent_registration
+
+    - name: Update ibm_schematics_agents
+      vars:
+        agent_user_state_model:
+          state: 'enable'
+      ibm_schematics_agents:
+        agent_id: 'testString'
+        name: 'MyDevAgent'
+        agent_location: 'us-south'
+        location: 'us-south'
+        profile_id: 'testString'
+        description: 'Register agent'
+        resource_group: 'testString'
+        tags: ['testString']
+        user_state: '{{ agent_user_state_model }}'
+        state: present
+      register: update_agent_registration_result
+
+    - name: Print update result
+      debug:
+        var: update_agent_registration_result
+
+    # end-update_agent_registration
+
+    - name: Assert ibm_schematics_agents was updated
+      assert:
+        that:
+        - update_agent_registration_result is success
+        - update_agent_registration_result is changed
+
+    # begin-list_policy
+
+    - name: List ibm_schematics_policy
+      ibm_schematics_policy_info:
+        offset: 0
+        limit: 100
+        profile: 'summary'
+      register: list_policy_result
+
+    - name: Print list result
+      debug:
+        var: list_policy_result
+
+    # end-list_policy
+
+    - name: Assert ibm_schematics_policy was listed
+      assert:
+        that:
+        - list_policy_result is success
+        - list_policy_result is not changed
+
+    # begin-create_policy
+
+    - name: Create ibm_schematics_policy
+      vars:
+        user_state_model:
+          state: 'draft'
+          set_by: 'testString'
+          set_at: '2019-01-01T12:00:00.000Z'
+        policy_object_selector_model:
+          kind: 'workspace'
+          tags: ['testString']
+          resource_groups: ['testString']
+          locations: ['us-south']
+        policy_objects_model:
+          selector_kind: 'ids'
+          selector_ids: ['testString']
+          selector_scope: [policy_object_selector_model]
+        agent_assignment_policy_parameter_model:
+          selector_kind: 'ids'
+          selector_ids: ['testString']
+          selector_scope: [policy_object_selector_model]
+        policy_parameter_model:
+          agent_assignment_policy_parameter: agent_assignment_policy_parameter_model
+        scoped_resource_model:
+          kind: 'workspace'
+          id: 'testString'
+      ibm_schematics_policy:
+        name: 'Agent1-DevWS'
+        description: 'Policy for job execution of secured workspaces on agent1'
+        resource_group: 'Default'
+        tags: ['policy:secured-job']
+        location: 'us-south'
+        schematics_policy_state: '{{ user_state_model }}'
+        kind: 'agent_assignment_policy'
+        target: '{{ policy_objects_model }}'
+        parameter: '{{ policy_parameter_model }}'
+        scoped_resources: [scoped_resource_model]
+        state: present
+      register: create_policy_result
+
+    - name: Print create result
+      debug:
+        var: create_policy_result
+
+    # end-create_policy
+
+    - name: Assert ibm_schematics_policy was created
+      assert:
+        that:
+        - create_policy_result is success
+        - create_policy_result is changed
+
+    # begin-get_policy
+
+    - name: Read ibm_schematics_policy
+      ibm_schematics_policy_info:
+        policy_id: 'testString'
+        profile: 'summary'
+      register: get_policy_result
+
+    - name: Print read result
+      debug:
+        var: get_policy_result
+
+    # end-get_policy
+
+    - name: Assert ibm_schematics_policy was read
+      assert:
+        that:
+        - get_policy_result is success
+        - get_policy_result is not changed
+
+    # begin-update_policy
+
+    - name: Update ibm_schematics_policy
+      vars:
+        user_state_model:
+          state: 'draft'
+          set_by: 'testString'
+          set_at: '2019-01-01T12:00:00.000Z'
+        policy_object_selector_model:
+          kind: 'workspace'
+          tags: ['testString']
+          resource_groups: ['testString']
+          locations: ['us-south']
+        policy_objects_model:
+          selector_kind: 'ids'
+          selector_ids: ['testString']
+          selector_scope: [policy_object_selector_model]
+        agent_assignment_policy_parameter_model:
+          selector_kind: 'ids'
+          selector_ids: ['testString']
+          selector_scope: [policy_object_selector_model]
+        policy_parameter_model:
+          agent_assignment_policy_parameter: agent_assignment_policy_parameter_model
+        scoped_resource_model:
+          kind: 'workspace'
+          id: 'testString'
+      ibm_schematics_policy:
+        policy_id: 'testString'
+        name: 'Agent1-DevWS'
+        description: 'Policy for job execution of secured workspaces on agent1'
+        resource_group: 'Default'
+        tags: ['policy:secured-job']
+        location: 'us-south'
+        schematics_policy_state: '{{ user_state_model }}'
+        kind: 'agent_assignment_policy'
+        target: '{{ policy_objects_model }}'
+        parameter: '{{ policy_parameter_model }}'
+        scoped_resources: [scoped_resource_model]
+        state: present
+      register: update_policy_result
+
+    - name: Print update result
+      debug:
+        var: update_policy_result
+
+    # end-update_policy
+
+    - name: Assert ibm_schematics_policy was updated
+      assert:
+        that:
+        - update_policy_result is success
+        - update_policy_result is changed
+
+    # begin-delete_workspace
+
+    - name: Delete ibm_schematics_workspace
+      ibm_schematics_workspace:
+        refresh_token: 'testString'
+        w_id: 'testString'
+        destroy_resources: 'testString'
+        state: absent
+      register: delete_workspace_result
+
+    - name: Print delete result
+      debug:
+        var: delete_workspace_result
+
+    # end-delete_workspace
+
+    - name: Assert ibm_schematics_workspace was deleted
+      assert:
+        that:
+        - delete_workspace_result is success
+        - delete_workspace_result is changed
+        - "delete_workspace_result.msg.status == 'deleted'"
+    # begin-delete_action
+
+    - name: Delete ibm_schematics_action
+      ibm_schematics_action:
+        action_id: 'testString'
+        force: True
+        propagate: True
+        state: absent
+      register: delete_action_result
+
+    - name: Print delete result
+      debug:
+        var: delete_action_result
+
+    # end-delete_action
+
+    - name: Assert ibm_schematics_action was deleted
+      assert:
+        that:
+        - delete_action_result is success
+        - delete_action_result is changed
+        - "delete_action_result.msg.status == 'deleted'"
+    # begin-delete_job
+
+    - name: Delete ibm_schematics_job
+      ibm_schematics_job:
+        job_id: 'testString'
+        refresh_token: 'testString'
+        force: True
+        propagate: True
+        state: absent
+      register: delete_job_result
+
+    - name: Print delete result
+      debug:
+        var: delete_job_result
+
+    # end-delete_job
+
+    - name: Assert ibm_schematics_job was deleted
+      assert:
+        that:
+        - delete_job_result is success
+        - delete_job_result is changed
+        - "delete_job_result.msg.status == 'deleted'"
+    # begin-delete_inventory
+
+    - name: Delete ibm_schematics_inventory
+      ibm_schematics_inventory:
+        inventory_id: 'testString'
+        force: True
+        propagate: True
+        state: absent
+      register: delete_inventory_result
+
+    - name: Print delete result
+      debug:
+        var: delete_inventory_result
+
+    # end-delete_inventory
+
+    - name: Assert ibm_schematics_inventory was deleted
+      assert:
+        that:
+        - delete_inventory_result is success
+        - delete_inventory_result is changed
+        - "delete_inventory_result.msg.status == 'deleted'"
+    # begin-delete_resources_query
+
+    - name: Delete ibm_schematics_resource_query
+      ibm_schematics_resource_query:
+        query_id: 'testString'
+        force: True
+        propagate: True
+        state: absent
+      register: delete_resources_query_result
+
+    - name: Print delete result
+      debug:
+        var: delete_resources_query_result
+
+    # end-delete_resources_query
+
+    - name: Assert ibm_schematics_resource_query was deleted
+      assert:
+        that:
+        - delete_resources_query_result is success
+        - delete_resources_query_result is changed
+        - "delete_resources_query_result.msg.status == 'deleted'"
+    # begin-delete_agent
+
+    - name: Delete ibm_schematics_agents
+      ibm_schematics_agents:
+        agent_id: 'testString'
+        state: absent
+      register: delete_agent_result
+
+    - name: Print delete result
+      debug:
+        var: delete_agent_result
+
+    # end-delete_agent
+
+    - name: Assert ibm_schematics_agents was deleted
+      assert:
+        that:
+        - delete_agent_result is success
+        - delete_agent_result is changed
+        - "delete_agent_result.msg.status == 'deleted'"
+    # begin-delete_policy
+
+    - name: Delete ibm_schematics_policy
+      ibm_schematics_policy:
+        policy_id: 'testString'
+        state: absent
+      register: delete_policy_result
+
+    - name: Print delete result
+      debug:
+        var: delete_policy_result
+
+    # end-delete_policy
+
+    - name: Assert ibm_schematics_policy was deleted
+      assert:
+        that:
+        - delete_policy_result is success
+        - delete_policy_result is changed
+        - "delete_policy_result.msg.status == 'deleted'"
