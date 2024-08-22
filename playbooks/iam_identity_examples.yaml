@@ -1,0 +1,615 @@
+- name: iam_identity modules examples
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    # begin-list_api_keys
+
+    - name: List ibm_iam_api_key_operations
+      ibm_iam_api_key_operations_info:
+        account_id: 'testString'
+        iam_id: 'testString'
+        pagesize: 38
+        pagetoken: 'testString'
+        scope: 'entity'
+        type: 'user'
+        sort: 'testString'
+        order: 'asc'
+        include_history: False
+      register: list_api_keys_result
+
+    - name: Print list result
+      debug:
+        var: list_api_keys_result
+
+    # end-list_api_keys
+
+    - name: Assert ibm_iam_api_key_operations was listed
+      assert:
+        that:
+        - list_api_keys_result is success
+        - list_api_keys_result is not changed
+
+    # begin-create_api_key
+
+    - name: Create ibm_iam_api_key_operations
+      ibm_iam_api_key_operations:
+        name: 'testString'
+        iam_id: 'testString'
+        description: 'testString'
+        account_id: 'testString'
+        apikey: 'testString'
+        store_value: True
+        support_sessions: True
+        action_when_leaked: 'testString'
+        entity_lock: 'false'
+        entity_disable: 'false'
+        state: present
+      register: create_api_key_result
+
+    - name: Print create result
+      debug:
+        var: create_api_key_result
+
+    # end-create_api_key
+
+    - name: Assert ibm_iam_api_key_operations was created
+      assert:
+        that:
+        - create_api_key_result is success
+        - create_api_key_result is changed
+
+    # begin-get_api_keys_details
+
+    - name: Read ibm_iam_api_key_operations
+      ibm_iam_api_key_operations_info:
+        iam_api_key: 'testString'
+        include_history: False
+      register: get_api_keys_details_result
+
+    - name: Print read result
+      debug:
+        var: get_api_keys_details_result
+
+    # end-get_api_keys_details
+
+    - name: Assert ibm_iam_api_key_operations was read
+      assert:
+        that:
+        - get_api_keys_details_result is success
+        - get_api_keys_details_result is not changed
+
+    # begin-get_api_key
+
+    - name: Read ibm_iam_api_key_operations
+      ibm_iam_api_key_operations_info:
+        id: 'testString'
+        include_history: False
+        include_activity: False
+      register: get_api_key_result
+
+    - name: Print read result
+      debug:
+        var: get_api_key_result
+
+    # end-get_api_key
+
+    - name: Assert ibm_iam_api_key_operations was read
+      assert:
+        that:
+        - get_api_key_result is success
+        - get_api_key_result is not changed
+
+    # begin-update_api_key
+
+    - name: Update ibm_iam_api_key_operations
+      ibm_iam_api_key_operations:
+        id: 'testString'
+        if_match: 'testString'
+        name: 'testString'
+        description: 'testString'
+        support_sessions: True
+        action_when_leaked: 'testString'
+        state: present
+      register: update_api_key_result
+
+    - name: Print update result
+      debug:
+        var: update_api_key_result
+
+    # end-update_api_key
+
+    - name: Assert ibm_iam_api_key_operations was updated
+      assert:
+        that:
+        - update_api_key_result is success
+        - update_api_key_result is changed
+
+    # begin-list_service_ids
+
+    - name: Read ibm_iam_service_id
+      ibm_iam_service_id_info:
+        account_id: 'testString'
+        name: 'testString'
+        pagesize: 38
+        pagetoken: 'testString'
+        sort: 'testString'
+        order: 'asc'
+        include_history: False
+      register: list_service_ids_result
+
+    - name: Print read result
+      debug:
+        var: list_service_ids_result
+
+    # end-list_service_ids
+
+    - name: Assert ibm_iam_service_id was read
+      assert:
+        that:
+        - list_service_ids_result is success
+        - list_service_ids_result is not changed
+
+    # begin-create_service_id
+
+    - name: Create ibm_iam_service_id
+      vars:
+        api_key_inside_create_service_id_request_model:
+          name: 'testString'
+          description: 'testString'
+          apikey: 'testString'
+          store_value: True
+      ibm_iam_service_id:
+        account_id: 'testString'
+        name: 'testString'
+        description: 'testString'
+        unique_instance_crns: ['testString']
+        apikey: '{{ api_key_inside_create_service_id_request_model }}'
+        entity_lock: 'false'
+        state: present
+      register: create_service_id_result
+
+    - name: Print create result
+      debug:
+        var: create_service_id_result
+
+    # end-create_service_id
+
+    - name: Assert ibm_iam_service_id was created
+      assert:
+        that:
+        - create_service_id_result is success
+        - create_service_id_result is changed
+
+    # begin-get_service_id
+
+    - name: Read ibm_iam_service_id
+      ibm_iam_service_id_info:
+        id: 'testString'
+        include_history: False
+        include_activity: False
+      register: get_service_id_result
+
+    - name: Print read result
+      debug:
+        var: get_service_id_result
+
+    # end-get_service_id
+
+    - name: Assert ibm_iam_service_id was read
+      assert:
+        that:
+        - get_service_id_result is success
+        - get_service_id_result is not changed
+
+    # begin-update_service_id
+
+    - name: Update ibm_iam_service_id
+      ibm_iam_service_id:
+        id: 'testString'
+        if_match: 'testString'
+        name: 'testString'
+        description: 'testString'
+        unique_instance_crns: ['testString']
+        state: present
+      register: update_service_id_result
+
+    - name: Print update result
+      debug:
+        var: update_service_id_result
+
+    # end-update_service_id
+
+    - name: Assert ibm_iam_service_id was updated
+      assert:
+        that:
+        - update_service_id_result is success
+        - update_service_id_result is changed
+
+    # begin-create_profile
+
+    - name: Create ibm_trusted_profile
+      ibm_trusted_profile:
+        name: 'testString'
+        account_id: 'testString'
+        description: 'testString'
+        state: present
+      register: create_profile_result
+
+    - name: Print create result
+      debug:
+        var: create_profile_result
+
+    # end-create_profile
+
+    - name: Assert ibm_trusted_profile was created
+      assert:
+        that:
+        - create_profile_result is success
+        - create_profile_result is changed
+
+    # begin-list_profiles
+
+    - name: Read ibm_trusted_profile
+      ibm_trusted_profile_info:
+        account_id: 'testString'
+        name: 'testString'
+        pagesize: 38
+        sort: 'testString'
+        order: 'asc'
+        include_history: False
+        pagetoken: 'testString'
+      register: list_profiles_result
+
+    - name: Print read result
+      debug:
+        var: list_profiles_result
+
+    # end-list_profiles
+
+    - name: Assert ibm_trusted_profile was read
+      assert:
+        that:
+        - list_profiles_result is success
+        - list_profiles_result is not changed
+
+    # begin-get_profile
+
+    - name: Read ibm_trusted_profile
+      ibm_trusted_profile_info:
+        profile_id: 'testString'
+        include_activity: False
+      register: get_profile_result
+
+    - name: Print read result
+      debug:
+        var: get_profile_result
+
+    # end-get_profile
+
+    - name: Assert ibm_trusted_profile was read
+      assert:
+        that:
+        - get_profile_result is success
+        - get_profile_result is not changed
+
+    # begin-update_profile
+
+    - name: Update ibm_trusted_profile
+      ibm_trusted_profile:
+        profile_id: 'testString'
+        if_match: 'testString'
+        name: 'testString'
+        description: 'testString'
+        state: present
+      register: update_profile_result
+
+    - name: Print update result
+      debug:
+        var: update_profile_result
+
+    # end-update_profile
+
+    - name: Assert ibm_trusted_profile was updated
+      assert:
+        that:
+        - update_profile_result is success
+        - update_profile_result is changed
+
+    # begin-create_claim_rule
+
+    - name: Create ibm_iam_profile_claim_rule
+      vars:
+        profile_claim_rule_conditions_model:
+          claim: 'testString'
+          operator: 'testString'
+          value: 'testString'
+        response_context_model:
+          transaction_id: 'testString'
+          operation: 'testString'
+          user_agent: 'testString'
+          url: 'testString'
+          instance_id: 'testString'
+          thread_id: 'testString'
+          host: 'testString'
+          start_time: 'testString'
+          end_time: 'testString'
+          elapsed_time: 'testString'
+          cluster_name: 'testString'
+      ibm_iam_profile_claim_rule:
+        profile_id: 'testString'
+        type: 'testString'
+        conditions: [profile_claim_rule_conditions_model]
+        context: '{{ response_context_model }}'
+        name: 'testString'
+        realm_name: 'testString'
+        cr_type: 'testString'
+        expiration: 38
+        state: present
+      register: create_claim_rule_result
+
+    - name: Print create result
+      debug:
+        var: create_claim_rule_result
+
+    # end-create_claim_rule
+
+    - name: Assert ibm_iam_profile_claim_rule was created
+      assert:
+        that:
+        - create_claim_rule_result is success
+        - create_claim_rule_result is changed
+
+    # begin-list_claim_rules
+
+    - name: List ibm_iam_profile_claim_rule
+      ibm_iam_profile_claim_rule_info:
+        profile_id: 'testString'
+      register: list_claim_rules_result
+
+    - name: Print list result
+      debug:
+        var: list_claim_rules_result
+
+    # end-list_claim_rules
+
+    - name: Assert ibm_iam_profile_claim_rule was listed
+      assert:
+        that:
+        - list_claim_rules_result is success
+        - list_claim_rules_result is not changed
+
+    # begin-get_claim_rule
+
+    - name: Read ibm_iam_profile_claim_rule
+      ibm_iam_profile_claim_rule_info:
+        profile_id: 'testString'
+        rule_id: 'testString'
+      register: get_claim_rule_result
+
+    - name: Print read result
+      debug:
+        var: get_claim_rule_result
+
+    # end-get_claim_rule
+
+    - name: Assert ibm_iam_profile_claim_rule was read
+      assert:
+        that:
+        - get_claim_rule_result is success
+        - get_claim_rule_result is not changed
+
+    # begin-update_claim_rule
+
+    - name: Update ibm_iam_profile_claim_rule
+      vars:
+        profile_claim_rule_conditions_model:
+          claim: 'testString'
+          operator: 'testString'
+          value: 'testString'
+        response_context_model:
+          transaction_id: 'testString'
+          operation: 'testString'
+          user_agent: 'testString'
+          url: 'testString'
+          instance_id: 'testString'
+          thread_id: 'testString'
+          host: 'testString'
+          start_time: 'testString'
+          end_time: 'testString'
+          elapsed_time: 'testString'
+          cluster_name: 'testString'
+      ibm_iam_profile_claim_rule:
+        profile_id: 'testString'
+        rule_id: 'testString'
+        if_match: 'testString'
+        type: 'testString'
+        conditions: [profile_claim_rule_conditions_model]
+        context: '{{ response_context_model }}'
+        name: 'testString'
+        realm_name: 'testString'
+        cr_type: 'testString'
+        expiration: 38
+        state: present
+      register: update_claim_rule_result
+
+    - name: Print update result
+      debug:
+        var: update_claim_rule_result
+
+    # end-update_claim_rule
+
+    - name: Assert ibm_iam_profile_claim_rule was updated
+      assert:
+        that:
+        - update_claim_rule_result is success
+        - update_claim_rule_result is changed
+
+    # begin-create_link
+
+    - name: Create ibm_iam_profile_link
+      vars:
+        create_profile_link_request_link_model:
+          crn: 'testString'
+          namespace: 'testString'
+          name: 'testString'
+      ibm_iam_profile_link:
+        profile_id: 'testString'
+        cr_type: 'testString'
+        link: '{{ create_profile_link_request_link_model }}'
+        name: 'testString'
+        state: present
+      register: create_link_result
+
+    - name: Print create result
+      debug:
+        var: create_link_result
+
+    # end-create_link
+
+    - name: Assert ibm_iam_profile_link was created
+      assert:
+        that:
+        - create_link_result is success
+        - create_link_result is changed
+
+    # begin-list_links
+
+    - name: List ibm_iam_profile_link
+      ibm_iam_profile_link_info:
+        profile_id: 'testString'
+      register: list_links_result
+
+    - name: Print list result
+      debug:
+        var: list_links_result
+
+    # end-list_links
+
+    - name: Assert ibm_iam_profile_link was listed
+      assert:
+        that:
+        - list_links_result is success
+        - list_links_result is not changed
+
+    # begin-get_link
+
+    - name: Read ibm_iam_profile_link
+      ibm_iam_profile_link_info:
+        profile_id: 'testString'
+        link_id: 'testString'
+      register: get_link_result
+
+    - name: Print read result
+      debug:
+        var: get_link_result
+
+    # end-get_link
+
+    - name: Assert ibm_iam_profile_link was read
+      assert:
+        that:
+        - get_link_result is success
+        - get_link_result is not changed
+
+    # begin-delete_api_key
+
+    - name: Delete ibm_iam_api_key_operations
+      ibm_iam_api_key_operations:
+        id: 'testString'
+        state: absent
+      register: delete_api_key_result
+
+    - name: Print delete result
+      debug:
+        var: delete_api_key_result
+
+    # end-delete_api_key
+
+    - name: Assert ibm_iam_api_key_operations was deleted
+      assert:
+        that:
+        - delete_api_key_result is success
+        - delete_api_key_result is changed
+        - "delete_api_key_result.msg.status == 'deleted'"
+    # begin-delete_service_id
+
+    - name: Delete ibm_iam_service_id
+      ibm_iam_service_id:
+        id: 'testString'
+        state: absent
+      register: delete_service_id_result
+
+    - name: Print delete result
+      debug:
+        var: delete_service_id_result
+
+    # end-delete_service_id
+
+    - name: Assert ibm_iam_service_id was deleted
+      assert:
+        that:
+        - delete_service_id_result is success
+        - delete_service_id_result is changed
+        - "delete_service_id_result.msg.status == 'deleted'"
+    # begin-delete_profile
+
+    - name: Delete ibm_trusted_profile
+      ibm_trusted_profile:
+        profile_id: 'testString'
+        state: absent
+      register: delete_profile_result
+
+    - name: Print delete result
+      debug:
+        var: delete_profile_result
+
+    # end-delete_profile
+
+    - name: Assert ibm_trusted_profile was deleted
+      assert:
+        that:
+        - delete_profile_result is success
+        - delete_profile_result is changed
+        - "delete_profile_result.msg.status == 'deleted'"
+    # begin-delete_claim_rule
+
+    - name: Delete ibm_iam_profile_claim_rule
+      ibm_iam_profile_claim_rule:
+        profile_id: 'testString'
+        rule_id: 'testString'
+        state: absent
+      register: delete_claim_rule_result
+
+    - name: Print delete result
+      debug:
+        var: delete_claim_rule_result
+
+    # end-delete_claim_rule
+
+    - name: Assert ibm_iam_profile_claim_rule was deleted
+      assert:
+        that:
+        - delete_claim_rule_result is success
+        - delete_claim_rule_result is changed
+        - "delete_claim_rule_result.msg.status == 'deleted'"
+    # begin-delete_link
+
+    - name: Delete ibm_iam_profile_link
+      ibm_iam_profile_link:
+        profile_id: 'testString'
+        link_id: 'testString'
+        state: absent
+      register: delete_link_result
+
+    - name: Print delete result
+      debug:
+        var: delete_link_result
+
+    # end-delete_link
+
+    - name: Assert ibm_iam_profile_link was deleted
+      assert:
+        that:
+        - delete_link_result is success
+        - delete_link_result is changed
+        - "delete_link_result.msg.status == 'deleted'"
